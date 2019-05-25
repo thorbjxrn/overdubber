@@ -14,9 +14,13 @@ import AVFoundation
 class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var playBtn: UIButton!
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
+    var audioPlayer: AVAudioPlayer!
+   
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,6 +57,15 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
             finishRecording(success: true)
         }
     }
+    @IBAction func playTapped(_ sender: Any) {
+        if audioPlayer == nil {
+            playAudioFile()
+        } else {
+            audioPlayer.stop()
+            audioPlayer = nil
+        }
+    }
+    
     
     func startRecording() {
         let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
@@ -95,6 +108,19 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
             finishRecording(success: false)
+        }
+    }
+    
+    //Playback
+    
+    func playAudioFile() {
+        let file = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: file)
+            audioPlayer?.play()
+        }
+        catch {
+            print("playback error")
         }
     }
     
