@@ -55,13 +55,9 @@ class Controller{
         
         let assetTrack1:AVAssetTrack = tracks1[0]
         let assetTrack2:AVAssetTrack = tracks2[0]
-        /*
+        
         let duration1: CMTime = assetTrack1.timeRange.duration
         let duration2: CMTime = assetTrack2.timeRange.duration
- */
-        let duration1: CMTime = CMTimeMake(value: 20, timescale: 1);
-        let duration2: CMTime = CMTimeMake(value: 20, timescale: 1);
-        
 
         let timeRange1 = CMTimeRangeMake(start: CMTime.zero, duration: duration1)
         let timeRange2 = CMTimeRangeMake(start: CMTime.zero, duration: duration2)

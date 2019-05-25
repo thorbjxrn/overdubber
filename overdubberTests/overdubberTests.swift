@@ -26,6 +26,7 @@ class overdubberTests: XCTestCase {
         let C = Controller.init()
         XCTAssertTrue(C.merge(audio1: stringPath as NSURL, audio2: stringPath2 as NSURL))
         
+        
     }
 
     func testExample() {

@@ -84,7 +84,12 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     //should only be possible if something is recorded at current level. Guard?
     @IBAction func addLayerTapped(_ sender: Any) {
         if(currentLayer >= 1){
-            controller.merge(audio1: getFile() as NSURL, audio2: getFileB() as NSURL)
+            //controller.merge(audio1: getFile() as NSURL, audio2: getFileB() as NSURL)
+            let stringPath = Bundle.main.url(forResource: "mp3", withExtension: "m4a")!
+            let stringPath2 = Bundle.main.url(forResource: "example", withExtension: "m4a")!
+            
+            controller.merge(audio1: stringPath as NSURL, audio2: stringPath2 as NSURL)
+            
         }
         
         currentLayer += 1
