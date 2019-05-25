@@ -14,6 +14,7 @@
 		B5A55EF4229912DF003C195F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5A55EF2229912DF003C195F /* LaunchScreen.storyboard */; };
 		B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EFE229912DF003C195F /* overdubberTests.swift */; };
 		B5A55F0A229912DF003C195F /* overdubberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F09229912DF003C195F /* overdubberUITests.swift */; };
+		B5A55F1822991D51003C195F /* RecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F1722991D51003C195F /* RecorderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		B5A55F05229912DF003C195F /* overdubberUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55F09229912DF003C195F /* overdubberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberUITests.swift; sourceTree = "<group>"; };
 		B5A55F0B229912DF003C195F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5A55F1722991D51003C195F /* RecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				B5A55EE9229912DD003C195F /* AppDelegate.swift */,
 				B5A55EEB229912DD003C195F /* ViewController.swift */,
+				B5A55F1722991D51003C195F /* RecorderViewController.swift */,
 				B5A55EED229912DD003C195F /* Main.storyboard */,
 				B5A55EF0229912DF003C195F /* Assets.xcassets */,
 				B5A55EF2229912DF003C195F /* LaunchScreen.storyboard */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5A55EEC229912DD003C195F /* ViewController.swift in Sources */,
+				B5A55F1822991D51003C195F /* RecorderViewController.swift in Sources */,
 				B5A55EEA229912DD003C195F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
