@@ -22,13 +22,10 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     var audioPlayer: AVAudioPlayer!
     var audioPlayer2: AVAudioPlayer!
     var currentLayer:Int = 0
-    
-    let controller = Controller.init()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         newLayer.isEnabled = false
 
         recordingSession = AVAudioSession.sharedInstance()
@@ -58,11 +55,7 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func getFile() -> URL{
-        return getDocumentsDirectory().appendingPathComponent("currentTake.m4a")
-    }
-    
-    func getFileB() -> URL{
-        return getDocumentsDirectory().appendingPathComponent("merged.m4a")
+        return getDocumentsDirectory().appendingPathComponent("dub\(currentLayer).m4a")
     }
     
     @objc func recordTapped() {
@@ -74,24 +67,10 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func playTapped(_ sender: Any) {
-        if audioPlayer == nil {
-            playAudioFile()
-        } else {
-            audioPlayer.stop()
-            audioPlayer = nil
-        }
+        playAudioFile()
     }
     //should only be possible if something is recorded at current level. Guard?
     @IBAction func addLayerTapped(_ sender: Any) {
-        if(currentLayer >= 1){
-            //controller.merge(audio1: getFile() as NSURL, audio2: getFileB() as NSURL)
-            let stringPath = Bundle.main.url(forResource: "mp3", withExtension: "m4a")!
-            let stringPath2 = Bundle.main.url(forResource: "example", withExtension: "m4a")!
-            
-            controller.merge(audio1: stringPath as NSURL, audio2: stringPath2 as NSURL)
-            
-        }
-        
         currentLayer += 1
         newLayer.isEnabled = false
         recordButton.setTitle("Tap to Record", for: .normal) //refactor to new class - invoke method?
@@ -147,19 +126,18 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     //Playback
     
     func playAudioFile() {
-        let file = getFile()
-        
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: file)
-            audioPlayer?.play()
-            
-            if(currentLayer >= 1){ //this plays last two recordings. Merge down {0 to (curr-1)}?
-                audioPlayer2 = try AVAudioPlayer(contentsOf: getFileB())
-                audioPlayer2?.play()
+        if(audioPlayer == nil || !audioPlayer.isPlaying){
+                do {
+                let file = getDocumentsDirectory().appendingPathComponent("dub\(currentLayer).m4a")
+                //try AVAudioPlayer(contentsOf: file).play()
+                audioPlayer = try AVAudioPlayer(contentsOf: file)
+                audioPlayer.play()
             }
-        }
-        catch {
-            print("playback error")
+            catch {
+                print("playback error")
+            }
+        }else{
+            audioPlayer.stop()
         }
     }
     
