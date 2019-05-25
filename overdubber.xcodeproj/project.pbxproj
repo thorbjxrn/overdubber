@@ -1,0 +1,585 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B5A55EEA229912DD003C195F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EE9229912DD003C195F /* AppDelegate.swift */; };
+		B5A55EEC229912DD003C195F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EEB229912DD003C195F /* ViewController.swift */; };
+		B5A55EEF229912DD003C195F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5A55EED229912DD003C195F /* Main.storyboard */; };
+		B5A55EF1229912DF003C195F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A55EF0229912DF003C195F /* Assets.xcassets */; };
+		B5A55EF4229912DF003C195F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5A55EF2229912DF003C195F /* LaunchScreen.storyboard */; };
+		B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EFE229912DF003C195F /* overdubberTests.swift */; };
+		B5A55F0A229912DF003C195F /* overdubberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F09229912DF003C195F /* overdubberUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B5A55EFB229912DF003C195F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5A55EDE229912DD003C195F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5A55EE5229912DD003C195F;
+			remoteInfo = overdubber;
+		};
+		B5A55F06229912DF003C195F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5A55EDE229912DD003C195F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5A55EE5229912DD003C195F;
+			remoteInfo = overdubber;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B5A55EE6229912DD003C195F /* overdubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = overdubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5A55EE9229912DD003C195F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5A55EEB229912DD003C195F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5A55EEE229912DD003C195F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B5A55EF0229912DF003C195F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5A55EF3229912DF003C195F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B5A55EF5229912DF003C195F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5A55EFA229912DF003C195F /* overdubberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5A55EFE229912DF003C195F /* overdubberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberTests.swift; sourceTree = "<group>"; };
+		B5A55F00229912DF003C195F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5A55F05229912DF003C195F /* overdubberUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5A55F09229912DF003C195F /* overdubberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberUITests.swift; sourceTree = "<group>"; };
+		B5A55F0B229912DF003C195F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B5A55EE3229912DD003C195F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5A55EF7229912DF003C195F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5A55F02229912DF003C195F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B5A55EDD229912DD003C195F = {
+			isa = PBXGroup;
+			children = (
+				B5A55EE8229912DD003C195F /* overdubber */,
+				B5A55EFD229912DF003C195F /* overdubberTests */,
+				B5A55F08229912DF003C195F /* overdubberUITests */,
+				B5A55EE7229912DD003C195F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B5A55EE7229912DD003C195F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B5A55EE6229912DD003C195F /* overdubber.app */,
+				B5A55EFA229912DF003C195F /* overdubberTests.xctest */,
+				B5A55F05229912DF003C195F /* overdubberUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B5A55EE8229912DD003C195F /* overdubber */ = {
+			isa = PBXGroup;
+			children = (
+				B5A55EE9229912DD003C195F /* AppDelegate.swift */,
+				B5A55EEB229912DD003C195F /* ViewController.swift */,
+				B5A55EED229912DD003C195F /* Main.storyboard */,
+				B5A55EF0229912DF003C195F /* Assets.xcassets */,
+				B5A55EF2229912DF003C195F /* LaunchScreen.storyboard */,
+				B5A55EF5229912DF003C195F /* Info.plist */,
+			);
+			path = overdubber;
+			sourceTree = "<group>";
+		};
+		B5A55EFD229912DF003C195F /* overdubberTests */ = {
+			isa = PBXGroup;
+			children = (
+				B5A55EFE229912DF003C195F /* overdubberTests.swift */,
+				B5A55F00229912DF003C195F /* Info.plist */,
+			);
+			path = overdubberTests;
+			sourceTree = "<group>";
+		};
+		B5A55F08229912DF003C195F /* overdubberUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B5A55F09229912DF003C195F /* overdubberUITests.swift */,
+				B5A55F0B229912DF003C195F /* Info.plist */,
+			);
+			path = overdubberUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B5A55EE5229912DD003C195F /* overdubber */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5A55F0E229912DF003C195F /* Build configuration list for PBXNativeTarget "overdubber" */;
+			buildPhases = (
+				B5A55EE2229912DD003C195F /* Sources */,
+				B5A55EE3229912DD003C195F /* Frameworks */,
+				B5A55EE4229912DD003C195F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = overdubber;
+			productName = overdubber;
+			productReference = B5A55EE6229912DD003C195F /* overdubber.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B5A55EF9229912DF003C195F /* overdubberTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5A55F11229912DF003C195F /* Build configuration list for PBXNativeTarget "overdubberTests" */;
+			buildPhases = (
+				B5A55EF6229912DF003C195F /* Sources */,
+				B5A55EF7229912DF003C195F /* Frameworks */,
+				B5A55EF8229912DF003C195F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5A55EFC229912DF003C195F /* PBXTargetDependency */,
+			);
+			name = overdubberTests;
+			productName = overdubberTests;
+			productReference = B5A55EFA229912DF003C195F /* overdubberTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B5A55F04229912DF003C195F /* overdubberUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5A55F14229912DF003C195F /* Build configuration list for PBXNativeTarget "overdubberUITests" */;
+			buildPhases = (
+				B5A55F01229912DF003C195F /* Sources */,
+				B5A55F02229912DF003C195F /* Frameworks */,
+				B5A55F03229912DF003C195F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5A55F07229912DF003C195F /* PBXTargetDependency */,
+			);
+			name = overdubberUITests;
+			productName = overdubberUITests;
+			productReference = B5A55F05229912DF003C195F /* overdubberUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B5A55EDE229912DD003C195F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "THORBJOERN THRONDSEN BONVIK";
+				TargetAttributes = {
+					B5A55EE5229912DD003C195F = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					B5A55EF9229912DF003C195F = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = B5A55EE5229912DD003C195F;
+					};
+					B5A55F04229912DF003C195F = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = B5A55EE5229912DD003C195F;
+					};
+				};
+			};
+			buildConfigurationList = B5A55EE1229912DD003C195F /* Build configuration list for PBXProject "overdubber" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B5A55EDD229912DD003C195F;
+			productRefGroup = B5A55EE7229912DD003C195F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B5A55EE5229912DD003C195F /* overdubber */,
+				B5A55EF9229912DF003C195F /* overdubberTests */,
+				B5A55F04229912DF003C195F /* overdubberUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B5A55EE4229912DD003C195F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5A55EF4229912DF003C195F /* LaunchScreen.storyboard in Resources */,
+				B5A55EF1229912DF003C195F /* Assets.xcassets in Resources */,
+				B5A55EEF229912DD003C195F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5A55EF8229912DF003C195F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5A55F03229912DF003C195F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B5A55EE2229912DD003C195F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5A55EEC229912DD003C195F /* ViewController.swift in Sources */,
+				B5A55EEA229912DD003C195F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5A55EF6229912DF003C195F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5A55F01229912DF003C195F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5A55F0A229912DF003C195F /* overdubberUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B5A55EFC229912DF003C195F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5A55EE5229912DD003C195F /* overdubber */;
+			targetProxy = B5A55EFB229912DF003C195F /* PBXContainerItemProxy */;
+		};
+		B5A55F07229912DF003C195F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5A55EE5229912DD003C195F /* overdubber */;
+			targetProxy = B5A55F06229912DF003C195F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B5A55EED229912DD003C195F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5A55EEE229912DD003C195F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B5A55EF2229912DF003C195F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5A55EF3229912DF003C195F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B5A55F0C229912DF003C195F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B5A55F0D229912DF003C195F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B5A55F0F229912DF003C195F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = overdubber/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubber;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B5A55F10229912DF003C195F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = overdubber/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubber;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B5A55F12229912DF003C195F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = overdubberTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/overdubber.app/overdubber";
+			};
+			name = Debug;
+		};
+		B5A55F13229912DF003C195F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = overdubberTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/overdubber.app/overdubber";
+			};
+			name = Release;
+		};
+		B5A55F15229912DF003C195F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = overdubberUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = overdubber;
+			};
+			name = Debug;
+		};
+		B5A55F16229912DF003C195F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = overdubberUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = overdubber;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B5A55EE1229912DD003C195F /* Build configuration list for PBXProject "overdubber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5A55F0C229912DF003C195F /* Debug */,
+				B5A55F0D229912DF003C195F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5A55F0E229912DF003C195F /* Build configuration list for PBXNativeTarget "overdubber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5A55F0F229912DF003C195F /* Debug */,
+				B5A55F10229912DF003C195F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5A55F11229912DF003C195F /* Build configuration list for PBXNativeTarget "overdubberTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5A55F12229912DF003C195F /* Debug */,
+				B5A55F13229912DF003C195F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5A55F14229912DF003C195F /* Build configuration list for PBXNativeTarget "overdubberUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5A55F15229912DF003C195F /* Debug */,
+				B5A55F16229912DF003C195F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B5A55EDE229912DD003C195F /* Project object */;
+}
