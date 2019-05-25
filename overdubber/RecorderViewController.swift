@@ -20,11 +20,15 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     var audioPlayer: AVAudioPlayer!
+    var audioPlayer2: AVAudioPlayer!
     var currentLayer:Int = 0
+    
+    let controller = Controller.init()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         newLayer.isEnabled = false
 
         recordingSession = AVAudioSession.sharedInstance()
@@ -54,7 +58,11 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func getFile() -> URL{
-        return getDocumentsDirectory().appendingPathComponent("dub\(currentLayer).m4a")
+        return getDocumentsDirectory().appendingPathComponent("currentTake.m4a")
+    }
+    
+    func getFileB() -> URL{
+        return getDocumentsDirectory().appendingPathComponent("merged.m4a")
     }
     
     @objc func recordTapped() {
@@ -75,6 +83,10 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     }
     //should only be possible if something is recorded at current level. Guard?
     @IBAction func addLayerTapped(_ sender: Any) {
+        if(currentLayer >= 1){
+            controller.merge(audio1: getFile() as NSURL, audio2: getFileB() as NSURL)
+        }
+        
         currentLayer += 1
         newLayer.isEnabled = false
         recordButton.setTitle("Tap to Record", for: .normal) //refactor to new class - invoke method?
@@ -131,9 +143,15 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     
     func playAudioFile() {
         let file = getFile()
+        
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: file)
             audioPlayer?.play()
+            
+            if(currentLayer >= 1){ //this plays last two recordings. Merge down {0 to (curr-1)}?
+                audioPlayer2 = try AVAudioPlayer(contentsOf: getFileB())
+                audioPlayer2?.play()
+            }
         }
         catch {
             print("playback error")

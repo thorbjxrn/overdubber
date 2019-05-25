@@ -18,6 +18,15 @@ class overdubberTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testMerge(){
+        let stringPath = Bundle.main.url(forResource: "mp3", withExtension: "m4a")!
+        let stringPath2 = Bundle.main.url(forResource: "example", withExtension: "m4a")!
+        
+        let C = Controller.init()
+        XCTAssertTrue(C.merge(audio1: stringPath as NSURL, audio2: stringPath2 as NSURL))
+        
+    }
 
     func testExample() {
         // This is an example of a functional test case.
