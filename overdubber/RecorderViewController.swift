@@ -15,14 +15,17 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var playBtn: UIButton!
+    @IBOutlet weak var newLayer: UIButton!
+    
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     var audioPlayer: AVAudioPlayer!
-   
+    var currentLayer:Int = 0
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        newLayer.isEnabled = false
 
         recordingSession = AVAudioSession.sharedInstance()
         
@@ -50,6 +53,10 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
         view.addSubview(recordButton)
     }
     
+    func getFile() -> URL{
+        return getDocumentsDirectory().appendingPathComponent("dub\(currentLayer).m4a")
+    }
+    
     @objc func recordTapped() {
         if audioRecorder == nil {
             startRecording()
@@ -57,6 +64,7 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
             finishRecording(success: true)
         }
     }
+    
     @IBAction func playTapped(_ sender: Any) {
         if audioPlayer == nil {
             playAudioFile()
@@ -65,10 +73,17 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
             audioPlayer = nil
         }
     }
+    //should only be possible if something is recorded at current level. Guard?
+    @IBAction func addLayerTapped(_ sender: Any) {
+        currentLayer += 1
+        newLayer.isEnabled = false
+        recordButton.setTitle("Tap to Record", for: .normal) //refactor to new class - invoke method?
+        
+    }
     
     
     func startRecording() {
-        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        let audioFilename = getFile()
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -83,6 +98,7 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
             audioRecorder.record()
             
             recordButton.setTitle("Tap to Stop", for: .normal)
+            newLayer.isEnabled = true
         } catch {
             finishRecording(success: false)
         }
@@ -114,7 +130,7 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     //Playback
     
     func playAudioFile() {
-        let file = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        let file = getFile()
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: file)
             audioPlayer?.play()

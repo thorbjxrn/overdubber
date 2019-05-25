@@ -145,6 +145,9 @@
                                 <rect key="frame" x="16" y="441" width="343" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add Layer"/>
+                                <connections>
+                                    <action selector="addLayerTapped:" destination="t1D-4l-Isb" eventType="touchUpInside" id="RWA-UW-RTy"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" barStyle="black" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12m-9L-kqp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
@@ -166,6 +169,7 @@
                         <viewLayoutGuide key="safeArea" id="hHy-fB-bca"/>
                     </view>
                     <connections>
+                        <outlet property="newLayer" destination="uEv-xo-Ip3" id="tzE-XD-DWJ"/>
                         <outlet property="playBtn" destination="vwr-4n-f6K" id="T2S-vn-ycG"/>
                         <outlet property="recordButton" destination="wdo-FG-DNL" id="DMR-5s-tCi"/>
                     </connections>
