@@ -124,14 +124,24 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     //Playback
-    
+    // POSSIBLE idea: Keep all layers as files, then initialize through closures a way to play all at once.
     func playAudioFile() {
         if(audioPlayer == nil || !audioPlayer.isPlaying){
                 do {
                 let file = getDocumentsDirectory().appendingPathComponent("dub\(currentLayer).m4a")
+                
                 //try AVAudioPlayer(contentsOf: file).play()
                 audioPlayer = try AVAudioPlayer(contentsOf: file)
                 audioPlayer.play()
+                    
+                    if(currentLayer>0){
+                        let file2 = getDocumentsDirectory().appendingPathComponent("dub\(currentLayer-1).m4a")
+                        if(FileManager.default.fileExists(atPath: file2.absoluteString)){
+                            print("Play 2. file")
+                            audioPlayer2 = try AVAudioPlayer(contentsOf: file2)
+                            audioPlayer2.play()
+                        }
+                    }
             }
             catch {
                 print("playback error")
