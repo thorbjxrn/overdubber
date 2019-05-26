@@ -10,26 +10,26 @@ import Foundation
 
 class Model{
     let LIB_NAME = "OverdubberLibrary"
+    let LIB_URL:URL
     
     init() {
         let fileManager = FileManager.default
         if let tDocumentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let filePath =  tDocumentDirectory.appendingPathComponent("\(LIB_NAME)")
-            if !fileManager.fileExists(atPath: filePath.path) {
+            LIB_URL =  tDocumentDirectory.appendingPathComponent("\(LIB_NAME)")
+            if !fileManager.fileExists(atPath: LIB_URL.path) {
                 do {
-                    try fileManager.createDirectory(atPath: filePath.path, withIntermediateDirectories: true, attributes: nil)
+                    try fileManager.createDirectory(atPath: LIB_URL.path, withIntermediateDirectories: true, attributes: nil)
                 } catch {
                     NSLog("Couldn't create document directory")
                 }
             }
-            NSLog("Document directory is \(filePath)")
-            addFakeFiles(path:filePath)
+            NSLog("Document directory is \(LIB_URL)")
+            
+            addFakeFiles(path:LIB_URL)
         }
-        
-        
-        
-        
-        
+        else{
+            LIB_URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] // THis is bull. TODO better error handling, what to do if above fails?
+        }
     }
     
     func getDocumentsDirectory() -> URL {
@@ -64,7 +64,18 @@ class Model{
     
     
     func getLibList() -> [URL]?{
-        
-        return nil
+        var records:[URL]?
+        do {
+            let urls = try FileManager.default.contentsOfDirectory(at: LIB_URL, includingPropertiesForKeys: nil, options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles)
+            records = urls.filter( { (name: URL) -> Bool in
+                return name.lastPathComponent.hasSuffix("m4a")
+            })
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        } catch {
+            print("something went wrong when listing recordings")
+        }
+        return records
     }
 }
