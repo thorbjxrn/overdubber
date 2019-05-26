@@ -24,6 +24,8 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     var audioPlayer: AVAudioPlayer!
     var audioPlayer2: AVAudioPlayer!
     var currentLayer:Int = 0
+    var version = 0
+    var somethingRecorded = false
     
     let child = SpinnerViewController()
 
@@ -32,6 +34,7 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
         Model.shared.clearRec()
         super.viewDidLoad()
         newLayer.isEnabled = false
+        playBtn.isEnabled = false
 
         recordingSession = AVAudioSession.sharedInstance()
         
@@ -64,7 +67,7 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func getProjectFile() -> URL{
-        return Model.shared.getRecordingFolder().appendingPathComponent("project.m4a")
+        return Model.shared.getRecordingFolder().appendingPathComponent("project\(version).m4a")
     }
     
     @IBAction func export(_ sender: Any) {
@@ -135,6 +138,8 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
             startRecording()
         } else {
             finishRecording(success: true)
+            somethingRecorded = true
+            playBtn.isEnabled = true
         }
     }
     
@@ -145,6 +150,7 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     @IBAction func addLayerTapped(_ sender: Any) {
         
         newLayer.isEnabled = false
+        somethingRecorded = false
         recordButton.setTitle("Tap to Record", for: .normal) //refactor to new class - invoke method?
         
         addLayer()
@@ -155,19 +161,29 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
             print("No new layer")
             return
         }*/
+        print(Controller.shared.assetExport?.progress)
         if(currentLayer>1){
-            print("First merge down")
-            if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer).m4a") as NSURL, audio2: Model.shared.getRecordingFolder().appendingPathComponent("project.m4a") as NSURL, filePath: getProjectFile()) {
+            print("Merge down")
+            if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("project\(version).m4a"), audio2: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer-1).m4a"), filePath: Model.shared.getRecordingFolder().appendingPathComponent("project\(version+1).m4a")) {
+                version += 1
                 print("Merge success?")
             }
             
         }
         else if(currentLayer>0){
-            print("merge down")
-            if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer).m4a") as NSURL, audio2: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer-1).m4a") as NSURL, filePath: getProjectFile()) {
+            print("First merge down")
+            
+            if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("dub0.m4a"), audio2: Model.shared.getRecordingFolder().appendingPathComponent("dub1.m4a"), filePath: Model.shared.getRecordingFolder().appendingPathComponent("project0.m4a")) {
+                
                 print("Merge success?")
             }
         }
+        self.createSpinnerView()
+        while(Controller.shared.assetExport?.progress ?? 1.0 < 1.0){
+            
+        }
+        removeSpinner()
+        
         print((Model.shared.getRecList()!).map{$0.lastPathComponent})
         currentLayer += 1
         layersLabel.text = "Layers: \(currentLayer)"
@@ -231,11 +247,12 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     func playAudioFile() {
         
         if(audioPlayer == nil || !audioPlayer.isPlaying){
+            if(somethingRecorded){
                 do {
-                let file = getFile()
-                //try AVAudioPlayer(contentsOf: file).play()
-                audioPlayer = try AVAudioPlayer(contentsOf: file)
-                audioPlayer.play()
+                    let file = getFile()
+                    //try AVAudioPlayer(contentsOf: file).play()
+                    audioPlayer = try AVAudioPlayer(contentsOf: file)
+                    audioPlayer.play()
                     
                     if(currentLayer>0){
                         print("layer \(currentLayer)")
@@ -249,9 +266,29 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
                             audioPlayer2.play()
                         }
                     }
+                }
+                catch {
+                    print("playback error")
+                }
             }
-            catch {
-                print("playback error")
+            else{
+                do{
+                    if(currentLayer>0){
+                        print("layer \(currentLayer)")
+                        var file2 = Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer-1).m4a")
+                        if(currentLayer>1){
+                            file2 = getProjectFile()
+                        }
+                        if(FileManager.default.fileExists(atPath: String(file2.absoluteString.dropFirst(8)))){
+                            print("Play 2. file: \(getProjectFile().lastPathComponent)")
+                            audioPlayer2 = try AVAudioPlayer(contentsOf: file2)
+                            audioPlayer2.play()
+                        }
+                    }
+                }
+                catch {
+                    print("playback error")
+                }
             }
         }else{
             audioPlayer.stop()

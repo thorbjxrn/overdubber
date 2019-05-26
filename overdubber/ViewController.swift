@@ -14,6 +14,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        /*//DEBUG
+        
+        let stringPath = Bundle.main.url(forResource: "mp3", withExtension: "m4a")!
+        let stringPath2 = Bundle.main.url(forResource: "example", withExtension: "m4a")!
+        
+        let C = Controller.init()
+        C.merge(audio1: stringPath, audio2: stringPath2)
+        */
 
         // Do any additional setup after loading the view.
     }
