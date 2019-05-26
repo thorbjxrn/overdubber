@@ -26,8 +26,9 @@ class PlaybackViewController: UIViewController {
     @IBAction func play(_ sender: Any) {
             if(audioPlayer == nil || !audioPlayer.isPlaying){
                 do {
-                    let file = audioFile! //?? Model.shared.getLibList()![0]//test
-                    audioPlayer = try AVAudioPlayer(contentsOf: file)
+                    //let file = audioFile! //?? Model.shared.getLibList()![0]//test
+                    print(audioFile)
+                    audioPlayer = try AVAudioPlayer(contentsOf: audioFile!)
                     audioPlayer.play()
                     
                     playBtn.setTitle("Stop", for: .normal)

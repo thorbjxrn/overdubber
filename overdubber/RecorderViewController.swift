@@ -14,6 +14,7 @@ import AVFoundation
 
 class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     
+    @IBOutlet weak var layersLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var playBtn: UIButton!
     @IBOutlet weak var newLayer: UIButton!
@@ -65,8 +66,46 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func export(_ sender: Any) {
-       performSegue(withIdentifier: "exportSeg", sender: nil)
+        print("export")
+        
+        let alert = UIAlertController(title: "Export as:", message: nil, preferredStyle: .alert)
+        alert.addTextField{(name) in
+            name.placeholder = "Filename"
+        }
+        let action = UIAlertAction(title: "Export", style: .default){(_) in
+            guard let name = alert.textFields?[0].text else { return }
+            if(name == ""){
+                self.toastError(string: "This is required.")
+                return
+            }
+            if(name.contains(" ")){
+                self.toastError(string: "No spaces allowed")
+                return
+            }
             
+            
+            do{
+                try FileManager.default.copyItem(at: self.getFile(), to: Model.shared.getLibraryFolder().appendingPathComponent("\(name).m4a"))
+                self.performSegue(withIdentifier: "exportSeg", sender: nil)
+                print("File copied to lib folder")
+                let added = UIAlertController(title: "Export Complete", message: "", preferredStyle: .alert)
+                added.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(added, animated: true)
+            }catch{
+                print("Copy Failed.")
+                self.toastError(string: "FileSystem error")
+            }
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
+        
+        
+    }
+    
+    func toastError(string:String){
+        let error = UIAlertController(title: "Error", message: string, preferredStyle: .alert)
+        error.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(error, animated: true)
     }
     
     @objc func recordTapped() {
@@ -95,21 +134,21 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
             return
         }*/
         if(currentLayer>1){
+            print("First merge down")
             if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer).m4a") as NSURL, audio2: Model.shared.getRecordingFolder().appendingPathComponent("project.m4a") as NSURL, filePath: getProjectFile()) {
                 print("Merge success?")
-                print(Model.shared.getRecList()!)
             }
             
         }
         else if(currentLayer>0){
-            print("Time to merge down")
+            print("merge down")
             if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer).m4a") as NSURL, audio2: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer-1).m4a") as NSURL, filePath: getProjectFile()) {
                 print("Merge success?")
-                print(Model.shared.getRecList()!)
             }
         }
+        print((Model.shared.getRecList()!).map{$0.lastPathComponent})
         currentLayer += 1
-        print(Model.shared.getRecList() ?? "")
+        layersLabel.text = "Layers: \(currentLayer)"
         
         
     }
@@ -118,12 +157,17 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     func startRecording() {
         let audioFilename = getFile()
         
-        let settings = [
+        let settings = [AVSampleRateKey : NSNumber(value: Float(44100.0)),
+                        AVFormatIDKey : NSNumber(value: Int32(kAudioFormatMPEG4AAC)),
+                        AVNumberOfChannelsKey : NSNumber(value: Int32(1)),
+                        AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue))]
+        
+        /*[
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000,
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-        ]
+        ]*/
         
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)

@@ -145,29 +145,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdo-FG-DNL">
-                                <rect key="frame" x="16" y="343" width="343" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Record."/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdo-FG-DNL">
+                                <rect key="frame" x="16" y="466" width="146" height="141"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="wdo-FG-DNL" secondAttribute="height" multiplier="86:83" id="0Z2-Sh-UNT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <state key="normal" title="Record." backgroundImage="base">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEv-xo-Ip3">
-                                <rect key="frame" x="16" y="441" width="343" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEv-xo-Ip3">
+                                <rect key="frame" x="212" y="441" width="147" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="84" id="HXi-E9-hbe"/>
+                                    <constraint firstAttribute="width" constant="147" id="wea-Zb-2zC"/>
+                                </constraints>
                                 <state key="normal" title="Add Layer"/>
                                 <connections>
                                     <action selector="addLayerTapped:" destination="t1D-4l-Isb" eventType="touchUpInside" id="RWA-UW-RTy"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwr-4n-f6K">
-                                <rect key="frame" x="16" y="533" width="343" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwr-4n-f6K">
+                                <rect key="frame" x="212" y="533" width="147" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="a2F-f3-tLW"/>
+                                </constraints>
                                 <state key="normal" title="Play"/>
                                 <connections>
                                     <action selector="playTapped:" destination="t1D-4l-Isb" eventType="touchUpInside" id="TLb-l8-uzL"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Layers: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Tc-vU-Alp">
+                                <rect key="frame" x="212" y="412" width="147" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceholderLC" translatesAutoresizingMaskIntoConstraints="NO" id="ifo-P1-MT2">
+                                <rect key="frame" x="67" y="172" width="241" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="Qas-5D-gx9"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hHy-fB-bca" firstAttribute="trailing" secondItem="ifo-P1-MT2" secondAttribute="trailing" constant="67" id="2wH-HD-1Q4"/>
+                            <constraint firstItem="uEv-xo-Ip3" firstAttribute="trailing" secondItem="5Tc-vU-Alp" secondAttribute="trailing" id="5vt-SQ-csI"/>
+                            <constraint firstItem="hHy-fB-bca" firstAttribute="trailing" secondItem="vwr-4n-f6K" secondAttribute="trailing" constant="16" id="G29-RR-yoD"/>
+                            <constraint firstItem="vwr-4n-f6K" firstAttribute="top" secondItem="uEv-xo-Ip3" secondAttribute="bottom" constant="8" id="LqC-oa-H3Y"/>
+                            <constraint firstItem="hHy-fB-bca" firstAttribute="bottom" secondItem="wdo-FG-DNL" secondAttribute="bottom" constant="60" id="PLH-dR-acz"/>
+                            <constraint firstItem="uEv-xo-Ip3" firstAttribute="trailing" secondItem="vwr-4n-f6K" secondAttribute="trailing" id="PVq-HF-fPr"/>
+                            <constraint firstItem="uEv-xo-Ip3" firstAttribute="leading" secondItem="5Tc-vU-Alp" secondAttribute="leading" id="VYX-sa-tOU"/>
+                            <constraint firstItem="uEv-xo-Ip3" firstAttribute="leading" secondItem="vwr-4n-f6K" secondAttribute="leading" id="f4Z-rj-qIj"/>
+                            <constraint firstItem="ifo-P1-MT2" firstAttribute="centerX" secondItem="wTw-rB-1Wc" secondAttribute="centerX" id="hCm-p7-D0l"/>
+                            <constraint firstItem="vwr-4n-f6K" firstAttribute="top" secondItem="uEv-xo-Ip3" secondAttribute="bottom" constant="8" id="hFa-aZ-ZVq"/>
+                            <constraint firstItem="vwr-4n-f6K" firstAttribute="leading" secondItem="wdo-FG-DNL" secondAttribute="trailing" constant="50" id="m51-em-JW4"/>
+                            <constraint firstItem="vwr-4n-f6K" firstAttribute="bottom" secondItem="wdo-FG-DNL" secondAttribute="bottom" id="nTu-x3-lcA"/>
+                            <constraint firstItem="ifo-P1-MT2" firstAttribute="top" secondItem="hHy-fB-bca" secondAttribute="top" constant="56" id="pWi-g5-sSr"/>
+                            <constraint firstItem="ifo-P1-MT2" firstAttribute="leading" secondItem="hHy-fB-bca" secondAttribute="leading" constant="67" id="qLe-La-eb2"/>
+                            <constraint firstItem="wdo-FG-DNL" firstAttribute="leading" secondItem="hHy-fB-bca" secondAttribute="leading" constant="16" id="tam-h5-Z7r"/>
+                            <constraint firstItem="uEv-xo-Ip3" firstAttribute="trailing" secondItem="wTw-rB-1Wc" secondAttribute="trailingMargin" id="x3T-a2-TsQ"/>
+                            <constraint firstItem="uEv-xo-Ip3" firstAttribute="top" secondItem="5Tc-vU-Alp" secondAttribute="bottom" constant="8" symbolic="YES" id="xTo-ea-piz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="hHy-fB-bca"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Recording" id="w5N-Jx-GYI">
@@ -179,15 +220,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="layersLabel" destination="5Tc-vU-Alp" id="eYd-ZQ-4J6"/>
                         <outlet property="newLayer" destination="uEv-xo-Ip3" id="tzE-XD-DWJ"/>
                         <outlet property="playBtn" destination="vwr-4n-f6K" id="T2S-vn-ycG"/>
-                        <outlet property="recordButton" destination="wdo-FG-DNL" id="DMR-5s-tCi"/>
+                        <outlet property="recordButton" destination="wdo-FG-DNL" id="ltV-sX-73W"/>
                         <segue destination="S71-fA-EmV" kind="show" identifier="exportSeg" id="yAq-UB-5Qy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ina-cD-dPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="905"/>
+            <point key="canvasLocation" x="132" y="904.49775112443785"/>
         </scene>
         <!--My Recordings-->
         <scene sceneID="752-wq-to7">
@@ -217,7 +259,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="X8G-Rq-uUd"/>
                         <barButtonItem key="leftBarButtonItem" title="Main Menu" id="Dek-tB-8Wh">
                             <connections>
-                                <segue destination="yzW-oL-DMm" kind="show" id="xlm-X3-7iW"/>
+                                <segue destination="yzW-oL-DMm" kind="showDetail" id="xlm-X3-7iW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -249,8 +291,9 @@
     </scenes>
     <resources>
         <image name="PlaceholderLC" width="400" height="400"/>
+        <image name="base" width="141.84538269042969" height="141.84538269042969"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="931-P7-TFn"/>
+        <segue reference="yAq-UB-5Qy"/>
     </inferredMetricsTieBreakers>
 </document>

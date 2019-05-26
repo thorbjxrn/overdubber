@@ -24,7 +24,7 @@ class overdubberTests: XCTestCase {
         let stringPath2 = Bundle.main.url(forResource: "example", withExtension: "m4a")!
         
         let C = Controller.init()
-        XCTAssertTrue(C.merge(audio1: stringPath as NSURL, audio2: stringPath2 as NSURL))
+        XCTAssertTrue(C.merge(audio1: stringPath as NSURL, audio2: stringPath2 as NSURL, filePath: Model.shared.getLibraryFolder().appendingPathComponent("combined_example.m4a")))
         
         
     }
@@ -33,11 +33,13 @@ class overdubberTests: XCTestCase {
         //OBS THESE FILES MUST BE MADE IN RECORDER. CLEARS AT RECORDER OPEN
         let stringPath = Model.shared.getRecordingFolder().appendingPathComponent("dub0.m4a")
         let stringPath2 = Model.shared.getRecordingFolder().appendingPathComponent("dub1.m4a")
+        let stringPath3 = Model.shared.getRecordingFolder().appendingPathComponent("dub2.m4a")
         let project = Model.shared.getRecordingFolder().appendingPathComponent("project.m4a")
         
         let C = Controller.init()
         XCTAssertTrue(C.merge(audio1: stringPath as NSURL, audio2: stringPath2 as NSURL, filePath: Model.shared.getLibraryFolder().appendingPathComponent("TEST.m4a")))
-        XCTAssertTrue(C.merge(audio1: stringPath as NSURL, audio2: project as NSURL, filePath: Model.shared.getLibraryFolder().appendingPathComponent("TEST2.m4a")))
+        XCTAssertTrue(C.merge(audio1: stringPath as NSURL, audio2: stringPath2 as NSURL, filePath: Model.shared.getLibraryFolder().appendingPathComponent("TEST2.m4a")))
+        XCTAssertTrue(C.merge(audio1: stringPath3 as NSURL, audio2: project as NSURL, filePath: Model.shared.getLibraryFolder().appendingPathComponent("TEST3.m4a")))
     }
     
     func testModelInit(){
