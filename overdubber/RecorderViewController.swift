@@ -72,7 +72,36 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func export(_ sender: Any) {
         print("export")
-        
+        if(self.somethingRecorded){
+            while(Controller.shared.assetExport?.progress ?? 1.0 < 1.0){
+                createSpinnerView()
+                sleep(2)
+            }
+            print(Controller.shared.assetExport?.progress)
+            if(currentLayer>1){
+                print("Merge down")
+                if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("project\(version).m4a"), audio2: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer).m4a"), filePath: Model.shared.getRecordingFolder().appendingPathComponent("project\(version+1).m4a"))
+                {
+                    version += 1
+                    print("Merge success?")
+                }
+                
+            }
+            else if(currentLayer>0){
+                print("First merge down")
+                
+                if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("dub0.m4a"), audio2: Model.shared.getRecordingFolder().appendingPathComponent("dub1.m4a"), filePath: Model.shared.getRecordingFolder().appendingPathComponent("project0.m4a"))
+                {
+                    print("Merge success?")
+                }
+            }
+        }
+        //LetExport do its thing. TODO this will merge down so if abort errors might accur.
+        currentLayer += 1 // just in case. 
+        while(Controller.shared.assetExport?.progress ?? 1.0 < 1.0){
+            createSpinnerView()
+            sleep(2)
+        }
         
         let alert = UIAlertController(title: "Export as:", message: nil, preferredStyle: .alert)
         alert.addTextField{(name) in
@@ -88,37 +117,21 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
                 self.toastError(string: "No spaces allowed")
                 return
             }
-            
-        
-            //self.createSpinnerView()
-            if(self.somethingRecorded){
-                Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("project\(self.version).m4a"), audio2: Model.shared.getRecordingFolder().appendingPathComponent("dub\(self.currentLayer-1).m4a"), filePath: Model.shared.getLibraryFolder().appendingPathComponent("\(name).m4a"))
-                while(Controller.shared.assetExport?.progress ?? 1.0 < 1.0){
-                    self.createSpinnerView()
-                    sleep(2) //TODO: Synch this to the actual completion
-                }
+            do{
+                try FileManager.default.copyItem(at: self.getProjectFile(), to: Model.shared.getLibraryFolder().appendingPathComponent("\(name).m4a"))
+                //self.removeSpinner()
+                
                 self.performSegue(withIdentifier: "exportSeg", sender: nil)
+                print("File copied to lib folder")
                 let added = UIAlertController(title: "Export Complete", message: "", preferredStyle: .alert)
                 added.addAction(UIAlertAction(title: "OK", style: .default))
                 self.present(added, animated: true)
-            }
-            else{
-                
-                do{
-                    try FileManager.default.copyItem(at: self.getProjectFile(), to: Model.shared.getLibraryFolder().appendingPathComponent("\(name).m4a"))
-                    //self.removeSpinner()
-                    
-                    self.performSegue(withIdentifier: "exportSeg", sender: nil)
-                    print("File copied to lib folder")
-                    let added = UIAlertController(title: "Export Complete", message: "", preferredStyle: .alert)
-                    added.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(added, animated: true)
-                }catch{
-                    print("Copy Failed.")
-                    self.toastError(string: "FileSystem error")
-                }
+            }catch{
+                print("Copy Failed.")
+                self.toastError(string: "FileSystem error")
             }
         }
+        
         alert.addAction(action)
         present(alert, animated: true)
         
@@ -232,6 +245,29 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]*/
+        
+        //Dubbing requires playback
+        do{
+            if(audioPlayer != nil){
+                audioPlayer.stop()
+            }
+            if(audioPlayer2 != nil){
+                audioPlayer2?.stop()
+            }
+            
+            var file2 = Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer-1).m4a")
+            if(currentLayer>1){
+                file2 = getProjectFile()
+            }
+            if(FileManager.default.fileExists(atPath: String(file2.absoluteString.dropFirst(8)))){
+                print("Play 2. file: \(getProjectFile().lastPathComponent)")
+                audioPlayer2 = try AVAudioPlayer(contentsOf: file2)
+                audioPlayer2.play()
+            }
+        }catch{
+            print("UnderDub error")
+        }
+        
         
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
