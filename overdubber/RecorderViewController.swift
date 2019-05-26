@@ -7,6 +7,7 @@
 //
 // Based on https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
 //
+// More complete resource: https://github.com/SwiftArchitect/SO-32342486/blob/master/SO-32342486/ViewController.swift
 
 import UIKit
 import AVFoundation
