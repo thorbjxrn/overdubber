@@ -78,8 +78,6 @@ class Controller{
             try compositionAudioTrack1.insertTimeRange(timeRange1, of: assetTrack1, at: CMTime.zero)
             try compositionAudioTrack2.insertTimeRange(timeRange2, of: assetTrack2, at: CMTime.zero)
             
-            print(composition)
-            //This should work
         }
         catch
         {
@@ -101,7 +99,7 @@ class Controller{
         
         assetExport?.exportAsynchronously(completionHandler:
             {
-                print(self.assetExport!)
+                //print(self.assetExport!)
                 switch self.assetExport!.status
                 {
                 case AVAssetExportSession.Status.failed:
@@ -173,7 +171,7 @@ class Controller{
             try compositionAudioTrack1.insertTimeRange(timeRange1, of: assetTrack1, at: CMTime.zero)
             try compositionAudioTrack2.insertTimeRange(timeRange2, of: assetTrack2, at: CMTime.zero)
             
-            print(composition)
+            //print(composition)
             //This should work
         }
         catch
@@ -196,7 +194,7 @@ class Controller{
         
         assetExport?.exportAsynchronously(completionHandler:
             {
-                print(self.assetExport!)
+                //print(self.assetExport!)
                 switch self.assetExport!.status
                 {
                 case AVAssetExportSession.Status.failed:
@@ -210,7 +208,7 @@ class Controller{
                 case AVAssetExportSession.Status.exporting:
                     print("exporting\(self.assetExport?.error)")
                 default:
-                    print("complete")
+                    print("Merge complete \(fileDestinationUrl.lastPathComponent)")
                 }
                 
         })

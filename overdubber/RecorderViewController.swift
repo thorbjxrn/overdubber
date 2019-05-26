@@ -97,11 +97,15 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
                     self.createSpinnerView()
                     sleep(2) //TODO: Synch this to the actual completion
                 }
+                self.performSegue(withIdentifier: "exportSeg", sender: nil)
+                let added = UIAlertController(title: "Export Complete", message: "", preferredStyle: .alert)
+                added.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(added, animated: true)
             }
             else{
                 
                 do{
-                    try FileManager.default.copyItem(at: self.getFile(), to: Model.shared.getLibraryFolder().appendingPathComponent("\(name).m4a"))
+                    try FileManager.default.copyItem(at: self.getProjectFile(), to: Model.shared.getLibraryFolder().appendingPathComponent("\(name).m4a"))
                     //self.removeSpinner()
                     
                     self.performSegue(withIdentifier: "exportSeg", sender: nil)
@@ -168,7 +172,7 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
         print(Controller.shared.assetExport?.progress)
         if(currentLayer>1){
             print("Merge down")
-            if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("project\(version).m4a"), audio2: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer-1).m4a"), filePath: Model.shared.getRecordingFolder().appendingPathComponent("project\(version+1).m4a"))
+            if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("project\(version).m4a"), audio2: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer).m4a"), filePath: Model.shared.getRecordingFolder().appendingPathComponent("project\(version+1).m4a"))
             {
                 version += 1
                 print("Merge success?")
