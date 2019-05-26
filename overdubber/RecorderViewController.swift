@@ -7,7 +7,10 @@
 //
 // Based on https://www.hackingwithswift.com/example-code/media/how-to-record-audio-using-avaudiorecorder
 //
-// More complete resource: https://github.com/SwiftArchitect/SO-32342486/blob/master/SO-32342486/ViewController.swift
+// For future refacotring: https://github.com/SwiftArchitect/SO-32342486/blob/master/SO-32342486/ViewController.swift
+//
+// Docu: https://developer.apple.com/documentation/avfoundation/avmutablecompositiontrack
+// More: https://developer.apple.com/documentation/avfoundation/avassetexportsession
 
 import UIKit
 import AVFoundation
@@ -97,7 +100,7 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
             }
         }
         //LetExport do its thing. TODO this will merge down so if abort errors might accur.
-        currentLayer += 1 // just in case. 
+        currentLayer += 1 // just in case.
         while(Controller.shared.assetExport?.progress ?? 1.0 < 1.0){
             createSpinnerView()
             sleep(2)
