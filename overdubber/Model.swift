@@ -9,6 +9,7 @@
 import Foundation
 
 class Model{
+    static let shared = Model.init()
     let LIB_NAME = "OverdubberLibrary"
     let LIB_URL:URL
     
