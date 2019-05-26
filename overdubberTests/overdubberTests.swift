@@ -29,6 +29,16 @@ class overdubberTests: XCTestCase {
         
     }
     
+    func testMergeRecordings(){
+        let stringPath = Model.shared.getRecordingFolder().appendingPathComponent("dub0.m4a")
+        let stringPath2 = Model.shared.getRecordingFolder().appendingPathComponent("dub1.m4a")
+        
+        let C = Controller.init()
+        XCTAssertTrue(C.merge(audio1: stringPath as NSURL, audio2: stringPath2 as NSURL, filePath: Model.shared.getLibraryFolder()))
+        
+        
+    }
+    
     func testModelInit(){
         Model.init()
         

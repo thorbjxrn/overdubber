@@ -26,6 +26,7 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
 
     
     override func viewDidLoad() {
+        Model.shared.clearRec()
         super.viewDidLoad()
         newLayer.isEnabled = false
 
@@ -56,7 +57,11 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func getFile() -> URL{
-        return getDocumentsDirectory().appendingPathComponent("dub\(currentLayer).m4a")
+        return Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer).m4a")
+    }
+    
+    func getProjectFile() -> URL{
+        return Model.shared.getRecordingFolder().appendingPathComponent("project.m4a")
     }
     
     @objc func recordTapped() {
@@ -72,9 +77,35 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     }
     //should only be possible if something is recorded at current level. Guard?
     @IBAction func addLayerTapped(_ sender: Any) {
-        currentLayer += 1
+        
         newLayer.isEnabled = false
         recordButton.setTitle("Tap to Record", for: .normal) //refactor to new class - invoke method?
+        
+        addLayer()
+    }
+    
+    func addLayer(){
+        /*guard audioPlayer.isPlaying else{
+            print("No new layer")
+            return
+        }*/
+        if(currentLayer>1){
+            if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer).m4a") as NSURL, audio2: Model.shared.getRecordingFolder().appendingPathComponent("project.m4a") as NSURL, filePath: getProjectFile()) {
+                print("Merge success?")
+                print(Model.shared.getRecList()!)
+            }
+            
+        }
+        else if(currentLayer>0){
+            print("Time to merge down")
+            if Controller.shared.merge(audio1: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer).m4a") as NSURL, audio2: Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer-1).m4a") as NSURL, filePath: getProjectFile()) {
+                print("Merge success?")
+                print(Model.shared.getRecList()!)
+            }
+        }
+        currentLayer += 1
+        print(Model.shared.getRecList() ?? "")
+        
         
     }
     
@@ -127,17 +158,21 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     //Playback
     // POSSIBLE idea: Keep all layers as files, then initialize through closures a way to play all at once.
     func playAudioFile() {
+        
         if(audioPlayer == nil || !audioPlayer.isPlaying){
                 do {
-                let file = getDocumentsDirectory().appendingPathComponent("dub\(currentLayer).m4a")
-                
+                let file = getFile()
                 //try AVAudioPlayer(contentsOf: file).play()
                 audioPlayer = try AVAudioPlayer(contentsOf: file)
                 audioPlayer.play()
                     
                     if(currentLayer>0){
-                        let file2 = getDocumentsDirectory().appendingPathComponent("dub\(currentLayer-1).m4a")
-                        if(FileManager.default.fileExists(atPath: file2.absoluteString)){
+                        print("layer \(currentLayer)")
+                        var file2 = Model.shared.getRecordingFolder().appendingPathComponent("dub\(currentLayer-1).m4a")
+                        if(currentLayer>1){
+                            file2 = getProjectFile()
+                        }
+                        if(FileManager.default.fileExists(atPath: String(file2.absoluteString.dropFirst(8)))){
                             print("Play 2. file")
                             audioPlayer2 = try AVAudioPlayer(contentsOf: file2)
                             audioPlayer2.play()

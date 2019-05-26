@@ -11,6 +11,8 @@ import AVFoundation
 
 class Controller{
     
+    static let shared = Controller.init()
+    
     init() {
         
     }
@@ -26,12 +28,17 @@ class Controller{
     }
     
     func merge(audio1: NSURL, audio2:  NSURL) -> Bool{
+        return merge(audio1: audio1, audio2: audio2, filePath: getFilePath(filename: "merged"))
+    }
+    
+    
+    func merge(audio1: NSURL, audio2:  NSURL, filePath: URL) -> Bool{
         let composition = AVMutableComposition()
         let compositionAudioTrack1:AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: CMPersistentTrackID())!
         let compositionAudioTrack2:AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: CMPersistentTrackID())!
         
         //let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first! as NSURL
-        let fileDestinationUrl = getFilePath(filename: "merged") //TODO : dynamic names and export/record folders
+        let fileDestinationUrl = filePath
         
         let filemanager = FileManager.default
         if (filemanager.fileExists(atPath: fileDestinationUrl.path))

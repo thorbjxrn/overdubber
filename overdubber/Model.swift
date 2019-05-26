@@ -11,7 +11,9 @@ import Foundation
 class Model{
     static let shared = Model.init()
     let LIB_NAME = "OverdubberLibrary"
+    let REC_FOLDER_NAME = "OverdubberActiveProject"
     let LIB_URL:URL
+    let REC:URL
     
     init() {
         let fileManager = FileManager.default
@@ -26,16 +28,52 @@ class Model{
             }
             NSLog("Document directory is \(LIB_URL)")
             
-            addFakeFiles(path:LIB_URL)
+           
+            //Recordings folder. Make a NSTemporaryDirectory?
+            REC = tDocumentDirectory.appendingPathComponent("\(REC_FOLDER_NAME)")
+            if !fileManager.fileExists(atPath: REC.path) {
+                do {
+                    try fileManager.createDirectory(atPath: REC.path, withIntermediateDirectories: true, attributes: nil)
+                } catch {
+                    NSLog("Couldn't create recording project directory")
+                }
+            }
+            NSLog("Record directory is \(REC)")
         }
         else{
             LIB_URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] // THis is bull. TODO better error handling, what to do if above fails?
+            REC = LIB_URL //even more bull. Throw error?
+            fatalError() //Crash!
         }
+        
+         addFakeFiles(path:LIB_URL)
+    }
+    
+    func getRecordingFolder() -> URL{
+        return REC
+    }
+    func getLibraryFolder() -> URL{
+        return LIB_URL
     }
     
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
+    }
+    
+    func clearRec(){//Return boolean?
+        do{
+            var fp = String(REC.absoluteString.dropFirst(8))
+            let folder = try FileManager.default.contentsOfDirectory(atPath: fp)
+            for filePath in folder {
+                fp = String(REC.appendingPathComponent(filePath).absoluteString.dropFirst(8))
+                print("Deleting\(filePath)")
+                try FileManager.default.removeItem(atPath: fp)
+                print("REC folder cleared")
+            }
+        }catch{
+            print("ERROR: Could not delete items in rec folder")
+        }
     }
     
     func addFakeFiles(path:URL){
@@ -68,6 +106,22 @@ class Model{
         var records:[URL]?
         do {
             let urls = try FileManager.default.contentsOfDirectory(at: LIB_URL, includingPropertiesForKeys: nil, options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles)
+            records = urls.filter( { (name: URL) -> Bool in
+                return name.lastPathComponent.hasSuffix("m4a")
+            })
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        } catch {
+            print("something went wrong when listing recordings")
+        }
+        return records
+    }
+    
+    func getRecList() -> [URL]?{
+        var records:[URL]?
+        do {
+            let urls = try FileManager.default.contentsOfDirectory(at: REC, includingPropertiesForKeys: nil, options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles)
             records = urls.filter( { (name: URL) -> Bool in
                 return name.lastPathComponent.hasSuffix("m4a")
             })
