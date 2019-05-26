@@ -24,6 +24,8 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     var audioPlayer: AVAudioPlayer!
     var audioPlayer2: AVAudioPlayer!
     var currentLayer:Int = 0
+    
+    let child = SpinnerViewController()
 
     
     override func viewDidLoad() {
@@ -85,7 +87,10 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
             
             
             do{
+                self.createSpinnerView()
                 try FileManager.default.copyItem(at: self.getFile(), to: Model.shared.getLibraryFolder().appendingPathComponent("\(name).m4a"))
+                self.removeSpinner()
+                
                 self.performSegue(withIdentifier: "exportSeg", sender: nil)
                 print("File copied to lib folder")
                 let added = UIAlertController(title: "Export Complete", message: "", preferredStyle: .alert)
@@ -106,6 +111,23 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
         let error = UIAlertController(title: "Error", message: string, preferredStyle: .alert)
         error.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(error, animated: true)
+    }
+    
+    func createSpinnerView() {
+        
+        
+        // add the spinner view controller
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+        
+    }
+    
+    func removeSpinner(){
+        self.child.willMove(toParent: nil)
+        self.child.view.removeFromSuperview()
+        self.child.removeFromParent()
     }
     
     @objc func recordTapped() {

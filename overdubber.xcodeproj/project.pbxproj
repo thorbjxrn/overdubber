@@ -11,6 +11,7 @@
 		B553016A229A370700C54052 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5530169229A370700C54052 /* Model.swift */; };
 		B553016B229A393500C54052 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5530169229A370700C54052 /* Model.swift */; };
 		B553016D229A4F3300C54052 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553016C229A4F3300C54052 /* ViewController.swift */; };
+		B56B9C89229A9D4700C2D72D /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B9C88229A9D4700C2D72D /* SpinnerViewController.swift */; };
 		B5A55EEA229912DD003C195F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EE9229912DD003C195F /* AppDelegate.swift */; };
 		B5A55EEC229912DD003C195F /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EEB229912DD003C195F /* PlaybackViewController.swift */; };
 		B5A55EEF229912DD003C195F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5A55EED229912DD003C195F /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		B5530167229A343100C54052 /* LibTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibTableViewController.swift; sourceTree = "<group>"; };
 		B5530169229A370700C54052 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B553016C229A4F3300C54052 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B56B9C88229A9D4700C2D72D /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		B5A55EE6229912DD003C195F /* overdubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = overdubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55EE9229912DD003C195F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5A55EEB229912DD003C195F /* PlaybackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				B5530169229A370700C54052 /* Model.swift */,
 				B5A55F1922993C0A003C195F /* Controller.swift */,
 				B5A55F1722991D51003C195F /* RecorderViewController.swift */,
+				B56B9C88229A9D4700C2D72D /* SpinnerViewController.swift */,
 				B5530167229A343100C54052 /* LibTableViewController.swift */,
 				B5A55EEB229912DD003C195F /* PlaybackViewController.swift */,
 				B5A55EED229912DD003C195F /* Main.storyboard */,
@@ -217,6 +220,7 @@
 				TargetAttributes = {
 					B5A55EE5229912DD003C195F = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					B5A55EF9229912DF003C195F = {
 						CreatedOnToolsVersion = 10.1;
@@ -288,6 +292,7 @@
 				B5A55F1822991D51003C195F /* RecorderViewController.swift in Sources */,
 				B5530168229A343100C54052 /* LibTableViewController.swift in Sources */,
 				B553016A229A370700C54052 /* Model.swift in Sources */,
+				B56B9C89229A9D4700C2D72D /* SpinnerViewController.swift in Sources */,
 				B553016D229A4F3300C54052 /* ViewController.swift in Sources */,
 				B5A55EEA229912DD003C195F /* AppDelegate.swift in Sources */,
 				B5A55F1A22993C0A003C195F /* Controller.swift in Sources */,
@@ -466,6 +471,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = overdubber/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -474,6 +480,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "overdubber/overdubber-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -483,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = overdubber/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -491,6 +500,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "overdubber/overdubber-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
