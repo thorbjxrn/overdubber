@@ -12,6 +12,7 @@ class LibTableViewController: UITableViewController {
     
     var soundFiles = [URL]()
     let lib = Model.shared
+    var selecteditem:URL?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +44,16 @@ class LibTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = soundFiles[indexPath.row].absoluteString
+        cell.textLabel?.text = soundFiles[indexPath.row].deletingPathExtension().lastPathComponent
         //cell.detailTextLabel?.text = String(soundFiles[indexPath.row])
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        selecteditem = soundFiles[indexPath.row]
+        performSegue(withIdentifier: "playBackSeg", sender: nil)
+        
     }
     
     /*
@@ -83,6 +91,12 @@ class LibTableViewController: UITableViewController {
     }
     */
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? PlaybackViewController{
+            viewController.audioFile = selecteditem
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -90,6 +104,10 @@ class LibTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "toNextVC" {
+            let vc = segue.destination as! SecondViewController
+            vc.someVariable = someValue
+        }
     }
     */
 

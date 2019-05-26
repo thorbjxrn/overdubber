@@ -15,16 +15,18 @@ class PlaybackViewController: UIViewController {
     @IBOutlet weak var playBtn: UIButton!
     
     var audioPlayer:AVAudioPlayer!
+    var audioFile:URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         progressView.setProgress(0, animated: false)
+        self.title = audioFile!.deletingPathExtension().lastPathComponent
         
     }
     @IBAction func play(_ sender: Any) {
             if(audioPlayer == nil || !audioPlayer.isPlaying){
                 do {
-                    let file =  Model.shared.getLibList()![0]//test
+                    let file = audioFile! //?? Model.shared.getLibList()![0]//test
                     audioPlayer = try AVAudioPlayer(contentsOf: file)
                     audioPlayer.play()
                     

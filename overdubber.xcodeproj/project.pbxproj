@@ -118,11 +118,11 @@
 			children = (
 				B5A55EE9229912DD003C195F /* AppDelegate.swift */,
 				B553016C229A4F3300C54052 /* ViewController.swift */,
-				B5A55EEB229912DD003C195F /* PlaybackViewController.swift */,
 				B5530169229A370700C54052 /* Model.swift */,
 				B5A55F1922993C0A003C195F /* Controller.swift */,
 				B5A55F1722991D51003C195F /* RecorderViewController.swift */,
 				B5530167229A343100C54052 /* LibTableViewController.swift */,
+				B5A55EEB229912DD003C195F /* PlaybackViewController.swift */,
 				B5A55EED229912DD003C195F /* Main.storyboard */,
 				B5A55EF0229912DF003C195F /* Assets.xcassets */,
 				B5A55EF2229912DF003C195F /* LaunchScreen.storyboard */,

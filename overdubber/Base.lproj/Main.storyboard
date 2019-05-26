@@ -104,38 +104,10 @@
             </objects>
             <point key="canvasLocation" x="1071.2" y="133.5832083958021"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="eqo-XL-Jc5">
-            <objects>
-                <tableViewController id="3CY-oT-eZB" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GIm-Fa-fMo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="z1G-tD-zXB">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z1G-tD-zXB" id="qaA-21-gEz">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="3CY-oT-eZB" id="olf-hI-tdD"/>
-                            <outlet property="delegate" destination="3CY-oT-eZB" id="G2L-m4-eaD"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IY8-9s-8b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1852" y="133.5832083958021"/>
-        </scene>
-        <!--Playback View Controller-->
+        <!--Title-->
         <scene sceneID="rXO-2n-u4p">
             <objects>
-                <viewController id="2bz-BH-zbE" customClass="PlaybackViewController" customModule="overdubber" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Title" id="2bz-BH-zbE" customClass="PlaybackViewController" customModule="overdubber" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wxh-lF-5I2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -163,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DU4-bf-LIp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124" y="905.3973013493254"/>
+            <point key="canvasLocation" x="1942" y="904"/>
         </scene>
         <!--New Recording-->
         <scene sceneID="FqE-T1-YHc">
@@ -200,11 +172,17 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Recording" id="w5N-Jx-GYI">
                         <barButtonItem key="backBarButtonItem" title="Back" id="DwJ-3e-4jl"/>
+                        <barButtonItem key="rightBarButtonItem" title="Export" id="eQ8-rN-jb6">
+                            <connections>
+                                <action selector="export:" destination="t1D-4l-Isb" id="khd-9b-rDT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="newLayer" destination="uEv-xo-Ip3" id="tzE-XD-DWJ"/>
                         <outlet property="playBtn" destination="vwr-4n-f6K" id="T2S-vn-ycG"/>
                         <outlet property="recordButton" destination="wdo-FG-DNL" id="DMR-5s-tCi"/>
+                        <segue destination="S71-fA-EmV" kind="show" identifier="exportSeg" id="yAq-UB-5Qy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ina-cD-dPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -214,6 +192,7 @@
         <!--My Recordings-->
         <scene sceneID="752-wq-to7">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Vj-o7-kvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="S71-fA-EmV" customClass="LibTableViewController" customModule="overdubber" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MZv-YN-4ui">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -227,9 +206,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="2bz-BH-zbE" kind="show" id="1Qq-17-eCm"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -239,15 +215,23 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="My Recordings" id="m12-Po-e5Y">
                         <barButtonItem key="backBarButtonItem" title="Back" id="X8G-Rq-uUd"/>
+                        <barButtonItem key="leftBarButtonItem" title="Main Menu" id="Dek-tB-8Wh">
+                            <connections>
+                                <segue destination="yzW-oL-DMm" kind="show" id="xlm-X3-7iW"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="2bz-BH-zbE" kind="show" identifier="playBackSeg" id="6mf-0Q-Mbe"/>
+                    </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Vj-o7-kvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2681" y="134"/>
+            <point key="canvasLocation" x="1942" y="157"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MFM-X3-EFp">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TjK-jT-C6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yzW-oL-DMm" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="TcJ-kE-oe5">
@@ -259,12 +243,14 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4wX-1a-FTa"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TjK-jT-C6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="133.5832083958021"/>
+            <point key="canvasLocation" x="233" y="20"/>
         </scene>
     </scenes>
     <resources>
         <image name="PlaceholderLC" width="400" height="400"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="931-P7-TFn"/>
+    </inferredMetricsTieBreakers>
 </document>

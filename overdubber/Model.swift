@@ -69,8 +69,8 @@ class Model{
                 fp = String(REC.appendingPathComponent(filePath).absoluteString.dropFirst(8))
                 print("Deleting\(filePath)")
                 try FileManager.default.removeItem(atPath: fp)
-                print("REC folder cleared")
             }
+            print("REC folder cleared")
         }catch{
             print("ERROR: Could not delete items in rec folder")
         }

@@ -24,7 +24,7 @@ class Controller{
     }
     
     func getFilePath(filename: String) -> URL{
-        return getDocumentsDirectory().appendingPathComponent("\(filename).m4a")
+        return Model.shared.getLibraryFolder().appendingPathComponent("\(filename).m4a") //export
     }
     
     func merge(audio1: NSURL, audio2:  NSURL) -> Bool{

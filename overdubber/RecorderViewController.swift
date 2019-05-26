@@ -64,6 +64,11 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
         return Model.shared.getRecordingFolder().appendingPathComponent("project.m4a")
     }
     
+    @IBAction func export(_ sender: Any) {
+       performSegue(withIdentifier: "exportSeg", sender: nil)
+            
+    }
+    
     @objc func recordTapped() {
         if audioRecorder == nil {
             startRecording()
