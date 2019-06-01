@@ -99,8 +99,13 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
                 }
             }
         }
-        //LetExport do its thing. TODO this will merge down so if abort errors might accur.
-        currentLayer += 1 // just in case.
+        //Let Export do its thing. TODO this will merge down so abort errors might accur.
+        //Do same as add layer button:
+        newLayer.isEnabled = false
+        somethingRecorded = false
+        recordButton.setTitle("Tap to Record", for: .normal)
+        currentLayer += 1
+        
         while(Controller.shared.assetExport?.progress ?? 1.0 < 1.0){
             createSpinnerView()
             sleep(2)
@@ -150,10 +155,12 @@ class RecorderViewController: UIViewController, AVAudioRecorderDelegate {
     @objc func recordTapped() {
         if audioRecorder == nil {
             startRecording()
+            newLayer.isEnabled = false
         } else {
             finishRecording(success: true)
             somethingRecorded = true
             playBtn.isEnabled = true
+            newLayer.isEnabled = true
             if(Controller.shared.assetExport?.progress ?? 1.0 < 1.0){
                 createSpinnerView()
             }
