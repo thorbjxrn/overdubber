@@ -39,13 +39,9 @@ final class AudioEngine {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func configureSession(forRecording: Bool = false) throws {
+    func configureSession() throws {
         let session = AVAudioSession.sharedInstance()
-        if forRecording {
-            try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .allowBluetoothA2DP])
-        } else {
-            try session.setCategory(.playback, mode: .default)
-        }
+        try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .allowBluetoothA2DP])
         try session.setActive(true)
     }
 
@@ -72,7 +68,7 @@ final class AudioEngine {
     // MARK: - Recording (solo — no backing layers)
 
     func startRecording(to url: URL) throws {
-        try configureSession(forRecording: true)
+        try configureSession()
         stopPlayback()
 
         let inputNode = engine.inputNode
@@ -100,7 +96,7 @@ final class AudioEngine {
         to url: URL,
         existingLayers: [(url: URL, volume: Float)]
     ) throws {
-        try configureSession(forRecording: true)
+        try configureSession()
         stopPlayback()
 
         let inputNode = engine.inputNode
@@ -172,6 +168,8 @@ final class AudioEngine {
 
         engine.prepare()
         try engine.start()
+
+        engine.disconnectNodeOutput(engine.inputNode)
 
         for node in playerNodes {
             node.play()
