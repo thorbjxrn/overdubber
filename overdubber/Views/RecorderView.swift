@@ -6,6 +6,7 @@ struct RecorderView: View {
     @State private var viewModel: RecorderViewModel?
     @State private var showMixer = false
     @State private var showLibrary = false
+    @State private var showExport = false
 
     var body: some View {
         NavigationStack {
@@ -29,15 +30,15 @@ struct RecorderView: View {
                     .padding(.horizontal)
                 }
 
-                Spacer(minLength: 4)
-
                 // Live waveform during recording
                 if let vm = viewModel, vm.isRecording {
                     WaveformView(samples: vm.liveWaveformSamples, color: .red)
                         .frame(height: 44)
                         .padding(.horizontal)
-                        .padding(.bottom, 8)
+                        .padding(.top, 8)
                 }
+
+                Spacer(minLength: 4)
 
                 // Duration display
                 Text(formattedDuration)
@@ -103,10 +104,17 @@ struct RecorderView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button { viewModel?.newProject() } label: {
-                        Image(systemName: "plus")
+                    HStack(spacing: 16) {
+                        Button { showExport = true } label: {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                        .disabled(viewModel?.layerCount == 0 || viewModel?.isRecording == true)
+
+                        Button { viewModel?.newProject() } label: {
+                            Image(systemName: "plus")
+                        }
+                        .disabled(viewModel?.isRecording == true)
                     }
-                    .disabled(viewModel?.isRecording == true)
                 }
             }
             .alert("Error", isPresented: showError, presenting: viewModel?.errorMessage) { _ in
@@ -124,6 +132,14 @@ struct RecorderView: View {
             .sheet(isPresented: $showLibrary) {
                 LibraryView { project in
                     viewModel?.loadProject(project)
+                }
+            }
+            .sheet(isPresented: $showExport) {
+                if let vm = viewModel {
+                    ExportView(
+                        projectName: vm.currentProject?.name ?? "Untitled",
+                        layers: vm.exportLayerData
+                    )
                 }
             }
         }

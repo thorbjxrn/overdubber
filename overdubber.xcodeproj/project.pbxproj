@@ -35,6 +35,10 @@
 		28E6B03D2F917042001AAA47 /* MixerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B03B2F917042001AAA47 /* MixerView.swift */; };
 		28E6B03E2F917042001AAA47 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B03F2F917042001AAA47 /* LibraryView.swift */; };
 		28E6B0402F917042001AAA47 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B03F2F917042001AAA47 /* LibraryView.swift */; };
+		28E6B0412F917042001AAA47 /* AudioExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0422F917042001AAA47 /* AudioExporter.swift */; };
+		28E6B0432F917042001AAA47 /* AudioExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0422F917042001AAA47 /* AudioExporter.swift */; };
+		28E6B0442F917042001AAA47 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0452F917042001AAA47 /* ExportView.swift */; };
+		28E6B0462F917042001AAA47 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0452F917042001AAA47 /* ExportView.swift */; };
 		B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EFE229912DF003C195F /* overdubberTests.swift */; };
 		B5A55F0A229912DF003C195F /* overdubberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F09229912DF003C195F /* overdubberUITests.swift */; };
 /* End PBXBuildFile section */
@@ -72,6 +76,8 @@
 		28E6B03A2F917042001AAA47 /* LayerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerRowView.swift; sourceTree = "<group>"; };
 		28E6B03B2F917042001AAA47 /* MixerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixerView.swift; sourceTree = "<group>"; };
 		28E6B03F2F917042001AAA47 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		28E6B0422F917042001AAA47 /* AudioExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExporter.swift; sourceTree = "<group>"; };
+		28E6B0452F917042001AAA47 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		B5A55EE6229912DD003C195F /* overdubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = overdubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55EFA229912DF003C195F /* overdubberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55EFE229912DF003C195F /* overdubberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberTests.swift; sourceTree = "<group>"; };
@@ -110,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				28E6B0102F917042001AAA47 /* AudioEngine.swift */,
+				28E6B0422F917042001AAA47 /* AudioExporter.swift */,
 				28E6B0112F917042001AAA47 /* FileManagerAudio.swift */,
 				28E6B0322F917042001AAA47 /* WaveformGenerator.swift */,
 			);
@@ -136,6 +143,7 @@
 		28E6B01A2F917042001AAA47 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				28E6B0452F917042001AAA47 /* ExportView.swift */,
 				28E6B03A2F917042001AAA47 /* LayerRowView.swift */,
 				28E6B03F2F917042001AAA47 /* LibraryView.swift */,
 				28E6B03B2F917042001AAA47 /* MixerView.swift */,
@@ -341,6 +349,8 @@
 				28E6B0382F917042001AAA47 /* LayerRowView.swift in Sources */,
 				28E6B03C2F917042001AAA47 /* MixerView.swift in Sources */,
 				28E6B03E2F917042001AAA47 /* LibraryView.swift in Sources */,
+				28E6B0412F917042001AAA47 /* AudioExporter.swift in Sources */,
+				28E6B0442F917042001AAA47 /* ExportView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +372,8 @@
 				28E6B0392F917042001AAA47 /* LayerRowView.swift in Sources */,
 				28E6B03D2F917042001AAA47 /* MixerView.swift in Sources */,
 				28E6B0402F917042001AAA47 /* LibraryView.swift in Sources */,
+				28E6B0432F917042001AAA47 /* AudioExporter.swift in Sources */,
+				28E6B0462F917042001AAA47 /* ExportView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

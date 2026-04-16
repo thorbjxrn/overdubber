@@ -210,6 +210,13 @@ final class RecorderViewModel {
         isPlaying = false
     }
 
+    // MARK: - Export
+
+    var exportLayerData: [(url: URL, volume: Float)] {
+        guard let project = currentProject else { return [] }
+        return layerData(for: project)
+    }
+
     // MARK: - Helpers
 
     private func layerData(for project: Project) -> [(url: URL, volume: Float)] {
