@@ -39,6 +39,8 @@
 		28E6B0432F917042001AAA47 /* AudioExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0422F917042001AAA47 /* AudioExporter.swift */; };
 		28E6B0442F917042001AAA47 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0452F917042001AAA47 /* ExportView.swift */; };
 		28E6B0462F917042001AAA47 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0452F917042001AAA47 /* ExportView.swift */; };
+		28E6B0472F917042001AAA47 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0482F917042001AAA47 /* ThemeManager.swift */; };
+		28E6B0492F917042001AAA47 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0482F917042001AAA47 /* ThemeManager.swift */; };
 		B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EFE229912DF003C195F /* overdubberTests.swift */; };
 		B5A55F0A229912DF003C195F /* overdubberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F09229912DF003C195F /* overdubberUITests.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +80,7 @@
 		28E6B03F2F917042001AAA47 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		28E6B0422F917042001AAA47 /* AudioExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExporter.swift; sourceTree = "<group>"; };
 		28E6B0452F917042001AAA47 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
+		28E6B0482F917042001AAA47 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		B5A55EE6229912DD003C195F /* overdubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = overdubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55EFA229912DF003C195F /* overdubberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55EFE229912DF003C195F /* overdubberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberTests.swift; sourceTree = "<group>"; };
@@ -159,6 +162,7 @@
 			children = (
 				28E6B0122F917042001AAA47 /* AudioEngine */,
 				28E6B0152F917042001AAA47 /* Models */,
+				28E6B04A2F917042001AAA47 /* Utilities */,
 				28E6B0172F917042001AAA47 /* ViewModels */,
 				28E6B01A2F917042001AAA47 /* Views */,
 				28E6B01B2F917042001AAA47 /* Assets.xcassets */,
@@ -204,6 +208,14 @@
 				B5A55F0B229912DF003C195F /* Info.plist */,
 			);
 			path = overdubberUITests;
+			sourceTree = "<group>";
+		};
+		28E6B04A2F917042001AAA47 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				28E6B0482F917042001AAA47 /* ThemeManager.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,6 +363,7 @@
 				28E6B03E2F917042001AAA47 /* LibraryView.swift in Sources */,
 				28E6B0412F917042001AAA47 /* AudioExporter.swift in Sources */,
 				28E6B0442F917042001AAA47 /* ExportView.swift in Sources */,
+				28E6B0472F917042001AAA47 /* ThemeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +387,7 @@
 				28E6B0402F917042001AAA47 /* LibraryView.swift in Sources */,
 				28E6B0432F917042001AAA47 /* AudioExporter.swift in Sources */,
 				28E6B0462F917042001AAA47 /* ExportView.swift in Sources */,
+				28E6B0492F917042001AAA47 /* ThemeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

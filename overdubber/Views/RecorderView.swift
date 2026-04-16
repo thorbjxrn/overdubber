@@ -3,6 +3,7 @@ import SwiftData
 
 struct RecorderView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(ThemeManager.self) private var theme
     @State private var viewModel: RecorderViewModel?
     @State private var showMixer = false
     @State private var showLibrary = false
@@ -32,7 +33,7 @@ struct RecorderView: View {
 
                 // Live waveform during recording
                 if let vm = viewModel, vm.isRecording {
-                    WaveformView(samples: vm.liveWaveformSamples, color: .red)
+                    WaveformView(samples: vm.liveWaveformSamples, color: theme.current.waveform)
                         .frame(height: 44)
                         .padding(.horizontal)
                         .padding(.top, 8)
@@ -50,7 +51,8 @@ struct RecorderView: View {
                 // Record button
                 RecordButton(
                     isRecording: viewModel?.isRecording ?? false,
-                    action: toggleRecording
+                    action: toggleRecording,
+                    recordColor: theme.current.record
                 )
 
                 // Status text
@@ -86,7 +88,7 @@ struct RecorderView: View {
                         HStack(spacing: 6) {
                             ForEach(0..<layerCount, id: \.self) { i in
                                 RoundedRectangle(cornerRadius: 2)
-                                    .fill(Color.red.opacity(i == layerCount - 1 ? 1.0 : 0.4))
+                                    .fill(theme.current.accent.opacity(i == layerCount - 1 ? 1.0 : 0.4))
                                     .frame(width: 20, height: 6)
                             }
                         }
@@ -158,7 +160,7 @@ struct RecorderView: View {
                 .frame(width: 16)
 
             if let samples = vm.layerWaveforms[layer.id], !samples.isEmpty {
-                WaveformView(samples: samples, color: .red.opacity(0.6))
+                WaveformView(samples: samples, color: theme.current.waveform.opacity(0.6))
                     .frame(height: 24)
             } else {
                 RoundedRectangle(cornerRadius: 2)
@@ -210,4 +212,5 @@ struct RecorderView: View {
 #Preview {
     RecorderView()
         .modelContainer(for: [Project.self, Layer.self], inMemory: true)
+        .environment(ThemeManager())
 }

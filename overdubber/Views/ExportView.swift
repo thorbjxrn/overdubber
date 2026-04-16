@@ -11,6 +11,7 @@ struct ExportView: View {
     @State private var progress: Double = 0
     @State private var exportedURL: URL?
     @State private var errorMessage: String?
+    @State private var exportTask: Task<Void, Never>?
 
     private let exporter = AudioExporter()
 
@@ -26,6 +27,7 @@ struct ExportView: View {
                 Section("File Name") {
                     TextField("Name", text: $fileName)
                         .font(.system(.body, design: .monospaced))
+                        .disabled(isExporting || exportedURL != nil)
                 }
 
                 Section("Format") {
@@ -35,6 +37,7 @@ struct ExportView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .disabled(isExporting || exportedURL != nil)
                 }
 
                 if isExporting {
@@ -72,7 +75,16 @@ struct ExportView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel") { dismiss() }
+                    Button(isExporting ? "Stop" : "Cancel") {
+                        if isExporting {
+                            exportTask?.cancel()
+                            exportTask = nil
+                            isExporting = false
+                            errorMessage = "Export cancelled"
+                        } else {
+                            dismiss()
+                        }
+                    }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Export") { startExport() }
@@ -89,8 +101,9 @@ struct ExportView: View {
 
         isExporting = true
         errorMessage = nil
+        progress = 0
 
-        Task {
+        exportTask = Task {
             do {
                 let url = try await exporter.export(
                     layers: layers,
@@ -101,11 +114,15 @@ struct ExportView: View {
                         progress = p
                     }
                 }
+                guard !Task.isCancelled else { return }
                 exportedURL = url
+            } catch is CancellationError {
+                errorMessage = "Export cancelled"
             } catch {
                 errorMessage = error.localizedDescription
             }
             isExporting = false
+            exportTask = nil
         }
     }
 }

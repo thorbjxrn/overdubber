@@ -3,6 +3,7 @@ import SwiftUI
 struct RecordButton: View {
     let isRecording: Bool
     let action: () -> Void
+    var recordColor: Color = .red
 
     @State private var isPulsing = false
 
@@ -10,11 +11,11 @@ struct RecordButton: View {
         Button(action: action) {
             ZStack {
                 Circle()
-                    .fill(isRecording ? Color.red.opacity(0.2) : Color.clear)
+                    .fill(isRecording ? recordColor.opacity(0.2) : Color.clear)
                     .frame(width: 96, height: 96)
 
                 Circle()
-                    .fill(Color.red)
+                    .fill(recordColor)
                     .frame(width: 72, height: 72)
                     .scaleEffect(isPulsing ? 0.85 : 1.0)
 

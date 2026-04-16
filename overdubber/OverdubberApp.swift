@@ -4,6 +4,7 @@ import SwiftData
 @main
 struct OverdubberApp: App {
     let modelContainer: ModelContainer
+    @State private var themeManager = ThemeManager()
 
     init() {
         do {
@@ -18,6 +19,7 @@ struct OverdubberApp: App {
     var body: some Scene {
         WindowGroup {
             RecorderView()
+                .environment(themeManager)
         }
         .modelContainer(modelContainer)
     }

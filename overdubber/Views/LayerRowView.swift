@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LayerRowView: View {
+    @Environment(ThemeManager.self) private var theme
     let layerNumber: Int
     let samples: [Float]
     @Binding var volume: Float
@@ -14,12 +15,12 @@ struct LayerRowView: View {
                 .foregroundStyle(.secondary)
                 .frame(width: 20)
 
-            WaveformView(samples: samples, color: isMuted ? .gray : .red.opacity(0.7))
+            WaveformView(samples: samples, color: isMuted ? .gray : theme.current.waveform.opacity(0.7))
                 .frame(height: 32)
                 .opacity(isMuted ? 0.4 : 1.0)
 
             Slider(value: $volume, in: 0...1)
-                .tint(.red)
+                .tint(theme.current.accent)
                 .frame(width: 80)
 
             Button {
