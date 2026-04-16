@@ -13,6 +13,8 @@ final class AudioEngine {
     var inputMonitoringEnabled = false {
         didSet { inputMixer.outputVolume = inputMonitoringEnabled ? 1.0 : 0.0 }
     }
+    var tapeWarmthEnabled = false
+    private var tapeSaturation = TapeSaturation()
 
     var onLiveWaveformSamples: (([Float]) -> Void)?
     var onPlaybackFinished: (() -> Void)?
@@ -251,9 +253,13 @@ final class AudioEngine {
 
     private func installRecordingTap(on inputNode: AVAudioInputNode, format: AVAudioFormat) {
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { [weak self] buffer, _ in
-            try? self?.audioFile?.write(from: buffer)
+            guard let self else { return }
+            if self.tapeWarmthEnabled {
+                self.tapeSaturation.process(buffer)
+            }
+            try? self.audioFile?.write(from: buffer)
             let samples = WaveformGenerator.downsample(buffer: buffer, targetCount: 50)
-            self?.onLiveWaveformSamples?(samples)
+            self.onLiveWaveformSamples?(samples)
         }
     }
 

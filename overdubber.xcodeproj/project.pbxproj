@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28E6B0652F917042001AAA47 /* TapeSaturation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0672F917042001AAA47 /* TapeSaturation.swift */; };
+		28E6B0662F917042001AAA47 /* TapeSaturation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0672F917042001AAA47 /* TapeSaturation.swift */; };
 		28E6B01F2F917042001AAA47 /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0192F917042001AAA47 /* RecorderView.swift */; };
 		28E6B0202F917042001AAA47 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0102F917042001AAA47 /* AudioEngine.swift */; };
 		28E6B0212F917042001AAA47 /* FileManagerAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0112F917042001AAA47 /* FileManagerAudio.swift */; };
@@ -77,6 +79,7 @@
 
 /* Begin PBXFileReference section */
 		28E6B0102F917042001AAA47 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		28E6B0672F917042001AAA47 /* TapeSaturation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeSaturation.swift; sourceTree = "<group>"; };
 		28E6B0112F917042001AAA47 /* FileManagerAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerAudio.swift; sourceTree = "<group>"; };
 		28E6B0132F917042001AAA47 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		28E6B0142F917042001AAA47 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 				28E6B0422F917042001AAA47 /* AudioExporter.swift */,
 				28E6B0112F917042001AAA47 /* FileManagerAudio.swift */,
 				28E6B0322F917042001AAA47 /* WaveformGenerator.swift */,
+				28E6B0672F917042001AAA47 /* TapeSaturation.swift */,
 			);
 			path = AudioEngine;
 			sourceTree = "<group>";
@@ -402,6 +406,7 @@
 				28E6B0592F917042001AAA47 /* OnboardingView.swift in Sources */,
 				28E6B05C2F917042001AAA47 /* AdManager.swift in Sources */,
 				28E6B05F2F917042001AAA47 /* BannerAdView.swift in Sources */,
+				28E6B0652F917042001AAA47 /* TapeSaturation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +437,7 @@
 				28E6B05B2F917042001AAA47 /* OnboardingView.swift in Sources */,
 				28E6B05E2F917042001AAA47 /* AdManager.swift in Sources */,
 				28E6B0612F917042001AAA47 /* BannerAdView.swift in Sources */,
+				28E6B0662F917042001AAA47 /* TapeSaturation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

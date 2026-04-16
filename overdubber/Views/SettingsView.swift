@@ -32,10 +32,17 @@ struct SettingsView: View {
                     )) {
                         Label("Auto-Stop at Track End", systemImage: "stop.circle")
                     }
+
+                    Toggle(isOn: Binding(
+                        get: { viewModel?.tapeWarmthEnabled ?? false },
+                        set: { viewModel?.tapeWarmthEnabled = $0 }
+                    )) {
+                        Label("Tape Warmth", systemImage: "waveform.path")
+                    }
                 } header: {
                     Text("Recording")
                 } footer: {
-                    Text("Input monitoring lets you hear your mic through headphones. Mute playback records in silence without hearing existing layers. Auto-stop ends overdub recording when existing layers finish.")
+                    Text("Tape warmth adds subtle analog saturation, compression, and high-end rolloff to your recordings — baked in, like real tape.")
                 }
 
                 Section("Premium") {
