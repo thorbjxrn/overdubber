@@ -32,7 +32,11 @@ struct SettingsView: View {
                     )) {
                         Label("Auto-Stop at Track End", systemImage: "stop.circle")
                     }
+                } header: {
+                    Text("Recording")
+                }
 
+                Section {
                     Toggle(isOn: Binding(
                         get: { viewModel?.tapeWarmthEnabled ?? false },
                         set: { viewModel?.tapeWarmthEnabled = $0 }
@@ -40,9 +44,9 @@ struct SettingsView: View {
                         Label("Tape Warmth", systemImage: "waveform.path")
                     }
                 } header: {
-                    Text("Recording")
+                    Text("Effects")
                 } footer: {
-                    Text("Tape warmth adds subtle analog saturation, compression, and high-end rolloff to your recordings — baked in, like real tape.")
+                    Text("Adds subtle analog saturation, compression, and high-end rolloff — baked in, like real tape.")
                 }
 
                 Section("Premium") {
