@@ -16,7 +16,7 @@ struct LayerRowView: View {
                 .frame(width: 20)
 
             WaveformView(samples: samples, color: isMuted ? .gray : theme.current.waveform.opacity(0.7))
-                .frame(height: 32)
+                .frame(height: 44)
                 .opacity(isMuted ? 0.4 : 1.0)
 
             Slider(value: $volume, in: 0...1)
@@ -39,6 +39,6 @@ struct LayerRowView: View {
             }
         }
         .padding(.horizontal, 12)
-        .padding(.vertical, 6)
+        .padding(.vertical, 10)
     }
 }

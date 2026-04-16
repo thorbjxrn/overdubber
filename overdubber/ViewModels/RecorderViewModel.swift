@@ -20,6 +20,8 @@ final class RecorderViewModel {
     }
     var liveWaveformSamples: [Float] = []
     var layerWaveforms: [UUID: [Float]] = [:]
+    var autoStopEnabled = false
+    var mutePlaybackWhileRecording = false
 
     private var recordingStartTime: Date?
     private var durationTimer: Timer?
@@ -101,6 +103,15 @@ final class RecorderViewModel {
         save()
     }
 
+    func renameProject(_ name: String) {
+        guard let project = currentProject else { return }
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        project.name = trimmed
+        project.lastModifiedDate = .now
+        save()
+    }
+
     // MARK: - Recording
 
     func startRecording() {
@@ -116,15 +127,17 @@ final class RecorderViewModel {
 
         do {
             liveWaveformSamples = []
-            if layerIndex == 0 {
+            if layerIndex == 0 || mutePlaybackWhileRecording {
                 try audioEngine.startRecording(to: fileURL)
             } else {
                 let existingLayers = layerData(for: project)
                 try audioEngine.startOverdubRecording(to: fileURL, existingLayers: existingLayers)
+            }
+            if layerIndex > 0 && autoStopEnabled {
                 scheduleAutoStop(after: project.duration)
             }
             isRecording = true
-            isPlaying = layerIndex > 0
+            isPlaying = layerIndex > 0 && !mutePlaybackWhileRecording
             recordingDuration = 0
             startDurationTimer()
         } catch {

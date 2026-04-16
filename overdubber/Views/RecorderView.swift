@@ -13,6 +13,8 @@ struct RecorderView: View {
     @State private var showExport = false
     @State private var showSettings = false
     @State private var showPaywall = false
+    @State private var showRename = false
+    @State private var renameText = ""
 
     private var isRegularWidth: Bool {
         sizeClass == .regular
@@ -33,9 +35,21 @@ struct RecorderView: View {
                     recorderContent
                 }
             }
-            .navigationTitle(viewModel?.currentProject?.name ?? "Overdubber")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar { toolbarContent }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Button {
+                        renameText = viewModel?.currentProject?.name ?? ""
+                        showRename = true
+                    } label: {
+                        Text(viewModel?.currentProject?.name ?? "Overdubber")
+                            .font(.system(.subheadline, design: .monospaced, weight: .medium))
+                            .foregroundStyle(.primary)
+                    }
+                    .disabled(viewModel?.currentProject == nil)
+                }
+                toolbarContent
+            }
             .alert("Error", isPresented: showError, presenting: viewModel?.errorMessage) { _ in
                 Button("OK") { viewModel?.errorMessage = nil }
             } message: { message in
@@ -62,10 +76,15 @@ struct RecorderView: View {
                 }
             }
             .sheet(isPresented: $showSettings) {
-                SettingsView(purchaseManager: purchaseManager)
+                SettingsView(purchaseManager: purchaseManager, viewModel: viewModel)
             }
             .sheet(isPresented: $showPaywall) {
                 PaywallView(purchaseManager: purchaseManager)
+            }
+            .alert("Rename Project", isPresented: $showRename) {
+                TextField("Project name", text: $renameText)
+                Button("Cancel", role: .cancel) {}
+                Button("Save") { viewModel?.renameProject(renameText) }
             }
         }
         .onAppear {
@@ -86,10 +105,10 @@ struct RecorderView: View {
                             }
                         }
                     }
-                    .frame(maxHeight: 120)
-                    .padding(.vertical, 8)
+                    .frame(maxHeight: 200)
+                    .padding(.vertical, 10)
                     .padding(.horizontal)
-                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8))
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
                 }
                 .buttonStyle(.plain)
                 .padding(.horizontal)
@@ -97,18 +116,18 @@ struct RecorderView: View {
 
             if let vm = viewModel, vm.isRecording {
                 WaveformView(samples: vm.liveWaveformSamples, color: theme.current.waveform)
-                    .frame(height: 44)
+                    .frame(height: 56)
                     .padding(.horizontal)
-                    .padding(.top, 8)
+                    .padding(.top, 10)
             }
 
             Spacer(minLength: 4)
 
             Text(formattedDuration)
-                .font(.system(size: 44, weight: .light, design: .monospaced))
+                .font(.system(size: 52, weight: .thin, design: .monospaced))
                 .foregroundStyle(.primary)
                 .contentTransition(.numericText())
-                .padding(.bottom, 12)
+                .padding(.bottom, 16)
                 .accessibilityLabel("Duration: \(formattedDuration)")
 
             RecordButton(
@@ -119,9 +138,10 @@ struct RecorderView: View {
             .accessibilityLabel(viewModel?.isRecording == true ? "Stop recording" : "Start recording")
 
             Text(statusText)
-                .font(.system(.caption, design: .monospaced))
-                .foregroundStyle(.secondary)
-                .padding(.top, 6)
+                .font(.system(.caption2, design: .monospaced))
+                .tracking(0.5)
+                .foregroundStyle(.tertiary)
+                .padding(.top, 8)
 
             Spacer(minLength: 4)
 
@@ -132,24 +152,10 @@ struct RecorderView: View {
                             .font(.title2)
                             .frame(width: 52, height: 52)
                             .background(.ultraThinMaterial, in: Circle())
+                            .overlay(Circle().strokeBorder(.primary.opacity(0.08), lineWidth: 0.5))
                     }
                     .disabled(viewModel?.layerCount == 0 || viewModel?.isRecording == true)
                     .accessibilityLabel(viewModel?.isPlaying == true ? "Stop playback" : "Play all layers")
-
-                    Button {
-                        viewModel?.inputMonitoringEnabled.toggle()
-                    } label: {
-                        Image(systemName: viewModel?.inputMonitoringEnabled == true ? "headphones" : "headphones.slash")
-                            .font(.title3)
-                            .frame(width: 44, height: 44)
-                            .background(
-                                viewModel?.inputMonitoringEnabled == true
-                                    ? AnyShapeStyle(theme.current.accent.opacity(0.2))
-                                    : AnyShapeStyle(.ultraThinMaterial),
-                                in: Circle()
-                            )
-                    }
-                    .accessibilityLabel(viewModel?.inputMonitoringEnabled == true ? "Disable input monitoring" : "Enable input monitoring")
 
                     if !isRegularWidth {
                         Button(action: { showMixer = true }) {
@@ -157,6 +163,7 @@ struct RecorderView: View {
                                 .font(.title2)
                                 .frame(width: 52, height: 52)
                                 .background(.ultraThinMaterial, in: Circle())
+                                .overlay(Circle().strokeBorder(.primary.opacity(0.08), lineWidth: 0.5))
                         }
                         .disabled(viewModel?.layerCount == 0 || viewModel?.isRecording == true)
                         .accessibilityLabel("Open mixer")
@@ -164,11 +171,11 @@ struct RecorderView: View {
                 }
 
                 if let layerCount = viewModel?.layerCount, layerCount > 0 {
-                    HStack(spacing: 6) {
+                    HStack(spacing: 5) {
                         ForEach(0..<layerCount, id: \.self) { i in
-                            RoundedRectangle(cornerRadius: 2)
-                                .fill(theme.current.accent.opacity(i == layerCount - 1 ? 1.0 : 0.4))
-                                .frame(width: 20, height: 6)
+                            RoundedRectangle(cornerRadius: 1.5)
+                                .fill(theme.current.accent.opacity(i == layerCount - 1 ? 0.8 : 0.25))
+                                .frame(width: 16, height: 3)
                         }
                     }
                     .animation(.easeOut(duration: 0.3), value: layerCount)
@@ -223,11 +230,11 @@ struct RecorderView: View {
 
             if let samples = vm.layerWaveforms[layer.id], !samples.isEmpty {
                 WaveformView(samples: samples, color: theme.current.waveform.opacity(0.6))
-                    .frame(height: 24)
+                    .frame(height: 36)
             } else {
                 RoundedRectangle(cornerRadius: 2)
                     .fill(Color.secondary.opacity(0.1))
-                    .frame(height: 24)
+                    .frame(height: 36)
             }
         }
     }

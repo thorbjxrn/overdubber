@@ -74,6 +74,7 @@ final class AudioEngine {
 
         audioFile = try AVAudioFile(forWriting: url, settings: recordingSettings(for: inputFormat))
 
+        engine.disconnectNodeOutput(inputNode)
         engine.attach(inputMixer)
         engine.connect(inputNode, to: inputMixer, format: inputFormat)
         engine.connect(inputMixer, to: engine.mainMixerNode, format: inputFormat)
@@ -101,6 +102,7 @@ final class AudioEngine {
 
         audioFile = try AVAudioFile(forWriting: url, settings: recordingSettings(for: inputFormat))
 
+        engine.disconnectNodeOutput(inputNode)
         engine.attach(inputMixer)
         engine.connect(inputNode, to: inputMixer, format: inputFormat)
         engine.connect(inputMixer, to: mainMixer, format: inputFormat)

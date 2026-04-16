@@ -58,7 +58,7 @@ struct PaywallView: View {
             benefitRow(icon: "square.stack.3d.up", title: "16 Layers", subtitle: "Stack up to 16 layers per project")
             benefitRow(icon: "waveform", title: "WAV Export", subtitle: "Lossless audio export")
             benefitRow(icon: "eye.slash", title: "No Ads", subtitle: "Clean, distraction-free experience")
-            benefitRow(icon: "paintbrush", title: "Themes", subtitle: "TASCAM, OP-1, SP-404 color themes")
+            benefitRow(icon: "paintbrush", title: "Themes", subtitle: "Porta, Synth, Sampler color themes")
         }
         .padding()
         .background(Color(.systemGray6))

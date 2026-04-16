@@ -4,12 +4,40 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(ThemeManager.self) private var theme
     var purchaseManager: PurchaseManager
+    var viewModel: RecorderViewModel?
 
     @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
             Form {
+                Section {
+                    Toggle(isOn: Binding(
+                        get: { viewModel?.inputMonitoringEnabled ?? false },
+                        set: { viewModel?.inputMonitoringEnabled = $0 }
+                    )) {
+                        Label("Input Monitoring", systemImage: "headphones")
+                    }
+
+                    Toggle(isOn: Binding(
+                        get: { viewModel?.mutePlaybackWhileRecording ?? false },
+                        set: { viewModel?.mutePlaybackWhileRecording = $0 }
+                    )) {
+                        Label("Mute Playback While Recording", systemImage: "speaker.slash")
+                    }
+
+                    Toggle(isOn: Binding(
+                        get: { viewModel?.autoStopEnabled ?? false },
+                        set: { viewModel?.autoStopEnabled = $0 }
+                    )) {
+                        Label("Auto-Stop at Track End", systemImage: "stop.circle")
+                    }
+                } header: {
+                    Text("Recording")
+                } footer: {
+                    Text("Input monitoring lets you hear your mic through headphones. Mute playback records in silence without hearing existing layers. Auto-stop ends overdub recording when existing layers finish.")
+                }
+
                 Section("Premium") {
                     if purchaseManager.isPremium {
                         Label("Premium Active", systemImage: "checkmark.seal.fill")

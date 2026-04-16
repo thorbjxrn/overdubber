@@ -11,7 +11,7 @@ enum AppTheme: String, CaseIterable, Identifiable {
 
     var accent: Color {
         switch self {
-        case .standard: .red
+        case .standard: Color(.sRGB, red: 0.85, green: 0.18, blue: 0.15)
         case .portastudio: Color(.sRGB, red: 0.8, green: 0.15, blue: 0.15)
         case .synth: Color(.sRGB, red: 0.2, green: 0.6, blue: 1.0)
         case .sampler: Color(.sRGB, red: 0.9, green: 0.5, blue: 0.1)
@@ -20,7 +20,7 @@ enum AppTheme: String, CaseIterable, Identifiable {
 
     var waveform: Color {
         switch self {
-        case .standard: .red
+        case .standard: Color(.sRGB, red: 0.82, green: 0.2, blue: 0.17)
         case .portastudio: Color(.sRGB, red: 0.9, green: 0.2, blue: 0.2)
         case .synth: Color(.sRGB, red: 0.3, green: 0.7, blue: 1.0)
         case .sampler: Color(.sRGB, red: 1.0, green: 0.6, blue: 0.2)
@@ -29,7 +29,7 @@ enum AppTheme: String, CaseIterable, Identifiable {
 
     var record: Color {
         switch self {
-        case .standard: .red
+        case .standard: Color(.sRGB, red: 0.82, green: 0.16, blue: 0.14)
         case .portastudio: Color(.sRGB, red: 0.85, green: 0.1, blue: 0.1)
         case .synth: Color(.sRGB, red: 1.0, green: 0.3, blue: 0.3)
         case .sampler: Color(.sRGB, red: 0.9, green: 0.3, blue: 0.1)

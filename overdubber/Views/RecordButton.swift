@@ -11,22 +11,22 @@ struct RecordButton: View {
         Button(action: action) {
             ZStack {
                 Circle()
-                    .fill(isRecording ? recordColor.opacity(0.2) : Color.clear)
+                    .strokeBorder(recordColor.opacity(isRecording ? 0.6 : 0.3), lineWidth: 1.5)
                     .frame(width: 96, height: 96)
 
                 Circle()
                     .fill(recordColor)
-                    .frame(width: 72, height: 72)
-                    .scaleEffect(isPulsing ? 0.85 : 1.0)
+                    .frame(width: 68, height: 68)
+                    .scaleEffect(isPulsing ? 0.88 : 1.0)
 
                 if isRecording {
-                    RoundedRectangle(cornerRadius: 6)
+                    RoundedRectangle(cornerRadius: 5)
                         .fill(Color.white)
-                        .frame(width: 24, height: 24)
+                        .frame(width: 22, height: 22)
                 } else {
                     Circle()
-                        .fill(Color.white.opacity(0.3))
-                        .frame(width: 28, height: 28)
+                        .fill(Color.white.opacity(0.25))
+                        .frame(width: 26, height: 26)
                 }
             }
         }
