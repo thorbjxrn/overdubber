@@ -1,14 +1,13 @@
 import AVFoundation
-import Accelerate
 
-struct TapeSaturation {
+final class TapeSaturation {
     var drive: Float = 0.4
     var warmth: Float = 0.3
     var compression: Float = 0.3
 
     private var prevSamples: [Float] = []
 
-    mutating func process(_ buffer: AVAudioPCMBuffer) {
+    func process(_ buffer: AVAudioPCMBuffer) {
         guard let channelData = buffer.floatChannelData else { return }
         let frameCount = Int(buffer.frameLength)
         let channelCount = Int(buffer.format.channelCount)
@@ -23,16 +22,16 @@ struct TapeSaturation {
             for i in 0..<frameCount {
                 var sample = data[i]
 
-                let gain = 1.0 + drive * 3.0
+                let gain: Float = 1.0 + drive * 3.0
                 sample *= gain
 
                 sample = tanh(sample)
 
                 let ratio: Float = 1.0 + compression * 3.0
                 let threshold: Float = 0.5
-                let abs = Swift.abs(sample)
-                if abs > threshold {
-                    let excess = abs - threshold
+                let magnitude = Swift.abs(sample)
+                if magnitude > threshold {
+                    let excess = magnitude - threshold
                     let compressed = threshold + excess / ratio
                     sample = sample > 0 ? compressed : -compressed
                 }
@@ -47,5 +46,9 @@ struct TapeSaturation {
                 data[i] = sample
             }
         }
+    }
+
+    func reset() {
+        prevSamples.removeAll()
     }
 }

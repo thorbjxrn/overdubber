@@ -82,6 +82,7 @@ final class AudioEngine {
         engine.connect(inputMixer, to: engine.mainMixerNode, format: inputFormat)
         inputMixer.outputVolume = inputMonitoringEnabled ? 1.0 : 0.0
 
+        tapeSaturation.reset()
         installRecordingTap(on: inputNode, format: inputFormat)
 
         engine.prepare()
@@ -110,6 +111,7 @@ final class AudioEngine {
         engine.connect(inputMixer, to: mainMixer, format: inputFormat)
         inputMixer.outputVolume = inputMonitoringEnabled ? 1.0 : 0.0
 
+        tapeSaturation.reset()
         installRecordingTap(on: inputNode, format: inputFormat)
 
         for (layerURL, volume) in existingLayers {
@@ -193,8 +195,10 @@ final class AudioEngine {
             }
         }
 
-        playerNodes[longestIndex].scheduleBuffer(
-            AVAudioPCMBuffer(pcmFormat: playerNodes[longestIndex].outputFormat(forBus: 0), frameCapacity: 0)!,
+        let longestNode = playerNodes[longestIndex]
+        guard let sentinel = AVAudioPCMBuffer(pcmFormat: longestNode.outputFormat(forBus: 0), frameCapacity: 1) else { return }
+        longestNode.scheduleBuffer(
+            sentinel,
             at: nil,
             options: [],
             completionCallbackType: .dataPlayedBack
@@ -211,6 +215,8 @@ final class AudioEngine {
     }
 
     private func restartLoop() {
+        guard isPlaying, looping else { return }
+
         for node in playerNodes {
             node.stop()
             engine.detach(node)
