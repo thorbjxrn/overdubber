@@ -60,8 +60,8 @@ struct LibraryView: View {
 
             Spacer()
 
-            Text(project.lastModifiedDate, style: .relative)
-                .font(.caption2)
+            Text(project.lastModifiedDate, format: .dateTime.month(.abbreviated).day().hour().minute())
+                .font(.system(.caption2, design: .monospaced))
                 .foregroundStyle(.tertiary)
         }
         .padding(.vertical, 4)

@@ -257,6 +257,9 @@ final class AudioEngine {
     func setVolume(at index: Int, volume: Float) {
         guard index < playerNodes.count else { return }
         playerNodes[index].volume = volume
+        if index < playbackFiles.count {
+            playbackFiles[index].volume = volume
+        }
     }
 
     // MARK: - Helpers

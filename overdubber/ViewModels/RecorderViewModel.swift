@@ -292,11 +292,10 @@ final class RecorderViewModel {
 
     private func layerData(for project: Project) -> [(url: URL, volume: Float)] {
         sortedLayers
-            .filter { !$0.isMuted }
             .map { layer in
                 let url = FileManager.layersDirectory(for: project.id)
                     .appendingPathComponent(layer.fileName)
-                return (url: url, volume: layer.volume)
+                return (url: url, volume: layer.isMuted ? 0 : layer.volume)
             }
     }
 

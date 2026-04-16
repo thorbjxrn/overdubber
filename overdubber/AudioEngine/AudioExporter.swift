@@ -83,7 +83,7 @@ actor AudioExporter {
         try engine.start()
 
         for (i, player) in players.enumerated() {
-            await player.scheduleFile(files[i], at: nil)
+            player.scheduleFile(files[i], at: nil, completionHandler: nil)
             player.play()
         }
 
