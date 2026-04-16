@@ -9,6 +9,7 @@ final class AudioEngine {
     private(set) var isPlaying = false
 
     var onLiveWaveformSamples: (([Float]) -> Void)?
+    var onPlaybackFinished: (() -> Void)?
 
     func configureSession() throws {
         let session = AVAudioSession.sharedInstance()
@@ -97,7 +98,10 @@ final class AudioEngine {
 
         let mainMixer = engine.mainMixerNode
 
-        for (url, volume) in urls {
+        var longestIndex = 0
+        var longestDuration: TimeInterval = 0
+
+        for (i, (url, volume)) in urls.enumerated() {
             let file = try AVAudioFile(forReading: url)
             let playerNode = AVAudioPlayerNode()
             engine.attach(playerNode)
@@ -105,6 +109,22 @@ final class AudioEngine {
             playerNode.volume = volume
             playerNode.scheduleFile(file, at: nil)
             playerNodes.append(playerNode)
+
+            if file.duration > longestDuration {
+                longestDuration = file.duration
+                longestIndex = i
+            }
+        }
+
+        playerNodes[longestIndex].scheduleBuffer(
+            AVAudioPCMBuffer(pcmFormat: playerNodes[longestIndex].outputFormat(forBus: 0), frameCapacity: 0)!,
+            at: nil,
+            options: [],
+            completionCallbackType: .dataPlayedBack
+        ) { [weak self] _ in
+            guard let self, self.isPlaying, !self.isRecording else { return }
+            self.stopPlayback()
+            self.onPlaybackFinished?()
         }
 
         engine.prepare()

@@ -36,6 +36,12 @@ final class RecorderViewModel {
                 self?.liveWaveformSamples = samples
             }
         }
+
+        audioEngine.onPlaybackFinished = { [weak self] in
+            Task { @MainActor [weak self] in
+                self?.isPlaying = false
+            }
+        }
     }
 
     // MARK: - Project
@@ -43,6 +49,7 @@ final class RecorderViewModel {
     func newProject() {
         if isRecording { stopRecording() }
         if isPlaying { stopPlayback() }
+        deleteCurrentProjectIfEmpty()
 
         let project = Project()
         modelContext.insert(project)
@@ -55,11 +62,20 @@ final class RecorderViewModel {
     func loadProject(_ project: Project) {
         if isRecording { stopRecording() }
         if isPlaying { stopPlayback() }
+        deleteCurrentProjectIfEmpty()
 
         currentProject = project
         recordingDuration = 0
         layerWaveforms.removeAll()
         loadAllWaveforms()
+    }
+
+    private func deleteCurrentProjectIfEmpty() {
+        guard let project = currentProject, project.layers.isEmpty else { return }
+        let projectDir = FileManager.projectDirectory(for: project.id)
+        try? Foundation.FileManager.default.removeItem(at: projectDir)
+        modelContext.delete(project)
+        save()
     }
 
     // MARK: - Recording
