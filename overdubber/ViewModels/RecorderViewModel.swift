@@ -25,6 +25,7 @@ final class RecorderViewModel {
     var layerWaveforms: [UUID: [Float]] = [:]
     var autoStopEnabled = false
     var mutePlaybackWhileRecording = false
+    var loopingEnabled = false
 
     private var recordingStartTime: Date?
     private var durationTimer: Timer?
@@ -256,7 +257,7 @@ final class RecorderViewModel {
         guard !layers.isEmpty else { return }
 
         do {
-            try audioEngine.startPlayback(urls: layers)
+            try audioEngine.startPlayback(urls: layers, loop: loopingEnabled)
             isPlaying = true
             playbackPosition = 0
             startDurationTimer()

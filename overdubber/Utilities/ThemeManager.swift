@@ -36,6 +36,15 @@ enum AppTheme: String, CaseIterable, Identifiable {
         }
     }
 
+    var playhead: Color {
+        switch self {
+        case .standard: .primary
+        case .portastudio: Color(.sRGB, red: 0.9, green: 0.85, blue: 0.7)
+        case .synth: Color(.sRGB, red: 0.1, green: 0.4, blue: 0.8)
+        case .sampler: Color(.sRGB, red: 1.0, green: 0.9, blue: 0.6)
+        }
+    }
+
     var surface: Color {
         switch self {
         case .standard: Color(.systemGray6)

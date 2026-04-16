@@ -30,7 +30,7 @@ struct SettingsView: View {
                         get: { viewModel?.autoStopEnabled ?? false },
                         set: { viewModel?.autoStopEnabled = $0 }
                     )) {
-                        Label("Auto-Stop at Track End", systemImage: "stop.circle")
+                        Label("First Recording Sets Length", systemImage: "ruler")
                     }
                 } header: {
                     Text("Recording")

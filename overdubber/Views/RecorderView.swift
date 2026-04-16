@@ -98,10 +98,22 @@ struct RecorderView: View {
         VStack(spacing: 0) {
             if let vm = viewModel, !vm.sortedLayers.isEmpty, !isRegularWidth {
                 Button { showMixer = true } label: {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack(spacing: 4) {
-                            ForEach(vm.sortedLayers) { layer in
-                                layerWaveformRow(layer: layer, vm: vm)
+                    ZStack(alignment: .leading) {
+                        ScrollView(.vertical, showsIndicators: false) {
+                            VStack(spacing: 4) {
+                                ForEach(vm.sortedLayers) { layer in
+                                    layerWaveformRow(layer: layer, vm: vm)
+                                }
+                            }
+                        }
+
+                        if vm.isPlaying, let project = vm.currentProject, project.duration > 0 {
+                            GeometryReader { geo in
+                                let progress = vm.playbackPosition / project.duration
+                                PlayheadIndicator(color: theme.current.playhead)
+                                    .frame(width: 8, height: geo.size.height)
+                                    .offset(x: (geo.size.width - 24) * progress + 20)
+                                    .animation(.linear(duration: 0.05), value: vm.playbackPosition)
                             }
                         }
                     }
@@ -146,7 +158,32 @@ struct RecorderView: View {
             Spacer(minLength: 4)
 
             VStack(spacing: 10) {
-                HStack(spacing: 24) {
+                HStack(spacing: 20) {
+                    Button {
+                        viewModel?.loopingEnabled.toggle()
+                    } label: {
+                        Image(systemName: "repeat")
+                            .font(.title3)
+                            .foregroundStyle(viewModel?.loopingEnabled == true ? theme.current.accent : .secondary)
+                            .frame(width: 44, height: 44)
+                            .background(
+                                viewModel?.loopingEnabled == true
+                                    ? AnyShapeStyle(theme.current.accent.opacity(0.15))
+                                    : AnyShapeStyle(.ultraThinMaterial),
+                                in: Circle()
+                            )
+                            .overlay(
+                                Circle().strokeBorder(
+                                    viewModel?.loopingEnabled == true
+                                        ? theme.current.accent.opacity(0.4)
+                                        : .primary.opacity(0.08),
+                                    lineWidth: viewModel?.loopingEnabled == true ? 1.0 : 0.5
+                                )
+                            )
+                    }
+                    .animation(.easeOut(duration: 0.15), value: viewModel?.loopingEnabled)
+                    .accessibilityLabel(viewModel?.loopingEnabled == true ? "Disable loop" : "Enable loop")
+
                     Button(action: { viewModel?.togglePlayback() }) {
                         Image(systemName: viewModel?.isPlaying == true ? "stop.fill" : "play.fill")
                             .font(.title2)
@@ -161,7 +198,7 @@ struct RecorderView: View {
                         Button(action: { showMixer = true }) {
                             Image(systemName: "slider.vertical.3")
                                 .font(.title2)
-                                .frame(width: 52, height: 52)
+                                .frame(width: 44, height: 44)
                                 .background(.ultraThinMaterial, in: Circle())
                                 .overlay(Circle().strokeBorder(.primary.opacity(0.08), lineWidth: 0.5))
                         }
@@ -222,20 +259,26 @@ struct RecorderView: View {
     }
 
     private func layerWaveformRow(layer: Layer, vm: RecorderViewModel) -> some View {
-        HStack(spacing: 8) {
+        let projectDuration = vm.currentProject?.duration ?? 1
+        let fraction = projectDuration > 0 ? layer.duration / projectDuration : 1.0
+
+        return HStack(spacing: 8) {
             Text("\(layer.sortOrder + 1)")
                 .font(.system(.caption2, design: .monospaced))
                 .foregroundStyle(.secondary)
                 .frame(width: 16)
 
-            if let samples = vm.layerWaveforms[layer.id], !samples.isEmpty {
-                WaveformView(samples: samples, color: theme.current.waveform.opacity(0.6))
-                    .frame(height: 36)
-            } else {
-                RoundedRectangle(cornerRadius: 2)
-                    .fill(Color.secondary.opacity(0.1))
-                    .frame(height: 36)
+            GeometryReader { geo in
+                if let samples = vm.layerWaveforms[layer.id], !samples.isEmpty {
+                    WaveformView(samples: samples, color: theme.current.waveform.opacity(0.6))
+                        .frame(width: geo.size.width * fraction, height: geo.size.height)
+                } else {
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(Color.secondary.opacity(0.1))
+                        .frame(width: geo.size.width * fraction, height: geo.size.height)
+                }
             }
+            .frame(height: 36)
         }
     }
 

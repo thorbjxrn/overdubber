@@ -4,6 +4,7 @@ struct LayerRowView: View {
     @Environment(ThemeManager.self) private var theme
     let layerNumber: Int
     let samples: [Float]
+    var durationFraction: CGFloat = 1.0
     @Binding var volume: Float
     @Binding var isMuted: Bool
     var onDelete: () -> Void
@@ -15,9 +16,12 @@ struct LayerRowView: View {
                 .foregroundStyle(.secondary)
                 .frame(width: 20)
 
-            WaveformView(samples: samples, color: isMuted ? .gray : theme.current.waveform.opacity(0.7))
-                .frame(height: 44)
-                .opacity(isMuted ? 0.4 : 1.0)
+            GeometryReader { geo in
+                WaveformView(samples: samples, color: isMuted ? .gray : theme.current.waveform.opacity(0.7))
+                    .frame(width: geo.size.width * durationFraction, height: geo.size.height)
+                    .opacity(isMuted ? 0.4 : 1.0)
+            }
+            .frame(height: 44)
 
             Slider(value: $volume, in: 0...1)
                 .tint(theme.current.accent)
