@@ -2,11 +2,17 @@ import AVFoundation
 
 final class AudioEngine {
     private let engine = AVAudioEngine()
+    private let inputMixer = AVAudioMixerNode()
     private var audioFile: AVAudioFile?
     private var playerNodes: [AVAudioPlayerNode] = []
+    private var playbackFiles: [(url: URL, volume: Float)] = []
+    private var looping = false
 
     private(set) var isRecording = false
     private(set) var isPlaying = false
+    var inputMonitoringEnabled = false {
+        didSet { inputMixer.outputVolume = inputMonitoringEnabled ? 1.0 : 0.0 }
+    }
 
     var onLiveWaveformSamples: (([Float]) -> Void)?
     var onPlaybackFinished: (() -> Void)?
@@ -27,6 +33,11 @@ final class AudioEngine {
         let inputFormat = inputNode.outputFormat(forBus: 0)
 
         audioFile = try AVAudioFile(forWriting: url, settings: recordingSettings(for: inputFormat))
+
+        engine.attach(inputMixer)
+        engine.connect(inputNode, to: inputMixer, format: inputFormat)
+        engine.connect(inputMixer, to: engine.mainMixerNode, format: inputFormat)
+        inputMixer.outputVolume = inputMonitoringEnabled ? 1.0 : 0.0
 
         installRecordingTap(on: inputNode, format: inputFormat)
 
@@ -49,6 +60,11 @@ final class AudioEngine {
         let mainMixer = engine.mainMixerNode
 
         audioFile = try AVAudioFile(forWriting: url, settings: recordingSettings(for: inputFormat))
+
+        engine.attach(inputMixer)
+        engine.connect(inputNode, to: inputMixer, format: inputFormat)
+        engine.connect(inputMixer, to: mainMixer, format: inputFormat)
+        inputMixer.outputVolume = inputMonitoringEnabled ? 1.0 : 0.0
 
         installRecordingTap(on: inputNode, format: inputFormat)
 
@@ -75,6 +91,7 @@ final class AudioEngine {
 
     func stopRecording() -> TimeInterval {
         engine.inputNode.removeTap(onBus: 0)
+        engine.detach(inputMixer)
 
         for node in playerNodes {
             node.stop()
@@ -87,25 +104,41 @@ final class AudioEngine {
         audioFile = nil
         isRecording = false
         isPlaying = false
+        looping = false
         return duration
     }
 
     // MARK: - Playback
 
-    func startPlayback(urls: [(url: URL, volume: Float)]) throws {
+    func startPlayback(urls: [(url: URL, volume: Float)], loop: Bool = true) throws {
         try configureSession()
         stopPlayback()
 
+        looping = loop
+        playbackFiles = urls
         let mainMixer = engine.mainMixerNode
 
+        try scheduleAllPlayers(on: mainMixer)
+
+        engine.prepare()
+        try engine.start()
+
+        for node in playerNodes {
+            node.play()
+        }
+
+        isPlaying = true
+    }
+
+    private func scheduleAllPlayers(on mixer: AVAudioMixerNode) throws {
         var longestIndex = 0
         var longestDuration: TimeInterval = 0
 
-        for (i, (url, volume)) in urls.enumerated() {
+        for (i, (url, volume)) in playbackFiles.enumerated() {
             let file = try AVAudioFile(forReading: url)
             let playerNode = AVAudioPlayerNode()
             engine.attach(playerNode)
-            engine.connect(playerNode, to: mainMixer, format: file.processingFormat)
+            engine.connect(playerNode, to: mixer, format: file.processingFormat)
             playerNode.volume = volume
             playerNode.scheduleFile(file, at: nil)
             playerNodes.append(playerNode)
@@ -123,27 +156,44 @@ final class AudioEngine {
             completionCallbackType: .dataPlayedBack
         ) { [weak self] _ in
             guard let self, self.isPlaying, !self.isRecording else { return }
-            self.onPlaybackFinished?()
+            if self.looping {
+                self.restartLoop()
+            } else {
+                self.onPlaybackFinished?()
+            }
         }
-
-        engine.prepare()
-        try engine.start()
-
-        for node in playerNodes {
-            node.play()
-        }
-
-        isPlaying = true
     }
 
-    func stopPlayback() {
+    private func restartLoop() {
         for node in playerNodes {
             node.stop()
             engine.detach(node)
         }
         playerNodes.removeAll()
 
-        if engine.isRunning {
+        let mixer = engine.mainMixerNode
+        do {
+            try scheduleAllPlayers(on: mixer)
+            for node in playerNodes {
+                node.play()
+            }
+            onPlaybackFinished?()
+        } catch {
+            onPlaybackFinished?()
+        }
+    }
+
+    func stopPlayback() {
+        looping = false
+
+        for node in playerNodes {
+            node.stop()
+            engine.detach(node)
+        }
+        playerNodes.removeAll()
+        playbackFiles.removeAll()
+
+        if engine.isRunning && !isRecording {
             engine.stop()
         }
 

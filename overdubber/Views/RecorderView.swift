@@ -126,7 +126,7 @@ struct RecorderView: View {
             Spacer(minLength: 4)
 
             VStack(spacing: 10) {
-                HStack(spacing: 40) {
+                HStack(spacing: 24) {
                     Button(action: { viewModel?.togglePlayback() }) {
                         Image(systemName: viewModel?.isPlaying == true ? "stop.fill" : "play.fill")
                             .font(.title2)
@@ -135,6 +135,21 @@ struct RecorderView: View {
                     }
                     .disabled(viewModel?.layerCount == 0 || viewModel?.isRecording == true)
                     .accessibilityLabel(viewModel?.isPlaying == true ? "Stop playback" : "Play all layers")
+
+                    Button {
+                        viewModel?.inputMonitoringEnabled.toggle()
+                    } label: {
+                        Image(systemName: viewModel?.inputMonitoringEnabled == true ? "headphones" : "headphones.slash")
+                            .font(.title3)
+                            .frame(width: 44, height: 44)
+                            .background(
+                                viewModel?.inputMonitoringEnabled == true
+                                    ? AnyShapeStyle(theme.current.accent.opacity(0.2))
+                                    : AnyShapeStyle(.ultraThinMaterial),
+                                in: Circle()
+                            )
+                    }
+                    .accessibilityLabel(viewModel?.inputMonitoringEnabled == true ? "Disable input monitoring" : "Enable input monitoring")
 
                     if !isRegularWidth {
                         Button(action: { showMixer = true }) {
