@@ -62,6 +62,13 @@ final class AdManager {
         }
     }
 
+    #if DEBUG
+    func debugSkipGracePeriod() {
+        appOpenCount = Self.gracePeriodOpens + 1
+        loadInterstitial()
+    }
+    #endif
+
     func loadInterstitial() {
         guard !purchaseManager.isPremium else { return }
 

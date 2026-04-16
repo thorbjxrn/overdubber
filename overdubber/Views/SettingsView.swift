@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(ThemeManager.self) private var theme
+    @Environment(AdManager.self) private var adManager
     var purchaseManager: PurchaseManager
 
     @State private var showPaywall = false
@@ -45,6 +46,11 @@ struct SettingsView: View {
                     Button("Toggle Premium") {
                         purchaseManager.debugTogglePremium()
                     }
+                    Button("Skip Ad Grace Period") {
+                        adManager.debugSkipGracePeriod()
+                    }
+                    LabeledContent("App Opens", value: "\(adManager.appOpenCount)")
+                    LabeledContent("Grace Period", value: adManager.isInGracePeriod ? "Active" : "Ended")
                 }
                 #endif
             }
