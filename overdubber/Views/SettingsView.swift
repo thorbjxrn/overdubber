@@ -26,12 +26,6 @@ struct SettingsView: View {
                         Label("Mute Playback While Recording", systemImage: "speaker.slash")
                     }
 
-                    Toggle(isOn: Binding(
-                        get: { viewModel?.autoStopEnabled ?? false },
-                        set: { viewModel?.autoStopEnabled = $0 }
-                    )) {
-                        Label("First Recording Sets Length", systemImage: "ruler")
-                    }
                 } header: {
                     Text("Recording")
                 }

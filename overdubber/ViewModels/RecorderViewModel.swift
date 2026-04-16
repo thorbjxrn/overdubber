@@ -23,13 +23,11 @@ final class RecorderViewModel {
     }
     var liveWaveformSamples: [Float] = []
     var layerWaveforms: [UUID: [Float]] = [:]
-    var autoStopEnabled = false
     var mutePlaybackWhileRecording = false
     var loopingEnabled = false
 
     private var recordingStartTime: Date?
     private var durationTimer: Timer?
-    private var autoStopTimer: Timer?
 
     var layerCount: Int {
         currentProject?.layers.count ?? 0
@@ -137,9 +135,6 @@ final class RecorderViewModel {
                 let existingLayers = layerData(for: project)
                 try audioEngine.startOverdubRecording(to: fileURL, existingLayers: existingLayers)
             }
-            if layerIndex > 0 && autoStopEnabled {
-                scheduleAutoStop(after: project.duration)
-            }
             isRecording = true
             isPlaying = layerIndex > 0 && !mutePlaybackWhileRecording
             recordingDuration = 0
@@ -150,8 +145,6 @@ final class RecorderViewModel {
     }
 
     func stopRecording() {
-        autoStopTimer?.invalidate()
-        autoStopTimer = nil
         let duration = audioEngine.stopRecording()
         isRecording = false
         isPlaying = false
@@ -292,15 +285,6 @@ final class RecorderViewModel {
             }
     }
 
-    private func scheduleAutoStop(after duration: TimeInterval) {
-        autoStopTimer?.invalidate()
-        autoStopTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { [weak self] _ in
-            Task { @MainActor [weak self] in
-                guard let self, self.isRecording else { return }
-                self.stopRecording()
-            }
-        }
-    }
 
     // MARK: - Timer
 
