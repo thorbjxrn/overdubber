@@ -34,7 +34,11 @@ final class AdManager {
     }
 
     var isInGracePeriod: Bool {
-        appOpenCount <= Self.gracePeriodOpens
+        #if DEBUG
+        return false
+        #else
+        return appOpenCount <= Self.gracePeriodOpens
+        #endif
     }
 
     var shouldShowBanner: Bool {
