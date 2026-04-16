@@ -199,11 +199,13 @@ final class AudioEngine {
             options: [],
             completionCallbackType: .dataPlayedBack
         ) { [weak self] _ in
-            guard let self, self.isPlaying, !self.isRecording else { return }
-            if self.looping {
-                self.restartLoop()
-            } else {
-                self.onPlaybackFinished?()
+            DispatchQueue.main.async {
+                guard let self, self.isPlaying, !self.isRecording else { return }
+                if self.looping {
+                    self.restartLoop()
+                } else {
+                    self.onPlaybackFinished?()
+                }
             }
         }
     }
