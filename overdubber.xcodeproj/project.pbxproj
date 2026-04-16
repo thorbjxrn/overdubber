@@ -7,24 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B5530168229A343100C54052 /* LibTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5530167229A343100C54052 /* LibTableViewController.swift */; };
-		B553016A229A370700C54052 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5530169229A370700C54052 /* Model.swift */; };
-		B553016B229A393500C54052 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5530169229A370700C54052 /* Model.swift */; };
-		B553016D229A4F3300C54052 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553016C229A4F3300C54052 /* ViewController.swift */; };
-		B56B9C89229A9D4700C2D72D /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B9C88229A9D4700C2D72D /* SpinnerViewController.swift */; };
-		B5A55EEA229912DD003C195F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EE9229912DD003C195F /* AppDelegate.swift */; };
-		B5A55EEC229912DD003C195F /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EEB229912DD003C195F /* PlaybackViewController.swift */; };
-		B5A55EEF229912DD003C195F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5A55EED229912DD003C195F /* Main.storyboard */; };
-		B5A55EF1229912DF003C195F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A55EF0229912DF003C195F /* Assets.xcassets */; };
-		B5A55EF4229912DF003C195F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5A55EF2229912DF003C195F /* LaunchScreen.storyboard */; };
+		28E6B01F2F917042001AAA47 /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0192F917042001AAA47 /* RecorderView.swift */; };
+		28E6B0202F917042001AAA47 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0102F917042001AAA47 /* AudioEngine.swift */; };
+		28E6B0212F917042001AAA47 /* FileManagerAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0112F917042001AAA47 /* FileManagerAudio.swift */; };
+		28E6B0222F917042001AAA47 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0132F917042001AAA47 /* Layer.swift */; };
+		28E6B0232F917042001AAA47 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0182F917042001AAA47 /* RecordButton.swift */; };
+		28E6B0242F917042001AAA47 /* RecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0162F917042001AAA47 /* RecorderViewModel.swift */; };
+		28E6B0252F917042001AAA47 /* OverdubberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B01D2F917042001AAA47 /* OverdubberApp.swift */; };
+		28E6B0262F917042001AAA47 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0142F917042001AAA47 /* Project.swift */; };
+		28E6B0272F917042001AAA47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28E6B01B2F917042001AAA47 /* Assets.xcassets */; };
+		28E6B0292F917042001AAA47 /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0192F917042001AAA47 /* RecorderView.swift */; };
+		28E6B0332F917042001AAA47 /* WaveformGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0322F917042001AAA47 /* WaveformGenerator.swift */; };
+		28E6B0342F917042001AAA47 /* WaveformGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0322F917042001AAA47 /* WaveformGenerator.swift */; };
+		28E6B0362F917042001AAA47 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0352F917042001AAA47 /* WaveformView.swift */; };
+		28E6B0372F917042001AAA47 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0352F917042001AAA47 /* WaveformView.swift */; };
+		28E6B02A2F917042001AAA47 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0102F917042001AAA47 /* AudioEngine.swift */; };
+		28E6B02B2F917042001AAA47 /* FileManagerAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0112F917042001AAA47 /* FileManagerAudio.swift */; };
+		28E6B02C2F917042001AAA47 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0132F917042001AAA47 /* Layer.swift */; };
+		28E6B02D2F917042001AAA47 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0182F917042001AAA47 /* RecordButton.swift */; };
+		28E6B02E2F917042001AAA47 /* RecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0162F917042001AAA47 /* RecorderViewModel.swift */; };
+		28E6B02F2F917042001AAA47 /* OverdubberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B01D2F917042001AAA47 /* OverdubberApp.swift */; };
+		28E6B0302F917042001AAA47 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0142F917042001AAA47 /* Project.swift */; };
+		28E6B0312F917042001AAA47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28E6B01B2F917042001AAA47 /* Assets.xcassets */; };
+		28E6B0382F917042001AAA47 /* LayerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B03A2F917042001AAA47 /* LayerRowView.swift */; };
+		28E6B0392F917042001AAA47 /* LayerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B03A2F917042001AAA47 /* LayerRowView.swift */; };
+		28E6B03C2F917042001AAA47 /* MixerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B03B2F917042001AAA47 /* MixerView.swift */; };
+		28E6B03D2F917042001AAA47 /* MixerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B03B2F917042001AAA47 /* MixerView.swift */; };
+		28E6B03E2F917042001AAA47 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B03F2F917042001AAA47 /* LibraryView.swift */; };
+		28E6B0402F917042001AAA47 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B03F2F917042001AAA47 /* LibraryView.swift */; };
 		B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EFE229912DF003C195F /* overdubberTests.swift */; };
 		B5A55F0A229912DF003C195F /* overdubberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F09229912DF003C195F /* overdubberUITests.swift */; };
-		B5A55F1822991D51003C195F /* RecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F1722991D51003C195F /* RecorderViewController.swift */; };
-		B5A55F1A22993C0A003C195F /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F1922993C0A003C195F /* Controller.swift */; };
-		B5A55F1D22994AFF003C195F /* mp3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B5A55F1C22994AFF003C195F /* mp3.m4a */; };
-		B5A55F1F22994B12003C195F /* example.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B5A55F1E22994B12003C195F /* example.m4a */; };
-		B5A55F20229953AF003C195F /* mp3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B5A55F1C22994AFF003C195F /* mp3.m4a */; };
-		B5A55F21229953B3003C195F /* example.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B5A55F1E22994B12003C195F /* example.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,27 +57,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B5530167229A343100C54052 /* LibTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibTableViewController.swift; sourceTree = "<group>"; };
-		B5530169229A370700C54052 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		B553016C229A4F3300C54052 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B56B9C88229A9D4700C2D72D /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
+		28E6B0102F917042001AAA47 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		28E6B0112F917042001AAA47 /* FileManagerAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerAudio.swift; sourceTree = "<group>"; };
+		28E6B0132F917042001AAA47 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
+		28E6B0142F917042001AAA47 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		28E6B0162F917042001AAA47 /* RecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewModel.swift; sourceTree = "<group>"; };
+		28E6B0182F917042001AAA47 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		28E6B0192F917042001AAA47 /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
+		28E6B01B2F917042001AAA47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		28E6B01C2F917042001AAA47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28E6B01D2F917042001AAA47 /* OverdubberApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdubberApp.swift; sourceTree = "<group>"; };
+		28E6B0322F917042001AAA47 /* WaveformGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformGenerator.swift; sourceTree = "<group>"; };
+		28E6B0352F917042001AAA47 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
+		28E6B03A2F917042001AAA47 /* LayerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerRowView.swift; sourceTree = "<group>"; };
+		28E6B03B2F917042001AAA47 /* MixerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixerView.swift; sourceTree = "<group>"; };
+		28E6B03F2F917042001AAA47 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		B5A55EE6229912DD003C195F /* overdubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = overdubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5A55EE9229912DD003C195F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5A55EEB229912DD003C195F /* PlaybackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
-		B5A55EEE229912DD003C195F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B5A55EF0229912DF003C195F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B5A55EF3229912DF003C195F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B5A55EF5229912DF003C195F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5A55EFA229912DF003C195F /* overdubberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55EFE229912DF003C195F /* overdubberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberTests.swift; sourceTree = "<group>"; };
 		B5A55F00229912DF003C195F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5A55F05229912DF003C195F /* overdubberUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55F09229912DF003C195F /* overdubberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberUITests.swift; sourceTree = "<group>"; };
 		B5A55F0B229912DF003C195F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5A55F1722991D51003C195F /* RecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewController.swift; sourceTree = "<group>"; };
-		B5A55F1922993C0A003C195F /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
-		B5A55F1C22994AFF003C195F /* mp3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = mp3.m4a; sourceTree = "<group>"; };
-		B5A55F1E22994B12003C195F /* example.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = example.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,12 +106,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28E6B0122F917042001AAA47 /* AudioEngine */ = {
+			isa = PBXGroup;
+			children = (
+				28E6B0102F917042001AAA47 /* AudioEngine.swift */,
+				28E6B0112F917042001AAA47 /* FileManagerAudio.swift */,
+				28E6B0322F917042001AAA47 /* WaveformGenerator.swift */,
+			);
+			path = AudioEngine;
+			sourceTree = "<group>";
+		};
+		28E6B0152F917042001AAA47 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				28E6B0132F917042001AAA47 /* Layer.swift */,
+				28E6B0142F917042001AAA47 /* Project.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		28E6B0172F917042001AAA47 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				28E6B0162F917042001AAA47 /* RecorderViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		28E6B01A2F917042001AAA47 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				28E6B03A2F917042001AAA47 /* LayerRowView.swift */,
+				28E6B03F2F917042001AAA47 /* LibraryView.swift */,
+				28E6B03B2F917042001AAA47 /* MixerView.swift */,
+				28E6B0182F917042001AAA47 /* RecordButton.swift */,
+				28E6B0192F917042001AAA47 /* RecorderView.swift */,
+				28E6B0352F917042001AAA47 /* WaveformView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		28E6B01E2F917042001AAA47 /* overdubber */ = {
+			isa = PBXGroup;
+			children = (
+				28E6B0122F917042001AAA47 /* AudioEngine */,
+				28E6B0152F917042001AAA47 /* Models */,
+				28E6B0172F917042001AAA47 /* ViewModels */,
+				28E6B01A2F917042001AAA47 /* Views */,
+				28E6B01B2F917042001AAA47 /* Assets.xcassets */,
+				28E6B01C2F917042001AAA47 /* Info.plist */,
+				28E6B01D2F917042001AAA47 /* OverdubberApp.swift */,
+			);
+			path = overdubber;
+			sourceTree = "<group>";
+		};
 		B5A55EDD229912DD003C195F = {
 			isa = PBXGroup;
 			children = (
-				B5A55F1C22994AFF003C195F /* mp3.m4a */,
-				B5A55F1E22994B12003C195F /* example.m4a */,
-				B5A55EE8229912DD003C195F /* overdubber */,
+				28E6B01E2F917042001AAA47 /* overdubber */,
 				B5A55EFD229912DF003C195F /* overdubberTests */,
 				B5A55F08229912DF003C195F /* overdubberUITests */,
 				B5A55EE7229912DD003C195F /* Products */,
@@ -113,25 +178,6 @@
 				B5A55F05229912DF003C195F /* overdubberUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B5A55EE8229912DD003C195F /* overdubber */ = {
-			isa = PBXGroup;
-			children = (
-				B5A55EE9229912DD003C195F /* AppDelegate.swift */,
-				B553016C229A4F3300C54052 /* ViewController.swift */,
-				B5530169229A370700C54052 /* Model.swift */,
-				B5A55F1922993C0A003C195F /* Controller.swift */,
-				B5A55F1722991D51003C195F /* RecorderViewController.swift */,
-				B56B9C88229A9D4700C2D72D /* SpinnerViewController.swift */,
-				B5530167229A343100C54052 /* LibTableViewController.swift */,
-				B5A55EEB229912DD003C195F /* PlaybackViewController.swift */,
-				B5A55EED229912DD003C195F /* Main.storyboard */,
-				B5A55EF0229912DF003C195F /* Assets.xcassets */,
-				B5A55EF2229912DF003C195F /* LaunchScreen.storyboard */,
-				B5A55EF5229912DF003C195F /* Info.plist */,
-			);
-			path = overdubber;
 			sourceTree = "<group>";
 		};
 		B5A55EFD229912DF003C195F /* overdubberTests */ = {
@@ -257,11 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5A55F21229953B3003C195F /* example.m4a in Resources */,
-				B5A55EF4229912DF003C195F /* LaunchScreen.storyboard in Resources */,
-				B5A55EF1229912DF003C195F /* Assets.xcassets in Resources */,
-				B5A55EEF229912DD003C195F /* Main.storyboard in Resources */,
-				B5A55F20229953AF003C195F /* mp3.m4a in Resources */,
+				28E6B0312F917042001AAA47 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,8 +311,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5A55F1D22994AFF003C195F /* mp3.m4a in Resources */,
-				B5A55F1F22994B12003C195F /* example.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,14 +328,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5A55EEC229912DD003C195F /* PlaybackViewController.swift in Sources */,
-				B5A55F1822991D51003C195F /* RecorderViewController.swift in Sources */,
-				B5530168229A343100C54052 /* LibTableViewController.swift in Sources */,
-				B553016A229A370700C54052 /* Model.swift in Sources */,
-				B56B9C89229A9D4700C2D72D /* SpinnerViewController.swift in Sources */,
-				B553016D229A4F3300C54052 /* ViewController.swift in Sources */,
-				B5A55EEA229912DD003C195F /* AppDelegate.swift in Sources */,
-				B5A55F1A22993C0A003C195F /* Controller.swift in Sources */,
+				28E6B0292F917042001AAA47 /* RecorderView.swift in Sources */,
+				28E6B02A2F917042001AAA47 /* AudioEngine.swift in Sources */,
+				28E6B02B2F917042001AAA47 /* FileManagerAudio.swift in Sources */,
+				28E6B02C2F917042001AAA47 /* Layer.swift in Sources */,
+				28E6B02D2F917042001AAA47 /* RecordButton.swift in Sources */,
+				28E6B02E2F917042001AAA47 /* RecorderViewModel.swift in Sources */,
+				28E6B02F2F917042001AAA47 /* OverdubberApp.swift in Sources */,
+				28E6B0302F917042001AAA47 /* Project.swift in Sources */,
+				28E6B0332F917042001AAA47 /* WaveformGenerator.swift in Sources */,
+				28E6B0362F917042001AAA47 /* WaveformView.swift in Sources */,
+				28E6B0382F917042001AAA47 /* LayerRowView.swift in Sources */,
+				28E6B03C2F917042001AAA47 /* MixerView.swift in Sources */,
+				28E6B03E2F917042001AAA47 /* LibraryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +349,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */,
-				B553016B229A393500C54052 /* Model.swift in Sources */,
+				28E6B01F2F917042001AAA47 /* RecorderView.swift in Sources */,
+				28E6B0202F917042001AAA47 /* AudioEngine.swift in Sources */,
+				28E6B0212F917042001AAA47 /* FileManagerAudio.swift in Sources */,
+				28E6B0222F917042001AAA47 /* Layer.swift in Sources */,
+				28E6B0232F917042001AAA47 /* RecordButton.swift in Sources */,
+				28E6B0242F917042001AAA47 /* RecorderViewModel.swift in Sources */,
+				28E6B0252F917042001AAA47 /* OverdubberApp.swift in Sources */,
+				28E6B0262F917042001AAA47 /* Project.swift in Sources */,
+				28E6B0342F917042001AAA47 /* WaveformGenerator.swift in Sources */,
+				28E6B0372F917042001AAA47 /* WaveformView.swift in Sources */,
+				28E6B0392F917042001AAA47 /* LayerRowView.swift in Sources */,
+				28E6B03D2F917042001AAA47 /* MixerView.swift in Sources */,
+				28E6B0402F917042001AAA47 /* LibraryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,24 +388,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		B5A55EED229912DD003C195F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B5A55EEE229912DD003C195F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B5A55EF2229912DF003C195F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B5A55EF3229912DF003C195F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B5A55F0C229912DF003C195F /* Debug */ = {
@@ -402,7 +441,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -457,7 +496,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -473,16 +512,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 228DC29L7W;
 				INFOPLIST_FILE = overdubber/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubber;
+				PRODUCT_BUNDLE_IDENTIFIER = thorbjxrn.overdubber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -493,15 +531,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 228DC29L7W;
 				INFOPLIST_FILE = overdubber/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubber;
+				PRODUCT_BUNDLE_IDENTIFIER = thorbjxrn.overdubber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -509,7 +547,6 @@
 		B5A55F12229912DF003C195F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = overdubberTests/Info.plist;
@@ -520,7 +557,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/overdubber.app/overdubber";
 			};
@@ -529,7 +566,6 @@
 		B5A55F13229912DF003C195F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = overdubberTests/Info.plist;
@@ -540,7 +576,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/overdubber.app/overdubber";
 			};
@@ -549,7 +585,6 @@
 		B5A55F15229912DF003C195F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = overdubberUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -559,7 +594,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = overdubber;
 			};
@@ -568,7 +603,6 @@
 		B5A55F16229912DF003C195F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = overdubberUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -578,7 +612,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = overdubber;
 			};

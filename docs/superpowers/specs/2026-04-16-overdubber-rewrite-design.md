@@ -16,6 +16,9 @@ Record audio layers on top of each other (overdubbing), mix them non-destructive
 | Layer cap | 16 per project |
 | Per-layer controls | Volume + mute |
 | Mixing model | Non-destructive (individual layers preserved) |
+| Loop playback | Yes — continuous looping on playback and during overdub |
+| Length cap | First layer sets the loop length; subsequent layers auto-stop at that duration |
+| Input monitoring | Toggle on/off — off allows use without headphones (no feedback loop) |
 | Metronome | No — play to feel, not a grid |
 | Export formats | WAV (lossless) + M4A (compressed) |
 | Export destinations | App library, iOS Files app, Share sheet |
@@ -37,7 +40,8 @@ The primary screen. A tape-machine interface:
 - Large record button (chunky, tactile, pulses while recording)
 - Live waveform display during recording
 - Layer count indicator
-- Play/Stop for hearing all layers mixed
+- Play/Stop for hearing all layers mixed (loops continuously)
+- Loop toggle (on by default)
 - "Add Layer" action after recording a take
 - Button/gesture to expand into mixer view
 - Export button (nav bar)
@@ -114,17 +118,21 @@ AVAudioPlayerNode → AVMixerNode → Output Node
 ### Recording Flow
 
 1. Configure `AVAudioSession` for `.playAndRecord`
-2. Start all existing layer player nodes (so user hears previous layers)
+2. Start all existing layer player nodes (so user hears previous layers, looping)
 3. Install tap on input node for live waveform data
 4. Write input to `AVAudioFile` (CAF format, lossless)
-5. On stop: remove tap, finalize file, create Layer model entry
+5. If existing layers exist, auto-stop recording when the project duration is reached (length cap)
+6. On stop: remove tap, finalize file, create Layer model entry
+
+The first layer recorded in a project has no length cap — it defines the project's loop length. All subsequent layers auto-stop at the end of the loop, so every layer aligns. The user can still manually stop early (shorter layers are fine).
 
 ### Playback Flow
 
 1. Load each unmuted layer's audio file into its `AVAudioPlayerNode`
 2. Set volume per node from Layer model
 3. Schedule all nodes, start engine
-4. Tap mixer node output for playback position / level metering
+4. When loop is enabled (default), re-schedule all nodes when playback reaches project duration — seamless looping
+5. Tap mixer node output for playback position / level metering
 
 ### Export Flow
 
@@ -328,3 +336,6 @@ Overdubber/
 9. Test on both iPhone and iPad
 10. Test dark mode and light mode
 11. Verify waveforms render correctly for short and long recordings
+12. Record layer 1 (8 seconds), record layer 2 — verify it auto-stops at 8 seconds
+13. Play back with loop on — verify seamless looping
+14. Play back with loop off — verify it stops at end
