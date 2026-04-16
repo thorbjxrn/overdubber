@@ -18,6 +18,9 @@ final class RecorderViewModel {
     var inputMonitoringEnabled = false {
         didSet { audioEngine.inputMonitoringEnabled = inputMonitoringEnabled }
     }
+    var tapeWarmthEnabled = false {
+        didSet { audioEngine.tapeWarmthEnabled = tapeWarmthEnabled }
+    }
     var liveWaveformSamples: [Float] = []
     var layerWaveforms: [UUID: [Float]] = [:]
     var autoStopEnabled = false

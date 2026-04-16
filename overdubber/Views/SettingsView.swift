@@ -34,8 +34,19 @@ struct SettingsView: View {
                     }
                 } header: {
                     Text("Recording")
+                }
+
+                Section {
+                    Toggle(isOn: Binding(
+                        get: { viewModel?.tapeWarmthEnabled ?? false },
+                        set: { viewModel?.tapeWarmthEnabled = $0 }
+                    )) {
+                        Label("Tape Warmth", systemImage: "waveform.path")
+                    }
+                } header: {
+                    Text("Effects")
                 } footer: {
-                    Text("Input monitoring lets you hear your mic through headphones. Mute playback records in silence without hearing existing layers. Auto-stop ends overdub recording when existing layers finish.")
+                    Text("Adds subtle analog saturation, compression, and high-end rolloff — baked in, like real tape.")
                 }
 
                 Section("Premium") {

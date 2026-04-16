@@ -13,6 +13,8 @@ final class AudioEngine {
     var inputMonitoringEnabled = false {
         didSet { inputMixer.outputVolume = inputMonitoringEnabled ? 1.0 : 0.0 }
     }
+    var tapeWarmthEnabled = false
+    private var tapeSaturation = TapeSaturation()
 
     var onLiveWaveformSamples: (([Float]) -> Void)?
     var onPlaybackFinished: (() -> Void)?
@@ -80,6 +82,7 @@ final class AudioEngine {
         engine.connect(inputMixer, to: engine.mainMixerNode, format: inputFormat)
         inputMixer.outputVolume = inputMonitoringEnabled ? 1.0 : 0.0
 
+        tapeSaturation.reset()
         installRecordingTap(on: inputNode, format: inputFormat)
 
         engine.prepare()
@@ -108,6 +111,7 @@ final class AudioEngine {
         engine.connect(inputMixer, to: mainMixer, format: inputFormat)
         inputMixer.outputVolume = inputMonitoringEnabled ? 1.0 : 0.0
 
+        tapeSaturation.reset()
         installRecordingTap(on: inputNode, format: inputFormat)
 
         for (layerURL, volume) in existingLayers {
@@ -191,22 +195,28 @@ final class AudioEngine {
             }
         }
 
-        playerNodes[longestIndex].scheduleBuffer(
-            AVAudioPCMBuffer(pcmFormat: playerNodes[longestIndex].outputFormat(forBus: 0), frameCapacity: 0)!,
+        let longestNode = playerNodes[longestIndex]
+        guard let sentinel = AVAudioPCMBuffer(pcmFormat: longestNode.outputFormat(forBus: 0), frameCapacity: 1) else { return }
+        longestNode.scheduleBuffer(
+            sentinel,
             at: nil,
             options: [],
             completionCallbackType: .dataPlayedBack
         ) { [weak self] _ in
-            guard let self, self.isPlaying, !self.isRecording else { return }
-            if self.looping {
-                self.restartLoop()
-            } else {
-                self.onPlaybackFinished?()
+            DispatchQueue.main.async {
+                guard let self, self.isPlaying, !self.isRecording else { return }
+                if self.looping {
+                    self.restartLoop()
+                } else {
+                    self.onPlaybackFinished?()
+                }
             }
         }
     }
 
     private func restartLoop() {
+        guard isPlaying, looping else { return }
+
         for node in playerNodes {
             node.stop()
             engine.detach(node)
@@ -251,9 +261,13 @@ final class AudioEngine {
 
     private func installRecordingTap(on inputNode: AVAudioInputNode, format: AVAudioFormat) {
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { [weak self] buffer, _ in
-            try? self?.audioFile?.write(from: buffer)
+            guard let self else { return }
+            if self.tapeWarmthEnabled {
+                self.tapeSaturation.process(buffer)
+            }
+            try? self.audioFile?.write(from: buffer)
             let samples = WaveformGenerator.downsample(buffer: buffer, targetCount: 50)
-            self?.onLiveWaveformSamples?(samples)
+            self.onLiveWaveformSamples?(samples)
         }
     }
 
