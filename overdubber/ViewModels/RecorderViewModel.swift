@@ -53,6 +53,18 @@ final class RecorderViewModel {
                 }
             }
         }
+
+        audioEngine.onRouteInterruption = { [weak self] in
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                if self.isRecording {
+                    self.stopRecording()
+                    self.errorMessage = "Recording stopped — audio device changed"
+                } else if self.isPlaying {
+                    self.stopPlayback()
+                }
+            }
+        }
     }
 
     // MARK: - Project
