@@ -5,6 +5,8 @@ import SwiftData
 struct OverdubberApp: App {
     let modelContainer: ModelContainer
     @State private var themeManager = ThemeManager()
+    @State private var purchaseManager = PurchaseManager()
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
 
     init() {
         do {
@@ -20,6 +22,10 @@ struct OverdubberApp: App {
         WindowGroup {
             RecorderView()
                 .environment(themeManager)
+                .environment(purchaseManager)
+                .fullScreenCover(isPresented: .constant(!hasSeenOnboarding)) {
+                    OnboardingView()
+                }
         }
         .modelContainer(modelContainer)
     }

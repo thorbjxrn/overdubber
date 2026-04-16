@@ -4,10 +4,13 @@ import SwiftData
 struct RecorderView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(ThemeManager.self) private var theme
+    @Environment(PurchaseManager.self) private var purchaseManager
     @State private var viewModel: RecorderViewModel?
     @State private var showMixer = false
     @State private var showLibrary = false
     @State private var showExport = false
+    @State private var showSettings = false
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
@@ -101,8 +104,13 @@ struct RecorderView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button { showLibrary = true } label: {
-                        Image(systemName: "folder")
+                    HStack(spacing: 16) {
+                        Button { showLibrary = true } label: {
+                            Image(systemName: "folder")
+                        }
+                        Button { showSettings = true } label: {
+                            Image(systemName: "gearshape")
+                        }
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
@@ -143,6 +151,12 @@ struct RecorderView: View {
                         layers: vm.exportLayerData
                     )
                 }
+            }
+            .sheet(isPresented: $showSettings) {
+                SettingsView(purchaseManager: purchaseManager)
+            }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView(purchaseManager: purchaseManager)
             }
         }
         .onAppear {
@@ -204,7 +218,12 @@ struct RecorderView: View {
         if viewModel.isRecording {
             viewModel.stopRecording()
         } else {
-            viewModel.startRecording()
+            let freeLayerLimit = 4
+            if !purchaseManager.isPremium && viewModel.layerCount >= freeLayerLimit {
+                showPaywall = true
+            } else {
+                viewModel.startRecording()
+            }
         }
     }
 }

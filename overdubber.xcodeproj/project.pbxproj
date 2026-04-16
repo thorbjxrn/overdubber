@@ -41,6 +41,14 @@
 		28E6B0462F917042001AAA47 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0452F917042001AAA47 /* ExportView.swift */; };
 		28E6B0472F917042001AAA47 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0482F917042001AAA47 /* ThemeManager.swift */; };
 		28E6B0492F917042001AAA47 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0482F917042001AAA47 /* ThemeManager.swift */; };
+		28E6B0502F917042001AAA47 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0512F917042001AAA47 /* PurchaseManager.swift */; };
+		28E6B0522F917042001AAA47 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0512F917042001AAA47 /* PurchaseManager.swift */; };
+		28E6B0532F917042001AAA47 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0542F917042001AAA47 /* PaywallView.swift */; };
+		28E6B0552F917042001AAA47 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0542F917042001AAA47 /* PaywallView.swift */; };
+		28E6B0562F917042001AAA47 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0572F917042001AAA47 /* SettingsView.swift */; };
+		28E6B0582F917042001AAA47 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0572F917042001AAA47 /* SettingsView.swift */; };
+		28E6B0592F917042001AAA47 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B05A2F917042001AAA47 /* OnboardingView.swift */; };
+		28E6B05B2F917042001AAA47 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B05A2F917042001AAA47 /* OnboardingView.swift */; };
 		B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EFE229912DF003C195F /* overdubberTests.swift */; };
 		B5A55F0A229912DF003C195F /* overdubberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F09229912DF003C195F /* overdubberUITests.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +89,10 @@
 		28E6B0422F917042001AAA47 /* AudioExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExporter.swift; sourceTree = "<group>"; };
 		28E6B0452F917042001AAA47 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		28E6B0482F917042001AAA47 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		28E6B0512F917042001AAA47 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		28E6B0542F917042001AAA47 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		28E6B0572F917042001AAA47 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		28E6B05A2F917042001AAA47 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		B5A55EE6229912DD003C195F /* overdubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = overdubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55EFA229912DF003C195F /* overdubberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55EFE229912DF003C195F /* overdubberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberTests.swift; sourceTree = "<group>"; };
@@ -150,8 +162,11 @@
 				28E6B03A2F917042001AAA47 /* LayerRowView.swift */,
 				28E6B03F2F917042001AAA47 /* LibraryView.swift */,
 				28E6B03B2F917042001AAA47 /* MixerView.swift */,
+				28E6B05A2F917042001AAA47 /* OnboardingView.swift */,
+				28E6B0542F917042001AAA47 /* PaywallView.swift */,
 				28E6B0182F917042001AAA47 /* RecordButton.swift */,
 				28E6B0192F917042001AAA47 /* RecorderView.swift */,
+				28E6B0572F917042001AAA47 /* SettingsView.swift */,
 				28E6B0352F917042001AAA47 /* WaveformView.swift */,
 			);
 			path = Views;
@@ -213,6 +228,7 @@
 		28E6B04A2F917042001AAA47 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				28E6B0512F917042001AAA47 /* PurchaseManager.swift */,
 				28E6B0482F917042001AAA47 /* ThemeManager.swift */,
 			);
 			path = Utilities;
@@ -364,6 +380,10 @@
 				28E6B0412F917042001AAA47 /* AudioExporter.swift in Sources */,
 				28E6B0442F917042001AAA47 /* ExportView.swift in Sources */,
 				28E6B0472F917042001AAA47 /* ThemeManager.swift in Sources */,
+				28E6B0502F917042001AAA47 /* PurchaseManager.swift in Sources */,
+				28E6B0532F917042001AAA47 /* PaywallView.swift in Sources */,
+				28E6B0562F917042001AAA47 /* SettingsView.swift in Sources */,
+				28E6B0592F917042001AAA47 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +408,10 @@
 				28E6B0432F917042001AAA47 /* AudioExporter.swift in Sources */,
 				28E6B0462F917042001AAA47 /* ExportView.swift in Sources */,
 				28E6B0492F917042001AAA47 /* ThemeManager.swift in Sources */,
+				28E6B0522F917042001AAA47 /* PurchaseManager.swift in Sources */,
+				28E6B0552F917042001AAA47 /* PaywallView.swift in Sources */,
+				28E6B0582F917042001AAA47 /* SettingsView.swift in Sources */,
+				28E6B05B2F917042001AAA47 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
