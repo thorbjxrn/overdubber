@@ -51,7 +51,7 @@ final class RecorderViewModel {
         audioEngine.onPlaybackFinished = { [weak self] in
             Task { @MainActor [weak self] in
                 guard let self else { return }
-                if self.isPlaying && !self.isRecording {
+                if self.loopingEnabled && self.isPlaying && !self.isRecording {
                     self.playbackPosition = 0
                     self.recordingStartTime = Date()
                 } else {
