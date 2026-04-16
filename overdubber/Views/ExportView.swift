@@ -4,6 +4,7 @@ struct ExportView: View {
     let projectName: String
     let layers: [(url: URL, volume: Float)]
     @Environment(\.dismiss) private var dismiss
+    @Environment(AdManager.self) private var adManager
 
     @State private var fileName: String
     @State private var format: ExportFormat = .m4a
@@ -116,6 +117,9 @@ struct ExportView: View {
                 }
                 guard !Task.isCancelled else { return }
                 exportedURL = url
+                if adManager.onExport() {
+                    adManager.showInterstitialIfReady()
+                }
             } catch is CancellationError {
                 errorMessage = "Export cancelled"
             } catch {

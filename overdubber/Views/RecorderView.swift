@@ -5,6 +5,7 @@ struct RecorderView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(ThemeManager.self) private var theme
     @Environment(PurchaseManager.self) private var purchaseManager
+    @Environment(AdManager.self) private var adManager
     @State private var viewModel: RecorderViewModel?
     @State private var showMixer = false
     @State private var showLibrary = false
@@ -99,6 +100,11 @@ struct RecorderView: View {
                     }
                 }
                 .padding(.bottom, 8)
+
+                if adManager.shouldShowBanner {
+                    BannerAdView()
+                        .frame(height: 50)
+                }
             }
             .navigationTitle(viewModel?.currentProject?.name ?? "Overdubber")
             .navigationBarTitleDisplayMode(.inline)
