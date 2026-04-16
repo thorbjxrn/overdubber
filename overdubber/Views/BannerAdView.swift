@@ -5,7 +5,7 @@ struct BannerAdView: UIViewRepresentable {
     #if DEBUG
     private let adUnitID = "ca-app-pub-3940256099942544/2435281174"
     #else
-    private let adUnitID = "ca-app-pub-3919813110479769/7714368905"
+    private let adUnitID = "ca-app-pub-3919813110479769/6146970514"
     #endif
 
     func makeUIView(context: Context) -> BannerView {

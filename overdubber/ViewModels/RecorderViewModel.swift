@@ -28,6 +28,7 @@ final class RecorderViewModel {
 
     private var recordingStartTime: Date?
     private var durationTimer: Timer?
+    private var loopRecordDuration: TimeInterval?
 
     var layerCount: Int {
         currentProject?.layers.count ?? 0
@@ -35,6 +36,14 @@ final class RecorderViewModel {
 
     var sortedLayers: [Layer] {
         (currentProject?.layers ?? []).sorted { $0.sortOrder < $1.sortOrder }
+    }
+
+    var effectiveDuration: TimeInterval {
+        let saved = currentProject?.duration ?? 0
+        if isRecording && recordingDuration > saved {
+            return recordingDuration
+        }
+        return saved
     }
 
     init(modelContext: ModelContext) {
@@ -138,6 +147,11 @@ final class RecorderViewModel {
             isRecording = true
             isPlaying = layerIndex > 0 && !mutePlaybackWhileRecording
             recordingDuration = 0
+            if loopingEnabled && layerIndex > 0 && project.duration > 0 {
+                loopRecordDuration = project.duration
+            } else {
+                loopRecordDuration = nil
+            }
             startDurationTimer()
         } catch {
             errorMessage = "Could not start recording: \(error.localizedDescription)"
@@ -145,6 +159,7 @@ final class RecorderViewModel {
     }
 
     func stopRecording() {
+        loopRecordDuration = nil
         let duration = audioEngine.stopRecording()
         isRecording = false
         isPlaying = false
@@ -296,12 +311,23 @@ final class RecorderViewModel {
                 let elapsed = Date().timeIntervalSince(start)
                 if self.isRecording {
                     self.recordingDuration = elapsed
+                    if let loopDur = self.loopRecordDuration, elapsed >= loopDur {
+                        self.loopToNextLayer()
+                        return
+                    }
                 }
                 if self.isPlaying {
                     self.playbackPosition = elapsed
                 }
             }
         }
+    }
+
+    private func loopToNextLayer() {
+        let savedLoopDuration = loopRecordDuration
+        stopRecording()
+        startRecording()
+        loopRecordDuration = savedLoopDuration
     }
 
     private func stopDurationTimer() {

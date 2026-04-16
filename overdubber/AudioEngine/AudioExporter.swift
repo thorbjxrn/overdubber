@@ -70,33 +70,39 @@ actor AudioExporter {
             engine.attach(player)
             engine.connect(player, to: mainMixer, format: file.processingFormat)
             player.volume = volume
-            await player.scheduleFile(file, at: nil)
             files.append(file)
             players.append(player)
             maxLength = max(maxLength, file.length)
         }
 
-        let outputFormat = mainMixer.outputFormat(forBus: 0)
+        guard let renderFormat = files.first?.processingFormat else {
+            throw ExportError.exportFailed("No audio format available")
+        }
+
+        try engine.enableManualRenderingMode(.offline, format: renderFormat, maximumFrameCount: 4096)
+        try engine.start()
+
+        for (i, player) in players.enumerated() {
+            await player.scheduleFile(files[i], at: nil)
+            player.play()
+        }
+
+        let totalFrames = AVAudioFrameCount(maxLength)
+        var framesWritten: AVAudioFrameCount = 0
+
         let outputFile = try AVAudioFile(
             forWriting: outputURL,
             settings: [
                 AVFormatIDKey: kAudioFormatLinearPCM,
-                AVSampleRateKey: outputFormat.sampleRate,
-                AVNumberOfChannelsKey: outputFormat.channelCount,
+                AVSampleRateKey: renderFormat.sampleRate,
+                AVNumberOfChannelsKey: renderFormat.channelCount,
                 AVLinearPCMBitDepthKey: 16,
                 AVLinearPCMIsFloatKey: false,
                 AVLinearPCMIsBigEndianKey: false
             ]
         )
 
-        try engine.enableManualRenderingMode(.offline, format: outputFormat, maximumFrameCount: 4096)
-        try engine.start()
-        for player in players { player.play() }
-
-        let totalFrames = AVAudioFrameCount(Double(maxLength) * outputFormat.sampleRate / (files.first?.processingFormat.sampleRate ?? outputFormat.sampleRate))
-        var framesWritten: AVAudioFrameCount = 0
-
-        guard let buffer = AVAudioPCMBuffer(pcmFormat: outputFormat, frameCapacity: 4096) else {
+        guard let buffer = AVAudioPCMBuffer(pcmFormat: engine.manualRenderingFormat, frameCapacity: 4096) else {
             throw ExportError.exportFailed("Could not create buffer")
         }
 
@@ -111,6 +117,7 @@ actor AudioExporter {
                 onProgress(Double(framesWritten) / Double(totalFrames))
             case .insufficientDataFromInputNode:
                 framesWritten += framesToRender
+                onProgress(Double(framesWritten) / Double(totalFrames))
             case .cannotDoInCurrentContext:
                 try await Task.sleep(for: .milliseconds(10))
             case .error:

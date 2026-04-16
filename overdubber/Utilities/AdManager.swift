@@ -8,7 +8,7 @@ final class AdManager {
     #if DEBUG
     private static let interstitialAdUnitID = "ca-app-pub-3940256099942544/4411468910"
     #else
-    private static let interstitialAdUnitID = "ca-app-pub-3919813110479769/6042194583"
+    private static let interstitialAdUnitID = "ca-app-pub-3919813110479769/7408081290"
     #endif
 
     private(set) var interstitialAd: InterstitialAd?

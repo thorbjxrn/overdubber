@@ -58,6 +58,7 @@
 		28E6B0622F917042001AAA47 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 28E6B0632F917042001AAA47 /* GoogleMobileAds */; };
 		B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EFE229912DF003C195F /* overdubberTests.swift */; };
 		B5A55F0A229912DF003C195F /* overdubberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F09229912DF003C195F /* overdubberUITests.swift */; };
+		28E6B0702F917042001AAA47 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 28E6B06E2F917042001AAA47 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,8 @@
 		28E6B05A2F917042001AAA47 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		28E6B05D2F917042001AAA47 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		28E6B0602F917042001AAA47 /* BannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
+		28E6B06E2F917042001AAA47 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		28E6B06F2F917042001AAA47 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
 		B5A55EE6229912DD003C195F /* overdubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = overdubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55EFA229912DF003C195F /* overdubberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A55EFE229912DF003C195F /* overdubberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberTests.swift; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				28E6B01B2F917042001AAA47 /* Assets.xcassets */,
 				28E6B01C2F917042001AAA47 /* Info.plist */,
 				28E6B01D2F917042001AAA47 /* OverdubberApp.swift */,
+				28E6B06E2F917042001AAA47 /* PrivacyInfo.xcprivacy */,
+				28E6B06F2F917042001AAA47 /* Products.storekit */,
 			);
 			path = overdubber;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28E6B0312F917042001AAA47 /* Assets.xcassets in Resources */,
+				28E6B0702F917042001AAA47 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import AVFoundation
 
 struct RecorderView: View {
     @Environment(\.modelContext) private var modelContext
@@ -15,6 +16,8 @@ struct RecorderView: View {
     @State private var showPaywall = false
     @State private var showRename = false
     @State private var renameText = ""
+    @State private var showBluetoothWarning = false
+    @AppStorage("hasShownBluetoothWarning") private var hasShownBluetoothWarning = false
 
     private var isRegularWidth: Bool {
         sizeClass == .regular
@@ -81,6 +84,15 @@ struct RecorderView: View {
             .sheet(isPresented: $showPaywall) {
                 PaywallView(purchaseManager: purchaseManager)
             }
+            .alert("Bluetooth Latency", isPresented: $showBluetoothWarning) {
+                Button("Record Anyway") {
+                    hasShownBluetoothWarning = true
+                    viewModel?.startRecording()
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("Bluetooth audio adds latency that can cause layers to be out of sync. For best results, use wired headphones when overdubbing.")
+            }
             .alert("Rename Project", isPresented: $showRename) {
                 TextField("Project name", text: $renameText)
                 Button("Cancel", role: .cancel) {}
@@ -99,15 +111,23 @@ struct RecorderView: View {
             if let vm = viewModel, !vm.sortedLayers.isEmpty, !isRegularWidth {
                 Button { showMixer = true } label: {
                     ZStack(alignment: .leading) {
-                        ScrollView(.vertical, showsIndicators: false) {
-                            VStack(spacing: 4) {
-                                ForEach(vm.sortedLayers) { layer in
-                                    layerWaveformRow(layer: layer, vm: vm)
+                        ScrollViewReader { proxy in
+                            ScrollView(.vertical, showsIndicators: false) {
+                                VStack(spacing: 4) {
+                                    ForEach(vm.sortedLayers) { layer in
+                                        layerWaveformRow(layer: layer, vm: vm)
+                                            .id(layer.id)
+                                    }
+                                }
+                            }
+                            .onChange(of: vm.layerCount) {
+                                if let last = vm.sortedLayers.last {
+                                    withAnimation { proxy.scrollTo(last.id, anchor: .bottom) }
                                 }
                             }
                         }
 
-                        if vm.isPlaying, let project = vm.currentProject, project.duration > 0 {
+                        if vm.isPlaying, !vm.isRecording, let project = vm.currentProject, project.duration > 0 {
                             GeometryReader { geo in
                                 let progress = vm.playbackPosition / project.duration
                                 PlayheadIndicator(color: theme.current.playhead)
@@ -117,7 +137,7 @@ struct RecorderView: View {
                             }
                         }
                     }
-                    .frame(maxHeight: 200)
+                    .frame(maxHeight: min(CGFloat(vm.layerCount) * 40 + 8, 280))
                     .padding(.vertical, 10)
                     .padding(.horizontal)
                     .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
@@ -259,7 +279,7 @@ struct RecorderView: View {
     }
 
     private func layerWaveformRow(layer: Layer, vm: RecorderViewModel) -> some View {
-        let projectDuration = vm.currentProject?.duration ?? 1
+        let projectDuration = vm.effectiveDuration
         let fraction = projectDuration > 0 ? layer.duration / projectDuration : 1.0
 
         return HStack(spacing: 8) {
@@ -324,10 +344,20 @@ struct RecorderView: View {
             let freeLayerLimit = 4
             if !purchaseManager.isPremium && viewModel.layerCount >= freeLayerLimit {
                 showPaywall = true
+            } else if viewModel.layerCount > 0 && !hasShownBluetoothWarning && isBluetoothAudioConnected {
+                showBluetoothWarning = true
             } else {
                 viewModel.startRecording()
             }
         }
+    }
+
+    private var isBluetoothAudioConnected: Bool {
+        let session = AVAudioSession.sharedInstance()
+        try? session.setCategory(.playAndRecord, options: [.defaultToSpeaker, .allowBluetoothA2DP])
+        try? session.setActive(true)
+        let outputs = session.currentRoute.outputs
+        return outputs.contains { $0.portType == .bluetoothA2DP || $0.portType == .bluetoothHFP || $0.portType == .bluetoothLE }
     }
 }
 

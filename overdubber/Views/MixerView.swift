@@ -5,7 +5,7 @@ struct MixerView: View {
     @Environment(ThemeManager.self) private var theme
 
     private var projectDuration: TimeInterval {
-        viewModel.currentProject?.duration ?? 1
+        viewModel.effectiveDuration
     }
 
     var body: some View {
@@ -51,7 +51,7 @@ struct MixerView: View {
                         }
                     }
 
-                    if viewModel.isPlaying, projectDuration > 0 {
+                    if viewModel.isPlaying, !viewModel.isRecording, projectDuration > 0 {
                         playheadOverlay
                     }
                 }
