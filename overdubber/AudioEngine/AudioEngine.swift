@@ -123,7 +123,6 @@ final class AudioEngine {
             completionCallbackType: .dataPlayedBack
         ) { [weak self] _ in
             guard let self, self.isPlaying, !self.isRecording else { return }
-            self.stopPlayback()
             self.onPlaybackFinished?()
         }
 

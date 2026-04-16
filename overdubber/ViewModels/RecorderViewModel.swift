@@ -12,6 +12,7 @@ final class RecorderViewModel {
     var isRecording = false
     var isPlaying = false
     var recordingDuration: TimeInterval = 0
+    var playbackPosition: TimeInterval = 0
     var errorMessage: String?
 
     var liveWaveformSamples: [Float] = []
@@ -39,7 +40,7 @@ final class RecorderViewModel {
 
         audioEngine.onPlaybackFinished = { [weak self] in
             Task { @MainActor [weak self] in
-                self?.isPlaying = false
+                self?.stopPlayback()
             }
         }
     }
@@ -216,6 +217,8 @@ final class RecorderViewModel {
         do {
             try audioEngine.startPlayback(urls: layers)
             isPlaying = true
+            playbackPosition = 0
+            startDurationTimer()
         } catch {
             errorMessage = "Playback failed: \(error.localizedDescription)"
         }
@@ -224,6 +227,8 @@ final class RecorderViewModel {
     func stopPlayback() {
         audioEngine.stopPlayback()
         isPlaying = false
+        stopDurationTimer()
+        playbackPosition = 0
     }
 
     // MARK: - Export
@@ -252,7 +257,13 @@ final class RecorderViewModel {
         durationTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
             Task { @MainActor [weak self] in
                 guard let self, let start = self.recordingStartTime else { return }
-                self.recordingDuration = Date().timeIntervalSince(start)
+                let elapsed = Date().timeIntervalSince(start)
+                if self.isRecording {
+                    self.recordingDuration = elapsed
+                }
+                if self.isPlaying {
+                    self.playbackPosition = elapsed
+                }
             }
         }
     }

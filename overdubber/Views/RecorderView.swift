@@ -3,6 +3,7 @@ import SwiftData
 
 struct RecorderView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.horizontalSizeClass) private var sizeClass
     @Environment(ThemeManager.self) private var theme
     @Environment(PurchaseManager.self) private var purchaseManager
     @Environment(AdManager.self) private var adManager
@@ -13,126 +14,28 @@ struct RecorderView: View {
     @State private var showSettings = false
     @State private var showPaywall = false
 
+    private var isRegularWidth: Bool {
+        sizeClass == .regular
+    }
+
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                // Compact layer waveforms (tap to open mixer)
-                if let vm = viewModel, !vm.sortedLayers.isEmpty {
-                    Button { showMixer = true } label: {
-                        ScrollView(.vertical, showsIndicators: false) {
-                            VStack(spacing: 4) {
-                                ForEach(vm.sortedLayers) { layer in
-                                    layerWaveformRow(layer: layer, vm: vm)
-                                }
-                            }
-                        }
-                        .frame(maxHeight: 120)
-                        .padding(.vertical, 8)
-                        .padding(.horizontal)
-                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8))
+            Group {
+                if isRegularWidth, let vm = viewModel, vm.layerCount > 0 {
+                    HStack(spacing: 0) {
+                        recorderContent
+                            .frame(maxWidth: .infinity)
+                        Divider()
+                        MixerView(viewModel: vm)
+                            .frame(width: 360)
                     }
-                    .buttonStyle(.plain)
-                    .padding(.horizontal)
-                }
-
-                // Live waveform during recording
-                if let vm = viewModel, vm.isRecording {
-                    WaveformView(samples: vm.liveWaveformSamples, color: theme.current.waveform)
-                        .frame(height: 44)
-                        .padding(.horizontal)
-                        .padding(.top, 8)
-                }
-
-                Spacer(minLength: 4)
-
-                // Duration display
-                Text(formattedDuration)
-                    .font(.system(size: 44, weight: .light, design: .monospaced))
-                    .foregroundStyle(.primary)
-                    .contentTransition(.numericText())
-                    .padding(.bottom, 12)
-
-                // Record button
-                RecordButton(
-                    isRecording: viewModel?.isRecording ?? false,
-                    action: toggleRecording,
-                    recordColor: theme.current.record
-                )
-
-                // Status text
-                Text(statusText)
-                    .font(.system(.caption, design: .monospaced))
-                    .foregroundStyle(.secondary)
-                    .padding(.top, 6)
-
-                Spacer(minLength: 4)
-
-                // Transport controls
-                VStack(spacing: 10) {
-                    HStack(spacing: 40) {
-                        Button(action: { viewModel?.togglePlayback() }) {
-                            Image(systemName: viewModel?.isPlaying == true ? "stop.fill" : "play.fill")
-                                .font(.title2)
-                                .frame(width: 52, height: 52)
-                                .background(.ultraThinMaterial, in: Circle())
-                        }
-                        .disabled(viewModel?.layerCount == 0 || viewModel?.isRecording == true)
-
-                        Button(action: { showMixer = true }) {
-                            Image(systemName: "slider.vertical.3")
-                                .font(.title2)
-                                .frame(width: 52, height: 52)
-                                .background(.ultraThinMaterial, in: Circle())
-                        }
-                        .disabled(viewModel?.layerCount == 0 || viewModel?.isRecording == true)
-                    }
-
-                    // Layer indicator
-                    if let layerCount = viewModel?.layerCount, layerCount > 0 {
-                        HStack(spacing: 6) {
-                            ForEach(0..<layerCount, id: \.self) { i in
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(theme.current.accent.opacity(i == layerCount - 1 ? 1.0 : 0.4))
-                                    .frame(width: 20, height: 6)
-                            }
-                        }
-                        .animation(.easeOut(duration: 0.3), value: layerCount)
-                    }
-                }
-                .padding(.bottom, 8)
-
-                if adManager.shouldShowBanner {
-                    BannerAdView()
-                        .frame(height: 50)
+                } else {
+                    recorderContent
                 }
             }
             .navigationTitle(viewModel?.currentProject?.name ?? "Overdubber")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    HStack(spacing: 16) {
-                        Button { showLibrary = true } label: {
-                            Image(systemName: "folder")
-                        }
-                        Button { showSettings = true } label: {
-                            Image(systemName: "gearshape")
-                        }
-                    }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    HStack(spacing: 16) {
-                        Button { showExport = true } label: {
-                            Image(systemName: "square.and.arrow.up")
-                        }
-                        .disabled(viewModel?.layerCount == 0 || viewModel?.isRecording == true)
-
-                        Button { viewModel?.newProject() } label: {
-                            Image(systemName: "plus")
-                        }
-                        .disabled(viewModel?.isRecording == true)
-                    }
-                }
-            }
+            .toolbar { toolbarContent }
             .alert("Error", isPresented: showError, presenting: viewModel?.errorMessage) { _ in
                 Button("OK") { viewModel?.errorMessage = nil }
             } message: { message in
@@ -168,6 +71,130 @@ struct RecorderView: View {
         .onAppear {
             if viewModel == nil {
                 viewModel = RecorderViewModel(modelContext: modelContext)
+            }
+        }
+    }
+
+    private var recorderContent: some View {
+        VStack(spacing: 0) {
+            if let vm = viewModel, !vm.sortedLayers.isEmpty, !isRegularWidth {
+                Button { showMixer = true } label: {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(spacing: 4) {
+                            ForEach(vm.sortedLayers) { layer in
+                                layerWaveformRow(layer: layer, vm: vm)
+                            }
+                        }
+                    }
+                    .frame(maxHeight: 120)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal)
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8))
+                }
+                .buttonStyle(.plain)
+                .padding(.horizontal)
+            }
+
+            if let vm = viewModel, vm.isRecording {
+                WaveformView(samples: vm.liveWaveformSamples, color: theme.current.waveform)
+                    .frame(height: 44)
+                    .padding(.horizontal)
+                    .padding(.top, 8)
+            }
+
+            Spacer(minLength: 4)
+
+            Text(formattedDuration)
+                .font(.system(size: 44, weight: .light, design: .monospaced))
+                .foregroundStyle(.primary)
+                .contentTransition(.numericText())
+                .padding(.bottom, 12)
+                .accessibilityLabel("Duration: \(formattedDuration)")
+
+            RecordButton(
+                isRecording: viewModel?.isRecording ?? false,
+                action: toggleRecording,
+                recordColor: theme.current.record
+            )
+            .accessibilityLabel(viewModel?.isRecording == true ? "Stop recording" : "Start recording")
+
+            Text(statusText)
+                .font(.system(.caption, design: .monospaced))
+                .foregroundStyle(.secondary)
+                .padding(.top, 6)
+
+            Spacer(minLength: 4)
+
+            VStack(spacing: 10) {
+                HStack(spacing: 40) {
+                    Button(action: { viewModel?.togglePlayback() }) {
+                        Image(systemName: viewModel?.isPlaying == true ? "stop.fill" : "play.fill")
+                            .font(.title2)
+                            .frame(width: 52, height: 52)
+                            .background(.ultraThinMaterial, in: Circle())
+                    }
+                    .disabled(viewModel?.layerCount == 0 || viewModel?.isRecording == true)
+                    .accessibilityLabel(viewModel?.isPlaying == true ? "Stop playback" : "Play all layers")
+
+                    if !isRegularWidth {
+                        Button(action: { showMixer = true }) {
+                            Image(systemName: "slider.vertical.3")
+                                .font(.title2)
+                                .frame(width: 52, height: 52)
+                                .background(.ultraThinMaterial, in: Circle())
+                        }
+                        .disabled(viewModel?.layerCount == 0 || viewModel?.isRecording == true)
+                        .accessibilityLabel("Open mixer")
+                    }
+                }
+
+                if let layerCount = viewModel?.layerCount, layerCount > 0 {
+                    HStack(spacing: 6) {
+                        ForEach(0..<layerCount, id: \.self) { i in
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(theme.current.accent.opacity(i == layerCount - 1 ? 1.0 : 0.4))
+                                .frame(width: 20, height: 6)
+                        }
+                    }
+                    .animation(.easeOut(duration: 0.3), value: layerCount)
+                }
+            }
+            .padding(.bottom, 8)
+
+            if adManager.shouldShowBanner {
+                BannerAdView()
+                    .frame(height: 50)
+            }
+        }
+    }
+
+    @ToolbarContentBuilder
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            HStack(spacing: 16) {
+                Button { showLibrary = true } label: {
+                    Image(systemName: "folder")
+                }
+                .accessibilityLabel("Project library")
+                Button { showSettings = true } label: {
+                    Image(systemName: "gearshape")
+                }
+                .accessibilityLabel("Settings")
+            }
+        }
+        ToolbarItem(placement: .topBarTrailing) {
+            HStack(spacing: 16) {
+                Button { showExport = true } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .disabled(viewModel?.layerCount == 0 || viewModel?.isRecording == true)
+                .accessibilityLabel("Export project")
+
+                Button { viewModel?.newProject() } label: {
+                    Image(systemName: "plus")
+                }
+                .disabled(viewModel?.isRecording == true)
+                .accessibilityLabel("New project")
             }
         }
     }
@@ -212,7 +239,12 @@ struct RecorderView: View {
     }
 
     private var formattedDuration: String {
-        let duration = viewModel?.recordingDuration ?? 0
+        let duration: TimeInterval
+        if viewModel?.isPlaying == true, viewModel?.isRecording != true {
+            duration = viewModel?.playbackPosition ?? 0
+        } else {
+            duration = viewModel?.recordingDuration ?? 0
+        }
         let minutes = Int(duration) / 60
         let seconds = Int(duration) % 60
         let tenths = Int((duration * 10).truncatingRemainder(dividingBy: 10))
