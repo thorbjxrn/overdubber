@@ -48,13 +48,8 @@ final class AudioEngine {
               let reasonValue = info[AVAudioSessionRouteChangeReasonKey] as? UInt,
               let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else { return }
 
-        switch reason {
-        case .oldDeviceUnavailable, .categoryChange:
-            if isRecording || isPlaying {
-                onRouteInterruption?()
-            }
-        default:
-            break
+        if reason == .oldDeviceUnavailable, isRecording || isPlaying {
+            onRouteInterruption?()
         }
     }
 
