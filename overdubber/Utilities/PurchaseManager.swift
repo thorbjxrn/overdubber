@@ -9,6 +9,7 @@ final class PurchaseManager {
     private(set) var product: Product?
     private(set) var isPremium: Bool = false
     private(set) var isLoading: Bool = false
+    private(set) var productLoadFailed: Bool = false
     var errorMessage: String?
 
     @ObservationIgnored
@@ -29,11 +30,16 @@ final class PurchaseManager {
     }
 
     func loadProducts() async {
+        productLoadFailed = false
         do {
             let products = try await Product.products(for: [Self.productID])
             product = products.first
+            if product == nil {
+                productLoadFailed = true
+            }
         } catch {
             print("Failed to load products: \(error)")
+            productLoadFailed = true
         }
     }
 
