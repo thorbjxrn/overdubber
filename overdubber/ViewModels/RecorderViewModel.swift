@@ -116,6 +116,23 @@ final class RecorderViewModel {
         save()
     }
 
+    func handleActiveProjectDeleted() {
+        if isRecording {
+            _ = audioEngine.stopRecording()
+            isRecording = false
+            isPlaying = false
+            stopDurationTimer()
+        } else if isPlaying {
+            stopPlayback()
+        }
+        currentProject = nil
+        layerWaveforms.removeAll()
+        recordingDuration = 0
+        playbackPosition = 0
+        liveWaveformSamples = []
+        loopRecordDuration = nil
+    }
+
     func renameProject(_ name: String) {
         guard let project = currentProject else { return }
         let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)

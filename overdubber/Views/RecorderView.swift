@@ -66,9 +66,15 @@ struct RecorderView: View {
                 }
             }
             .sheet(isPresented: $showLibrary) {
-                LibraryView { project in
-                    viewModel?.loadProject(project)
-                }
+                LibraryView(
+                    currentProjectId: viewModel?.currentProject?.id,
+                    onSelectProject: { project in
+                        viewModel?.loadProject(project)
+                    },
+                    onDeleteActiveProject: {
+                        viewModel?.handleActiveProjectDeleted()
+                    }
+                )
             }
             .sheet(isPresented: $showExport) {
                 if let vm = viewModel {

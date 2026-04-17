@@ -6,7 +6,9 @@ struct LibraryView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
+    var currentProjectId: UUID?
     var onSelectProject: (Project) -> Void
+    var onDeleteActiveProject: (() -> Void)?
 
     var body: some View {
         NavigationStack {
@@ -68,12 +70,19 @@ struct LibraryView: View {
     }
 
     private func deleteProjects(at offsets: IndexSet) {
+        var deletedActive = false
         for index in offsets {
             let project = projects[index]
+            if project.id == currentProjectId {
+                deletedActive = true
+            }
             FileManager.deleteProjectFiles(for: project.id)
             modelContext.delete(project)
         }
         try? modelContext.save()
+        if deletedActive {
+            onDeleteActiveProject?()
+        }
     }
 
     private func formattedDuration(_ duration: TimeInterval) -> String {
