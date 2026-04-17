@@ -24,7 +24,9 @@ final class RecorderViewModel {
     var liveWaveformSamples: [Float] = []
     var layerWaveforms: [UUID: [Float]] = [:]
     var mutePlaybackWhileRecording = false
-    var loopingEnabled = false
+    var loopingEnabled = false {
+        didSet { audioEngine.looping = loopingEnabled }
+    }
 
     private var recordingStartTime: Date?
     private var durationTimer: Timer?

@@ -13,7 +13,9 @@ struct ExportView: View {
     @State private var exportedURL: URL?
     @State private var errorMessage: String?
     @State private var exportTask: Task<Void, Never>?
+    @State private var layerWaveforms: [[Float]] = []
 
+    @Environment(ThemeManager.self) private var theme
     private let exporter = AudioExporter()
 
     init(projectName: String, layers: [(url: URL, volume: Float)]) {
@@ -39,6 +41,24 @@ struct ExportView: View {
                     }
                     .pickerStyle(.segmented)
                     .disabled(isExporting || exportedURL != nil)
+                }
+
+                if !layerWaveforms.isEmpty {
+                    Section {
+                        VStack(spacing: 3) {
+                            ForEach(Array(layerWaveforms.enumerated()), id: \.offset) { i, samples in
+                                HStack(spacing: 6) {
+                                    Text("\(i + 1)")
+                                        .font(.system(.caption2, design: .monospaced))
+                                        .foregroundStyle(.secondary)
+                                        .frame(width: 14)
+                                    WaveformView(samples: samples, color: theme.current.waveform.opacity(0.6))
+                                        .frame(height: 28)
+                                }
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
                 }
 
                 if isExporting {
@@ -92,6 +112,11 @@ struct ExportView: View {
                         .bold()
                         .disabled(isExporting || fileName.isEmpty || exportedURL != nil)
                 }
+            }
+        }
+        .task {
+            layerWaveforms = layers.map { layer in
+                WaveformGenerator.samples(from: layer.url, targetCount: 150)
             }
         }
     }

@@ -6,7 +6,7 @@ final class AudioEngine {
     private var audioFile: AVAudioFile?
     private var playerNodes: [AVAudioPlayerNode] = []
     private var playbackFiles: [(url: URL, volume: Float)] = []
-    private var looping = false
+    var looping = false
 
     private(set) var isRecording = false
     private(set) var isPlaying = false
@@ -161,15 +161,16 @@ final class AudioEngine {
         stopPlayback()
 
         looping = loop
-        playbackFiles = urls
+        playbackFiles = urls.filter { Foundation.FileManager.default.fileExists(atPath: $0.url.path) }
+        guard !playbackFiles.isEmpty else { return }
+
         let mainMixer = engine.mainMixerNode
+        engine.disconnectNodeOutput(engine.inputNode)
 
         try scheduleAllPlayers(on: mainMixer)
 
         engine.prepare()
         try engine.start()
-
-        engine.disconnectNodeOutput(engine.inputNode)
 
         for node in playerNodes {
             node.play()
