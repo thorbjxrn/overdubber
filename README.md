@@ -2,6 +2,8 @@
 
 A multi-track audio layering app for iOS. Record a take, then overdub as many layers as you want — like a portable tape machine.
 
+https://youtu.be/U47ZLFZjnVQ
+
 ## Features
 
 - **Layer-based recording** — Record your first take, then overdub on top with live playback of previous layers
