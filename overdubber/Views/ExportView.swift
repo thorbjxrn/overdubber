@@ -5,6 +5,7 @@ struct ExportView: View {
     let layers: [(url: URL, volume: Float)]
     @Environment(\.dismiss) private var dismiss
     @Environment(AdManager.self) private var adManager
+    @Environment(PurchaseManager.self) private var purchaseManager
 
     @State private var fileName: String
     @State private var format: ExportFormat = .m4a
@@ -14,6 +15,7 @@ struct ExportView: View {
     @State private var errorMessage: String?
     @State private var exportTask: Task<Void, Never>?
     @State private var layerWaveforms: [[Float]] = []
+    @State private var showPaywall = false
 
     @Environment(ThemeManager.self) private var theme
     private let exporter = AudioExporter()
@@ -114,6 +116,9 @@ struct ExportView: View {
                 }
             }
         }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView(purchaseManager: purchaseManager)
+        }
         .task {
             layerWaveforms = layers.map { layer in
                 WaveformGenerator.samples(from: layer.url, targetCount: 150)
@@ -124,6 +129,11 @@ struct ExportView: View {
     private func startExport() {
         let name = fileName.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !name.isEmpty else { return }
+
+        if format == .stems && !purchaseManager.isPremium {
+            showPaywall = true
+            return
+        }
 
         isExporting = true
         errorMessage = nil

@@ -38,7 +38,6 @@ final class PurchaseManager {
                 productLoadFailed = true
             }
         } catch {
-            print("Failed to load products: \(error)")
             productLoadFailed = true
         }
     }
@@ -51,6 +50,7 @@ final class PurchaseManager {
 
         isLoading = true
         errorMessage = nil
+        defer { isLoading = false }
 
         do {
             let result = try await product.purchase()
@@ -70,8 +70,6 @@ final class PurchaseManager {
             errorMessage = "Purchase failed: \(error.localizedDescription)"
             throw error
         }
-
-        isLoading = false
     }
 
     func restorePurchases() async {
