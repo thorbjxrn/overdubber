@@ -30,26 +30,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B5A55EF9229912DF003C195F"
-               BuildableName = "overdubberTests.xctest"
-               BlueprintName = "overdubberTests"
-               ReferencedContainer = "container:overdubber.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B5A55F04229912DF003C195F"
-               BuildableName = "overdubberUITests.xctest"
-               BlueprintName = "overdubberUITests"
-               ReferencedContainer = "container:overdubber.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -58,25 +58,9 @@
 		28E6B0662F917042001AAA47 /* TapeSaturation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0672F917042001AAA47 /* TapeSaturation.swift */; };
 		28E6B0702F917042001AAA47 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 28E6B06E2F917042001AAA47 /* PrivacyInfo.xcprivacy */; };
 		28EC62832F93D00600C7B580 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EC62822F93D00600C7B580 /* StoreKit.framework */; };
-		B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55EFE229912DF003C195F /* overdubberTests.swift */; };
-		B5A55F0A229912DF003C195F /* overdubberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A55F09229912DF003C195F /* overdubberUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B5A55EFB229912DF003C195F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5A55EDE229912DD003C195F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5A55EE5229912DD003C195F;
-			remoteInfo = overdubber;
-		};
-		B5A55F06229912DF003C195F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5A55EDE229912DD003C195F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5A55EE5229912DD003C195F;
-			remoteInfo = overdubber;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -109,12 +93,6 @@
 		28E6B06E2F917042001AAA47 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		28EC62822F93D00600C7B580 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B5A55EE6229912DD003C195F /* overdubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = overdubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5A55EFA229912DF003C195F /* overdubberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5A55EFE229912DF003C195F /* overdubberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberTests.swift; sourceTree = "<group>"; };
-		B5A55F00229912DF003C195F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5A55F05229912DF003C195F /* overdubberUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overdubberUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5A55F09229912DF003C195F /* overdubberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overdubberUITests.swift; sourceTree = "<group>"; };
-		B5A55F0B229912DF003C195F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,20 +103,6 @@
 				28E6B0622F917042001AAA47 /* GoogleMobileAds in Frameworks */,
 				28EC62832F93D00600C7B580 /* StoreKit.framework in Frameworks */,
 				28963A992F981380005A213D /* ZIPFoundation in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5A55EF7229912DF003C195F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5A55F02229912DF003C195F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,8 +195,6 @@
 			children = (
 				28B4FE502F92455700621F66 /* Product.storekit */,
 				28E6B01E2F917042001AAA47 /* overdubber */,
-				B5A55EFD229912DF003C195F /* overdubberTests */,
-				B5A55F08229912DF003C195F /* overdubberUITests */,
 				28EC62812F93D00600C7B580 /* Frameworks */,
 				B5A55EE7229912DD003C195F /* Products */,
 			);
@@ -242,28 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				B5A55EE6229912DD003C195F /* overdubber.app */,
-				B5A55EFA229912DF003C195F /* overdubberTests.xctest */,
-				B5A55F05229912DF003C195F /* overdubberUITests.xctest */,
-			);
+				);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B5A55EFD229912DF003C195F /* overdubberTests */ = {
-			isa = PBXGroup;
-			children = (
-				B5A55EFE229912DF003C195F /* overdubberTests.swift */,
-				B5A55F00229912DF003C195F /* Info.plist */,
-			);
-			path = overdubberTests;
-			sourceTree = "<group>";
-		};
-		B5A55F08229912DF003C195F /* overdubberUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B5A55F09229912DF003C195F /* overdubberUITests.swift */,
-				B5A55F0B229912DF003C195F /* Info.plist */,
-			);
-			path = overdubberUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,42 +232,6 @@
 			productReference = B5A55EE6229912DD003C195F /* overdubber.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B5A55EF9229912DF003C195F /* overdubberTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B5A55F11229912DF003C195F /* Build configuration list for PBXNativeTarget "overdubberTests" */;
-			buildPhases = (
-				B5A55EF6229912DF003C195F /* Sources */,
-				B5A55EF7229912DF003C195F /* Frameworks */,
-				B5A55EF8229912DF003C195F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B5A55EFC229912DF003C195F /* PBXTargetDependency */,
-			);
-			name = overdubberTests;
-			productName = overdubberTests;
-			productReference = B5A55EFA229912DF003C195F /* overdubberTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B5A55F04229912DF003C195F /* overdubberUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B5A55F14229912DF003C195F /* Build configuration list for PBXNativeTarget "overdubberUITests" */;
-			buildPhases = (
-				B5A55F01229912DF003C195F /* Sources */,
-				B5A55F02229912DF003C195F /* Frameworks */,
-				B5A55F03229912DF003C195F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B5A55F07229912DF003C195F /* PBXTargetDependency */,
-			);
-			name = overdubberUITests;
-			productName = overdubberUITests;
-			productReference = B5A55F05229912DF003C195F /* overdubberUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -340,15 +246,7 @@
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1010;
 					};
-					B5A55EF9229912DF003C195F = {
-						CreatedOnToolsVersion = 10.1;
-						TestTargetID = B5A55EE5229912DD003C195F;
 					};
-					B5A55F04229912DF003C195F = {
-						CreatedOnToolsVersion = 10.1;
-						TestTargetID = B5A55EE5229912DD003C195F;
-					};
-				};
 			};
 			buildConfigurationList = B5A55EE1229912DD003C195F /* Build configuration list for PBXProject "overdubber" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -368,8 +266,6 @@
 			projectRoot = "";
 			targets = (
 				B5A55EE5229912DD003C195F /* overdubber */,
-				B5A55EF9229912DF003C195F /* overdubberTests */,
-				B5A55F04229912DF003C195F /* overdubberUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -381,20 +277,6 @@
 			files = (
 				28E6B0312F917042001AAA47 /* Assets.xcassets in Resources */,
 				28E6B0702F917042001AAA47 /* PrivacyInfo.xcprivacy in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5A55EF8229912DF003C195F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5A55F03229912DF003C195F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,58 +313,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B5A55EF6229912DF003C195F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5A55EFF229912DF003C195F /* overdubberTests.swift in Sources */,
-				28E6B01F2F917042001AAA47 /* RecorderView.swift in Sources */,
-				28E6B0202F917042001AAA47 /* AudioEngine.swift in Sources */,
-				28E6B0212F917042001AAA47 /* FileManagerAudio.swift in Sources */,
-				28E6B0222F917042001AAA47 /* Layer.swift in Sources */,
-				28E6B0232F917042001AAA47 /* RecordButton.swift in Sources */,
-				28E6B0242F917042001AAA47 /* RecorderViewModel.swift in Sources */,
-				28E6B0252F917042001AAA47 /* OverdubberApp.swift in Sources */,
-				28E6B0262F917042001AAA47 /* Project.swift in Sources */,
-				28E6B0342F917042001AAA47 /* WaveformGenerator.swift in Sources */,
-				28E6B0372F917042001AAA47 /* WaveformView.swift in Sources */,
-				28E6B0392F917042001AAA47 /* LayerRowView.swift in Sources */,
-				28E6B03D2F917042001AAA47 /* MixerView.swift in Sources */,
-				28E6B0402F917042001AAA47 /* LibraryView.swift in Sources */,
-				28E6B0432F917042001AAA47 /* AudioExporter.swift in Sources */,
-				28E6B0462F917042001AAA47 /* ExportView.swift in Sources */,
-				28E6B0492F917042001AAA47 /* ThemeManager.swift in Sources */,
-				28E6B0522F917042001AAA47 /* PurchaseManager.swift in Sources */,
-				28E6B0552F917042001AAA47 /* PaywallView.swift in Sources */,
-				28E6B0582F917042001AAA47 /* SettingsView.swift in Sources */,
-				28E6B05B2F917042001AAA47 /* OnboardingView.swift in Sources */,
-				28E6B05E2F917042001AAA47 /* AdManager.swift in Sources */,
-				28E6B0612F917042001AAA47 /* BannerAdView.swift in Sources */,
-				28E6B0662F917042001AAA47 /* TapeSaturation.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5A55F01229912DF003C195F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5A55F0A229912DF003C195F /* overdubberUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B5A55EFC229912DF003C195F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5A55EE5229912DD003C195F /* overdubber */;
-			targetProxy = B5A55EFB229912DF003C195F /* PBXContainerItemProxy */;
-		};
-		B5A55F07229912DF003C195F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5A55EE5229912DD003C195F /* overdubber */;
-			targetProxy = B5A55F06229912DF003C195F /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -642,80 +475,6 @@
 			};
 			name = Release;
 		};
-		B5A55F12229912DF003C195F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = overdubberTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/overdubber.app/overdubber";
-			};
-			name = Debug;
-		};
-		B5A55F13229912DF003C195F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = overdubberTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/overdubber.app/overdubber";
-			};
-			name = Release;
-		};
-		B5A55F15229912DF003C195F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = overdubberUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = overdubber;
-			};
-			name = Debug;
-		};
-		B5A55F16229912DF003C195F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = overdubberUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = thor.overdubberUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = overdubber;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -733,24 +492,6 @@
 			buildConfigurations = (
 				B5A55F0F229912DF003C195F /* Debug */,
 				B5A55F10229912DF003C195F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B5A55F11229912DF003C195F /* Build configuration list for PBXNativeTarget "overdubberTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B5A55F12229912DF003C195F /* Debug */,
-				B5A55F13229912DF003C195F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B5A55F14229912DF003C195F /* Build configuration list for PBXNativeTarget "overdubberUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B5A55F15229912DF003C195F /* Debug */,
-				B5A55F16229912DF003C195F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
