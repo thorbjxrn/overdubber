@@ -2,7 +2,8 @@
 
 A multi-track audio layering app for iOS. Record a take, then overdub as many layers as you want — like a portable tape machine.
 
-https://youtu.be/U47ZLFZjnVQ
+appstore: https://apps.apple.com/us/app/overdubber/id6762368689
+demo: https://youtu.be/U47ZLFZjnVQ
 
 ## Features
 
