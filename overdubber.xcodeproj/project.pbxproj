@@ -358,6 +358,7 @@
 			mainGroup = B5A55EDD229912DD003C195F;
 			packageReferences = (
 				28E6B0642F917042001AAA47 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				28963A972F9812C5005A213D /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = B5A55EE7229912DD003C195F /* Products */;
 			projectDirPath = "";
@@ -754,6 +755,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		28963A972F9812C5005A213D /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
 		28E6B0642F917042001AAA47 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads";
