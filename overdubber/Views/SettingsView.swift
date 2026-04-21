@@ -71,6 +71,23 @@ struct SettingsView: View {
 
                 Section("About") {
                     LabeledContent("Version", value: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")
+
+                    Button {
+                        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"
+                        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "?"
+                        let device = UIDevice.current.model
+                        let ios = UIDevice.current.systemVersion
+                        let subject = "Overdubber Bug Report"
+                        let body = "\n\n---\nApp: \(version) (\(build))\nDevice: \(device)\niOS: \(ios)"
+
+                        let mailto = "mailto:app.chair433@passfwd.com?subject=\(subject)&body=\(body)"
+                            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                        if let url = URL(string: mailto) {
+                            UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        Label("Report a Bug", systemImage: "ladybug")
+                    }
                 }
 
                 #if DEBUG
