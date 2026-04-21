@@ -108,7 +108,7 @@ struct RecorderView: View {
         .onAppear {
             if viewModel == nil {
                 let vm = RecorderViewModel(modelContext: modelContext)
-                vm.maxLayers = purchaseManager.isPremium ? nil : 4
+                vm.maxLayers = purchaseManager.isPremium ? nil : 8
                 vm.onLayerLimitReached = { [weak vm] in
                     guard vm != nil else { return }
                     showPaywall = true
@@ -117,7 +117,7 @@ struct RecorderView: View {
             }
         }
         .onChange(of: purchaseManager.isPremium) {
-            viewModel?.maxLayers = purchaseManager.isPremium ? nil : 4
+            viewModel?.maxLayers = purchaseManager.isPremium ? nil : 8
         }
     }
 
@@ -357,7 +357,7 @@ struct RecorderView: View {
         if viewModel.isRecording {
             viewModel.stopRecording()
         } else {
-            let freeLayerLimit = 4
+            let freeLayerLimit = 8
             if !purchaseManager.isPremium && viewModel.layerCount >= freeLayerLimit {
                 showPaywall = true
             } else if viewModel.layerCount > 0 && !hasShownBluetoothWarning && isBluetoothAudioConnected {
