@@ -15,6 +15,7 @@ final class AudioEngine {
     }
     var tapeWarmthEnabled = false
     private var tapeSaturation = TapeSaturation()
+    private let writeQueue = DispatchQueue(label: "com.overdubber.audiowrite", qos: .userInitiated)
 
     var onLiveWaveformSamples: (([Float]) -> Void)?
     var onPlaybackFinished: (() -> Void)?
@@ -272,7 +273,9 @@ final class AudioEngine {
             if self.tapeWarmthEnabled {
                 self.tapeSaturation.process(buffer)
             }
-            try? self.audioFile?.write(from: buffer)
+            self.writeQueue.async {
+                try? self.audioFile?.write(from: buffer)
+            }
             let samples = WaveformGenerator.downsample(buffer: buffer, targetCount: 50)
             self.onLiveWaveformSamples?(samples)
         }

@@ -148,7 +148,7 @@ struct RecorderView: View {
                                 PlayheadIndicator(color: theme.current.playhead)
                                     .frame(width: 8, height: geo.size.height)
                                     .offset(x: (geo.size.width - 24) * progress + 20)
-                                    .animation(.linear(duration: 0.05), value: vm.playbackPosition)
+                                    .animation(.linear(duration: 0.1), value: vm.playbackPosition)
                             }
                         }
                     }

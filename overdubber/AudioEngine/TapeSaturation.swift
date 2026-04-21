@@ -16,19 +16,22 @@ final class TapeSaturation {
             prevSamples = [Float](repeating: 0, count: channelCount)
         }
 
+        let gain: Float = 1.0 + drive * 3.0
+        let ratio: Float = 1.0 + compression * 3.0
+        let threshold: Float = 0.5
+        let alpha = warmth * 0.4
+        let oneMinusAlpha = 1.0 - alpha
+        let makeup: Float = 1.0 / (1.0 + drive * 0.5)
+
         for ch in 0..<channelCount {
             let data = channelData[ch]
 
             for i in 0..<frameCount {
                 var sample = data[i]
 
-                let gain: Float = 1.0 + drive * 3.0
                 sample *= gain
-
                 sample = tanh(sample)
 
-                let ratio: Float = 1.0 + compression * 3.0
-                let threshold: Float = 0.5
                 let magnitude = Swift.abs(sample)
                 if magnitude > threshold {
                     let excess = magnitude - threshold
@@ -36,11 +39,8 @@ final class TapeSaturation {
                     sample = sample > 0 ? compressed : -compressed
                 }
 
-                let alpha = warmth * 0.4
-                sample = sample * (1.0 - alpha) + prevSamples[ch] * alpha
+                sample = sample * oneMinusAlpha + prevSamples[ch] * alpha
                 prevSamples[ch] = sample
-
-                let makeup: Float = 1.0 / (1.0 + drive * 0.5)
                 sample *= makeup
 
                 data[i] = sample
