@@ -1,8 +1,10 @@
 import AVFoundation
+import ZIPFoundation
 
 enum ExportFormat: String, CaseIterable, Identifiable {
     case m4a = "M4A"
     case wav = "WAV"
+    case stems = "Stems"
 
     var id: String { rawValue }
 
@@ -10,6 +12,7 @@ enum ExportFormat: String, CaseIterable, Identifiable {
         switch self {
         case .m4a: "m4a"
         case .wav: "wav"
+        case .stems: "zip"
         }
     }
 }
@@ -45,6 +48,8 @@ actor AudioExporter {
             try await exportWAV(layers: layers, to: outputURL, onProgress: onProgress)
         case .m4a:
             try await exportM4A(layers: layers, to: outputURL, onProgress: onProgress)
+        case .stems:
+            try await exportStems(layers: layers, to: outputURL, name: name, onProgress: onProgress)
         }
 
         return outputURL
@@ -188,6 +193,43 @@ actor AudioExporter {
         guard session.status == .completed else {
             throw ExportError.exportFailed("Export did not complete")
         }
+
+        onProgress(1.0)
+    }
+
+    // MARK: - Stems (individual WAVs → ZIP)
+
+    private func exportStems(
+        layers: [(url: URL, volume: Float)],
+        to outputURL: URL,
+        name: String,
+        onProgress: @Sendable @escaping (Double) -> Void
+    ) async throws {
+        let tempDir = FileManager.stemsTempDirectory()
+        let layerCount = layers.count
+        let progressPerLayer = 0.9 / Double(layerCount)
+
+        defer {
+            try? Foundation.FileManager.default.removeItem(at: tempDir)
+        }
+
+        for (index, layer) in layers.enumerated() {
+            let stemName = "\(name) - Track \(index + 1)"
+            let stemURL = tempDir.appendingPathComponent("\(stemName).wav")
+
+            try await exportWAV(
+                layers: [(url: layer.url, volume: layer.volume)],
+                to: stemURL,
+                onProgress: { layerProgress in
+                    let base = Double(index) * progressPerLayer
+                    onProgress(base + layerProgress * progressPerLayer)
+                }
+            )
+        }
+
+        onProgress(0.9)
+
+        try Foundation.FileManager.default.zipItem(at: tempDir, to: outputURL)
 
         onProgress(1.0)
     }

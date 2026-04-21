@@ -40,6 +40,13 @@ extension FileManager {
         }
     }
 
+    static func stemsTempDirectory() -> URL {
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("StemExport", isDirectory: true)
+        try? FileManager.default.removeItem(at: url)
+        ensureDirectoryExists(at: url)
+        return url
+    }
+
     static func deleteProjectFiles(for projectId: UUID) {
         let url = projectDirectory(for: projectId)
         try? FileManager.default.removeItem(at: url)
