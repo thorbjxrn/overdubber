@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28963A992F981380005A213D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 28963A982F981380005A213D /* ZIPFoundation */; };
 		28E6B01F2F917042001AAA47 /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0192F917042001AAA47 /* RecorderView.swift */; };
 		28E6B0202F917042001AAA47 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0102F917042001AAA47 /* AudioEngine.swift */; };
 		28E6B0212F917042001AAA47 /* FileManagerAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6B0112F917042001AAA47 /* FileManagerAudio.swift */; };
@@ -123,6 +124,7 @@
 			files = (
 				28E6B0622F917042001AAA47 /* GoogleMobileAds in Frameworks */,
 				28EC62832F93D00600C7B580 /* StoreKit.framework in Frameworks */,
+				28963A992F981380005A213D /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +284,7 @@
 			name = overdubber;
 			packageProductDependencies = (
 				28E6B0632F917042001AAA47 /* GoogleMobileAds */,
+				28963A982F981380005A213D /* ZIPFoundation */,
 			);
 			productName = overdubber;
 			productReference = B5A55EE6229912DD003C195F /* overdubber.app */;
@@ -774,6 +777,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		28963A982F981380005A213D /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28963A972F9812C5005A213D /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
 		28E6B0632F917042001AAA47 /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 28E6B0642F917042001AAA47 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
