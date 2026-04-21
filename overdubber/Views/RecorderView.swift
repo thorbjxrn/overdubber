@@ -107,8 +107,17 @@ struct RecorderView: View {
         }
         .onAppear {
             if viewModel == nil {
-                viewModel = RecorderViewModel(modelContext: modelContext)
+                let vm = RecorderViewModel(modelContext: modelContext)
+                vm.maxLayers = purchaseManager.isPremium ? nil : 4
+                vm.onLayerLimitReached = { [weak vm] in
+                    guard vm != nil else { return }
+                    showPaywall = true
+                }
+                viewModel = vm
             }
+        }
+        .onChange(of: purchaseManager.isPremium) {
+            viewModel?.maxLayers = purchaseManager.isPremium ? nil : 4
         }
     }
 

@@ -27,6 +27,8 @@ final class RecorderViewModel {
     var loopingEnabled = false {
         didSet { audioEngine.looping = loopingEnabled }
     }
+    var maxLayers: Int?
+    var onLayerLimitReached: (() -> Void)?
 
     private var recordingStartTime: Date?
     private var durationTimer: Timer?
@@ -344,6 +346,10 @@ final class RecorderViewModel {
     private func loopToNextLayer() {
         let savedLoopDuration = loopRecordDuration
         stopRecording()
+        if let max = maxLayers, layerCount >= max {
+            onLayerLimitReached?()
+            return
+        }
         startRecording()
         loopRecordDuration = savedLoopDuration
     }
