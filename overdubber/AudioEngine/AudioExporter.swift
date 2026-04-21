@@ -112,6 +112,7 @@ actor AudioExporter {
         }
 
         while framesWritten < totalFrames {
+            try Task.checkCancellation()
             let framesToRender = min(4096, totalFrames - framesWritten)
             let status = try engine.renderOffline(framesToRender, to: buffer)
 
@@ -214,6 +215,7 @@ actor AudioExporter {
         }
 
         for (index, layer) in layers.enumerated() {
+            try Task.checkCancellation()
             let stemName = "\(name) - Track \(index + 1)"
             let stemURL = tempDir.appendingPathComponent("\(stemName).wav")
 

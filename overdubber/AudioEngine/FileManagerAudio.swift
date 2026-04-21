@@ -41,8 +41,8 @@ extension FileManager {
     }
 
     static func stemsTempDirectory() -> URL {
-        let url = FileManager.default.temporaryDirectory.appendingPathComponent("StemExport", isDirectory: true)
-        try? FileManager.default.removeItem(at: url)
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent("StemExport-\(UUID().uuidString)", isDirectory: true)
         ensureDirectoryExists(at: url)
         return url
     }
