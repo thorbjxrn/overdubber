@@ -42,7 +42,6 @@ final class AudioEngine {
 
     func configureSession() throws {
         let session = AVAudioSession.sharedInstance()
-        try? session.setActive(false, options: .notifyOthersOnDeactivation)
         try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .allowBluetoothA2DP])
         try session.setActive(true)
     }
@@ -148,6 +147,7 @@ final class AudioEngine {
         playerNodes.removeAll()
 
         engine.stop()
+        writeQueue.sync {}
         let duration = audioFile?.duration ?? 0
         audioFile = nil
         isRecording = false
