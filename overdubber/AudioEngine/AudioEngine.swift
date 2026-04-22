@@ -15,6 +15,7 @@ final class AudioEngine {
     }
     var tapeWarmthEnabled = false
     private var tapeSaturation = TapeSaturation()
+    private let writeQueue = DispatchQueue(label: "com.overdubber.audiowrite", qos: .userInitiated)
 
     var onLiveWaveformSamples: (([Float]) -> Void)?
     var onPlaybackFinished: (() -> Void)?
@@ -41,7 +42,6 @@ final class AudioEngine {
 
     func configureSession() throws {
         let session = AVAudioSession.sharedInstance()
-        try? session.setActive(false, options: .notifyOthersOnDeactivation)
         try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .allowBluetoothA2DP])
         try session.setActive(true)
     }
@@ -147,6 +147,7 @@ final class AudioEngine {
         playerNodes.removeAll()
 
         engine.stop()
+        writeQueue.sync {}
         let duration = audioFile?.duration ?? 0
         audioFile = nil
         isRecording = false
@@ -272,7 +273,9 @@ final class AudioEngine {
             if self.tapeWarmthEnabled {
                 self.tapeSaturation.process(buffer)
             }
-            try? self.audioFile?.write(from: buffer)
+            self.writeQueue.async {
+                try? self.audioFile?.write(from: buffer)
+            }
             let samples = WaveformGenerator.downsample(buffer: buffer, targetCount: 50)
             self.onLiveWaveformSamples?(samples)
         }

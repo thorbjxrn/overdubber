@@ -33,6 +33,7 @@ final class RecorderViewModel {
     private var recordingStartTime: Date?
     private var durationTimer: Timer?
     private var loopRecordDuration: TimeInterval?
+    private var saveDebounceTask: Task<Void, Never>?
 
     var layerCount: Int {
         currentProject?.layers.count ?? 0
@@ -152,6 +153,11 @@ final class RecorderViewModel {
         }
         guard let project = currentProject else { return }
 
+        if let max = maxLayers, project.layers.count >= max {
+            onLayerLimitReached?()
+            return
+        }
+
         if isPlaying { stopPlayback() }
 
         let layerIndex = project.layers.count
@@ -234,7 +240,7 @@ final class RecorderViewModel {
         if isPlaying, let index = sortedLayers.firstIndex(where: { $0.id == layer.id }) {
             audioEngine.setVolume(at: index, volume: layer.isMuted ? 0 : volume)
         }
-        save()
+        debouncedSave()
     }
 
     func toggleLayerMute(layer: Layer) {
@@ -242,7 +248,7 @@ final class RecorderViewModel {
         if isPlaying, let index = sortedLayers.firstIndex(where: { $0.id == layer.id }) {
             audioEngine.setVolume(at: index, volume: layer.isMuted ? 0 : layer.volume)
         }
-        save()
+        debouncedSave()
     }
 
     func deleteLayer(_ layer: Layer) {
@@ -325,7 +331,7 @@ final class RecorderViewModel {
 
     private func startDurationTimer() {
         recordingStartTime = Date()
-        durationTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
+        durationTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
             Task { @MainActor [weak self] in
                 guard let self, let start = self.recordingStartTime else { return }
                 let elapsed = Date().timeIntervalSince(start)
@@ -345,8 +351,10 @@ final class RecorderViewModel {
 
     private func loopToNextLayer() {
         let savedLoopDuration = loopRecordDuration
+        let countAfterStop = layerCount + 1
         stopRecording()
-        if let max = maxLayers, layerCount >= max {
+
+        if let max = maxLayers, countAfterStop >= max {
             onLayerLimitReached?()
             return
         }
@@ -367,5 +375,14 @@ final class RecorderViewModel {
 
     private func save() {
         try? modelContext.save()
+    }
+
+    private func debouncedSave() {
+        saveDebounceTask?.cancel()
+        saveDebounceTask = Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(300))
+            guard !Task.isCancelled else { return }
+            save()
+        }
     }
 }
