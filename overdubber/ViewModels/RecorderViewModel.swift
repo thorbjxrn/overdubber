@@ -153,6 +153,11 @@ final class RecorderViewModel {
         }
         guard let project = currentProject else { return }
 
+        if let max = maxLayers, project.layers.count >= max {
+            onLayerLimitReached?()
+            return
+        }
+
         if isPlaying { stopPlayback() }
 
         let layerIndex = project.layers.count
@@ -346,8 +351,10 @@ final class RecorderViewModel {
 
     private func loopToNextLayer() {
         let savedLoopDuration = loopRecordDuration
+        let countAfterStop = layerCount + 1
         stopRecording()
-        if let max = maxLayers, layerCount >= max {
+
+        if let max = maxLayers, countAfterStop >= max {
             onLayerLimitReached?()
             return
         }
