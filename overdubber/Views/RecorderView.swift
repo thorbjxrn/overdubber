@@ -195,8 +195,13 @@ struct RecorderView: View {
             VStack(spacing: 10) {
                 HStack(spacing: 20) {
                     Button {
+                        guard let vm = viewModel else { return }
                         withAnimation(.easeOut(duration: 0.15)) {
-                            viewModel?.loopingEnabled.toggle()
+                            if vm.isRecording {
+                                vm.toggleLoopDuringRecording()
+                            } else {
+                                vm.loopingEnabled.toggle()
+                            }
                         }
                     } label: {
                         Image(systemName: "repeat")
@@ -218,6 +223,7 @@ struct RecorderView: View {
                                 )
                             )
                     }
+                    .disabled(viewModel?.isRecording != true && viewModel?.layerCount == 0)
                     .accessibilityLabel(viewModel?.loopingEnabled == true ? "Disable loop" : "Enable loop")
 
                     Button(action: { viewModel?.togglePlayback() }) {
