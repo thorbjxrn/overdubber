@@ -211,6 +211,24 @@ final class RecorderViewModel {
         liveWaveformSamples = []
     }
 
+    func toggleLoopDuringRecording() {
+        guard isRecording else { return }
+
+        if loopingEnabled {
+            loopingEnabled = false
+            loopRecordDuration = nil
+        } else {
+            loopingEnabled = true
+            if layerCount == 0 {
+                guard recordingDuration >= 0.3 else { return }
+                loopRecordDuration = recordingDuration
+                loopToNextLayer()
+            } else {
+                loopRecordDuration = currentProject?.duration
+            }
+        }
+    }
+
     // MARK: - Waveforms
 
     func loadAllWaveforms() {
