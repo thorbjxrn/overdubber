@@ -98,6 +98,7 @@ final class RecorderViewModel {
         currentProject = project
         layerWaveforms.removeAll()
         recordingDuration = 0
+        loopingEnabled = false
     }
 
     func loadProject(_ project: Project) {
@@ -107,6 +108,7 @@ final class RecorderViewModel {
 
         currentProject = project
         recordingDuration = 0
+        loopingEnabled = false
         layerWaveforms.removeAll()
         loadAllWaveforms()
     }
