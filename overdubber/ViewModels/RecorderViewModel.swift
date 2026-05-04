@@ -224,7 +224,7 @@ final class RecorderViewModel {
                 loopRecordDuration = recordingDuration
                 loopToNextLayer()
             } else {
-                loopRecordDuration = currentProject?.duration
+                loopRecordDuration = max(currentProject?.duration ?? 0, recordingDuration)
             }
         }
     }
